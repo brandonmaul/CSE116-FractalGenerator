@@ -2,8 +2,13 @@ package code;
 
 public class FractalGenerator {
 	
-	Pixel[][] cartPlane = new Pixel[512][512]; 
-	int[][] returnedFractal = new int[512][512];
+	Pixel[][] cartPlane;
+	int[][] returnedFractal;
+	
+	public FractalGenerator(){
+		cartPlane = new Pixel[512][512]; 
+		creturnedFractal = new int[512][512];
+	}
 	
 	/**
 	 * @author Brandon Maul
