@@ -7,7 +7,7 @@ public class FractalGenerator {
 	
 	public FractalGenerator(){
 		cartPlane = new Pixel[512][512]; 
-		creturnedFractal = new int[512][512];
+		returnedFractal = new int[512][512];
 	}
 	
 	/**
