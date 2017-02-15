@@ -1,6 +1,6 @@
 package code;
 
-public class FractalGenerator {
+public class FractalGenerator implements FractalAlgorithms{
 	
 	Pixel[][] cartPlane;
 	int[][] returnedFractal;
@@ -26,16 +26,20 @@ public class FractalGenerator {
 	 * 
 	 */
 	
-	public int[][] genMandelbrot(){		
+	//---------------------------------------------------------------//
+	//MANDLEBROT FRACTAL:
+	//---------------------------------------------------------------//
+	
+	public Pixel[][] genMandelbrot(){
+		
+		initMandlebrot(cartPlane);
 		for(int x=0; x<cartPlane.length; x++){
 			for(int y=0; y<cartPlane[0].length; y++){
-				cartPlane[x][y] = new Pixel();
-				
-				//Need to figure out how set the initial pixel's X and Y coords based on the fractals given range of coordinates.
-				//What sucks is that i can't start at (0,0) and move up... The grid isn't 1:1. Ex: the range of Mandle's X coords
-				//are from -2.15 to .6 which means pixel[0][0] needs to have the X coord of -2.15 and pixel[512][0] needs to have the
-				//x coord of .6
-				
+				System.out.println("Pixel ("+ x +", "+y+") has the coord ("+cartPlane[x][y].getX()+", "+cartPlane[x][y].getY()+").");
+			}
+		}
+		for(int x=0; x<cartPlane.length; x++){
+			for(int y=0; y<cartPlane[0].length; y++){
 				Pixel p = cartPlane[x][y];
 				p.setDistance();
 				int passes = 0;
@@ -49,11 +53,18 @@ public class FractalGenerator {
 				returnedFractal[x][y] = passes;
 			}
 		}
-		
-		return returnedFractal;
+		return cartPlane;
+		//return returnedFractal;
 	}
 	
+	//---------------------------------------------------------------//
+	//JULIA FRACTAL:
+	//---------------------------------------------------------------//
+	
 	public int[][] genJulia(){
+
+		initJulia(cartPlane);
+		
 		for(int x=0; x<cartPlane.length; x++){
 			for(int y=0; y<cartPlane[0].length; y++){
 				Pixel p = cartPlane[x][y];
@@ -73,7 +84,13 @@ public class FractalGenerator {
 		return returnedFractal;
 	}
 	
+	//---------------------------------------------------------------//
+	//BURNING SHIP FRACTAL:
+	//---------------------------------------------------------------//
 	public int[][] genBurningShip(){
+		
+		initBurningShip(cartPlane);
+		
 		for(int x=0; x<cartPlane.length; x++){
 			for(int y=0; y<cartPlane[0].length; y++){
 				Pixel p = cartPlane[x][y];

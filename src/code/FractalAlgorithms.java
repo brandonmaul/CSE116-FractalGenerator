@@ -2,6 +2,10 @@ package code;
 
 public interface FractalAlgorithms {
 	
+	//---------------------------------------------------------------//
+	//FRACTAL UPDATERS - UPDATES PIXEL POSITIONS FOR THE FRACTAL BASED ON ALGORITHM
+	//---------------------------------------------------------------//
+	
 	public default void updateMandelbrot(Pixel p){
 		double currentX = p.getX();
 		double currentY = p.getY();
@@ -16,6 +20,7 @@ public interface FractalAlgorithms {
 	public default void updateJulia(Pixel p){
 		double currentX = p.getX();
 		double currentY = p.getY();
+		
 		
 		double newX = (((currentX)*(currentX)) - ((currentY)*(currentY))) + (-0.72689);
 		double newY = (2 * currentX * currentY) + 0.188887;
@@ -35,50 +40,34 @@ public interface FractalAlgorithms {
 		p.setY(newY);
 	}
 	
+	//---------------------------------------------------------------//
+	//FRACTAL INITIATORS - PUTS PIXELS INTO ARRAY AND GIVES THEM THEIR INITIAL X/Y COORDINATES
+	//---------------------------------------------------------------//
+	
+	//Honestly there's probably a simpler way of doing these. Might need to rethink this
+	
 	public default void initMandlebrot(Pixel[][] pixelArray){
-		pixelArray[0][0].setX(-2.15);
-		pixelArray[0][0].setY(-1.3);
-		
 		for(int x=0; x<pixelArray.length; x++){
 			for(int y=0; y<pixelArray[0].length; y++){
-				if(x != 0){
-					pixelArray[x][y].setX((pixelArray[x-1][y] + 0.00537109375));
-				}elif(y !=0){
-					pixelArray[x][y].setY((pixelArray[x][y-1] + 0.005078125));
-				}
+				pixelArray[x][y] = new Pixel(x, y, -2.15, .6, -1.3, 1.3);
 			}
 		}
 	}
 	
 	public default void initJulia(Pixel[][] pixelArray){
-		pixelArray[0][0].setX(-1.7);
-		pixelArray[0][0].setY(-1.0);
-		
 		for(int x=0; x<pixelArray.length; x++){
 			for(int y=0; y<pixelArray[0].length; y++){
-				if(x != 0){
-					pixelArray[x][y].setX((pixelArray[x-1][y] + 0.0052734375));
-				}elif(y !=0){
-					pixelArray[x][y].setY((pixelArray[x][y-1] + 0.00390625));
-				}
+				pixelArray[x][y] = new Pixel(x, y, -1.7, 1.7, -1.0, 1.0);
 			}
 		}
 	}
 	
 	public default void initBurningShip(Pixel[][] pixelArray){
-		pixelArray[0][0].setX(-1.8);
-		pixelArray[0][0].setY(-0.08);
-		
 		for(int x=0; x<pixelArray.length; x++){
 			for(int y=0; y<pixelArray[0].length; y++){
-				if(x != 0){
-					pixelArray[x][y].setX((pixelArray[x-1][y] + 0.0068359375));
-				}elif(y !=0){
-					pixelArray[x][y].setY((pixelArray[x][y-1] + 0.00020507812));
-				}
+				pixelArray[x][y] = new Pixel(x, y, -1.8, -1.7, -0.08, 0.025);
+
 			}
 		}
 	}
-
-
 }
