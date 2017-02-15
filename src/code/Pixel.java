@@ -1,25 +1,43 @@
 package code;
 
-public class Pixel implements FractalAlgorithms {
-	double xCalc;
-	double yCalc;
-	double dist;
-	int escapeTime;
+public class Pixel {
+	/**
+	 * @author Brandon Maul
+	 * 
+	 * Pixels are what we use in each cell of the 2D array to build the fractal.
+	 * The Pixel class holds all the needed data for fractal calculations. When a Pixel object is instantiated, xCalc and yCalc are defined immediately.
+	 * Pixels can calculate their distance from the point (0,0) on the graph by using the setDistance method. 
+	 * Each Pixel also holds it's own escape-time and number of passes when being updated by a update method in FractalAlgorithms.
+	 *
+	 */
 	
-	public Pixel(int x, int y, double minX, double maxX, double minY, double maxY){
-		xCalc = ((Math.abs(maxX - minX)/512) * (x - 256));
-		yCalc = ((Math.abs(maxX - minY)/512) * (y - 256));
+	double _xCalc;
+	double _yCalc;
+	double _dist;
+	int _escapeTime;
+	int _passes;
+	
+	public Pixel(int x, int y,  double minX, double maxX, double minY, double maxY){
+		_xCalc = minX + (x * ((maxX - minX)/511.00));
+		_yCalc = minY + (y * ((maxY - minY)/511.00));
 	}
 	
 	public void setDistance(){
-		dist = Math.sqrt(((xCalc)*(xCalc)) + ((yCalc)*(yCalc))); //Sets distance from the point (0,0) using Pythagorean Theorem
+		_dist = Math.sqrt(((_xCalc)*(_xCalc)) + ((_yCalc)*(_yCalc))); //Sets distance from the point (0,0) using Pythagorean Theorem
 	}
+	public double getDistance(){ return _dist; }
 	
-	public void setX(double x){ xCalc = x; }
-	public void setY(double y){ yCalc = y; }
+	public void setX(double x){ _xCalc = x; }
+	public double getX(){ return _xCalc; }
 	
-	public void setEscapeTime(int et){ escapeTime = et; }
+	public void setY(double y){ _yCalc = y; }
+	public double getY(){ return _yCalc; }
 	
-	public double getX(){ return xCalc; }
-	public double getY(){ return yCalc; }
+	public void setPasses(int pass){ _passes = pass; }
+	public int getPasses(){ return _passes; }
+	
+	public void setEscapeTime(){ _escapeTime = _passes; }
+	public int getEscapeTime(){ return _escapeTime; }
+	
+	
 }
