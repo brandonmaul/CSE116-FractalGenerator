@@ -2,7 +2,6 @@ package code;
 
 public interface FractalAlgorithms {
 	/**
-	 * Ah here it is. The big kahuna.
 	 * @author Brandon Maul
 	 * 
 	 * This interface holds all the methods needed to properly set up and update a fractal.
@@ -10,14 +9,7 @@ public interface FractalAlgorithms {
 	 * are given the proper parameters to fit the fractal being made.
 	 * 
 	 * The Fractal Updater methods cycle through each pixel on the 2D array and then calculate 
-	 * the escape time of each pixel and store that escape in the respective pixel.
-	 * 
-	 * The final method at the bottom, getFractal, simply returns the 2D array that is of
-	 * type int, and is the exact same size as the @param pixels of a 2D pixel array. Each pixel
-	 * in the 2D Pixel array should have a escape time by the point this method is called.
-	 * This method then takes the escape time of each pixel and stores that in the 2D integer array
-	 * at the same index of the pixel it came from. Then finally it returns the 2D integer array it
-	 * generated.
+	 * the escape-time of each pixel and store that escape-time in the respective pixel.
 	 * 
 	 */
 	
