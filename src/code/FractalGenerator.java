@@ -28,6 +28,14 @@ public class FractalGenerator implements FractalAlgorithms{
 	 * From there you can use the return methods below the generators to acquire what you want from the fractal.
 	 * NOTE: If you call return methods before the fractal has been generated, you will get a Null Pointer Exception.
 	 * Don't do this. Please.
+	 
+	 * The method at the bottom, getEscapeTimeArray, simply returns the 2D array that is of
+	 * type int, and is the exact same size as the fractal stored as an instance variable in this class. 
+	 * Each pixel in the 2D Pixel array should have a escape time by the point this method is called.
+	 * This method then takes the escape time of each pixel and stores that in the 2D integer array
+	 * at the same index of the pixel it came from. Then finally it returns the 2D integer array it
+	 * generated.
+	 * 
 	 */
 	
 	//---------------------------------------------------------------//
