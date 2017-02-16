@@ -61,20 +61,18 @@ public interface FractalAlgorithms {
 				
 				Pixel p = pixelArray[x][y];
 				
-				p.setDistance();
-				p.setPasses(0);
-				
-				while(p.getDistance() <= 4 && p.getPasses() < 255){
-					p._passes++;
-					
+				while(p.getDistance() <= 4 & p.getPasses() < 255){
+			
 					double currentX = p.getX();
 					double currentY = p.getY();
 					
-					double newX = (((currentX)*(currentX)) - ((currentY)*(currentY))) + currentX;
-					double newY = (2 * currentX * currentY) + currentY;
+					double newX = ((currentX*currentX) - (currentY*currentY)) + currentX;
+					double newY = 2.0 * currentX * currentY + currentY;
 					
 					p.setX(newX); 
 					p.setY(newY);
+					
+					p.setPasses(p.getPasses() + 1);
 					
 					p.setDistance();
 				}
@@ -96,7 +94,7 @@ public interface FractalAlgorithms {
 				p.setPasses(0);
 				
 				while(p.getDistance() <= 4 && p.getPasses() < 255){
-					p._passes++;
+					p.setPasses(p.getPasses() + 1);
 					
 					double currentX = p.getX();
 					double currentY = p.getY();
@@ -127,7 +125,7 @@ public interface FractalAlgorithms {
 				p.setPasses(0);
 				
 				while(p.getDistance() <= 4 && p.getPasses() < 255){
-					p._passes++;
+					p.setPasses(p.getPasses() + 1);
 					
 					double currentX = p.getX();
 					double currentY = p.getY();
@@ -145,22 +143,5 @@ public interface FractalAlgorithms {
 				
 			}
 		}
-	}
-	
-	//---------------------------------------------------------------//
-	//PHASE 1 ESCAPE-TIME GENERATOR - GENERATES 2D ARRAY OF TYPE INT THAT PROVIDES THE ESCAPE TIME OF EACH PIXEL
-	//---------------------------------------------------------------//
-	
-	public default int[][] getFractal(Pixel[][] pixelArray){
-		
-		int[][] fractal = new int[pixelArray.length][pixelArray[0].length];
-		
-		for(int x=0; x<pixelArray.length; x++){
-			for(int y=0; y<pixelArray[0].length; y++){
-				fractal[x][y] = pixelArray[x][y].getEscapeTime();
-			}
-		}
-
-		return fractal;
 	}
 }

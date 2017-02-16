@@ -9,8 +9,12 @@ public class TestDriver {
 	 */
 
 	public static void main(String[] args) {
-		FractalGenerator gen = new FractalGenerator();
-		gen.genMandelbrot();
+		FractalGenerator fractal = new FractalGenerator();
+		fractal.genMandelbrot();
+		fractal.getEscapeTimeArray();
+
+		
+		
 	}
 
 }
