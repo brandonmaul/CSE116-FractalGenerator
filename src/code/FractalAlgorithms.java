@@ -16,10 +16,10 @@ public interface FractalAlgorithms {
 	//---------------------------------------------------------------//
 	//FRACTAL INITIATORS - PUTS PIXELS INTO ARRAY AND GIVES THEM THEIR INITIAL X/Y COORDINATES
 	//---------------------------------------------------------------//
-		
+		//Coordinates of pixel are seperate from indices 
 		public default void initMandelbrot(Pixel[][] pixelArray){
-			for(int x=0; x<pixelArray.length; x++){
-				for(int y=0; y<pixelArray[0].length; y++){
+			for(int x=0; x<pixelArray.length; x++){//Row
+				for(int y=0; y<pixelArray[0].length; y++){//Col
 					pixelArray[x][y] = new Pixel(x, y, -2.15, 0.6, -1.3, 1.3);
 				}
 			}

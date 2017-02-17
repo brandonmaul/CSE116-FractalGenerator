@@ -41,11 +41,12 @@ public class FractalGenerator implements FractalAlgorithms{
 	//---------------------------------------------------------------//
 	//MANDLEBROT FRACTAL:
 	//---------------------------------------------------------------//
-	
+	//Pixel is the 2d array - This is fractal MandelBrot
+	//From the pixel class
 	public Pixel[][] genMandelbrot(){
-		
+		//Creates an array of pixel objects 512 by 512
 		_fractal = new Pixel[512][512];
-		
+		//Found in the interface - algortithim 
 		initMandelbrot(_fractal);
 		
 		updateMandelbrot(_fractal);
