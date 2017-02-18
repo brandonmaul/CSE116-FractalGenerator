@@ -1,0 +1,29 @@
+package tests;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+import code.FractalGenerator;
+
+public class CalcCoordEscTimeMaxPassesTest {
+
+	@Test
+	public void MBEscTest() {
+		FractalGenerator fractal = new FractalGenerator();
+		assertEquals(255,fractal.calcMandlebrotEscapeTime(0.3207031250000001, -0.07109374999999386),0.01);
+	}
+
+	@Test
+	public void JEscTest() {
+		FractalGenerator fractal = new FractalGenerator();
+		assertEquals(255,fractal.calcJuliaEscapeTime(1.0492187499999897, -0.234375),0.01);
+	}
+
+	@Test
+	public void BurnEscTest() {
+		FractalGenerator fractal = new FractalGenerator();
+		assertEquals(255,fractal.calcBurningShipEscapeTime(-1.7443359374999874, -0.017451171875000338),0.01);
+	}
+
+}
