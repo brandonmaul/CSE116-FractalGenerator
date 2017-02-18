@@ -5,7 +5,9 @@ import org.junit.Test;
 import code.*;
 
 public class CoordTest {
-
+	/**
+	 * @author Giselle
+	 */
 	@Test
 	public void xMBtest() {
 		
