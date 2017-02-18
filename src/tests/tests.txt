@@ -1,1 +1,11 @@
 This is where we should put our JUnit tests! 😁
+	//---------------------------------------------------------------//
+	//XCord
+	//---------------------------------------------------------------//
+	@Test 
+	public void xCordTest{
+	
+	FractalGenerator xcord= new FractalGenerator();
+	xcord.
+	
+// 
