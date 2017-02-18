@@ -6,7 +6,10 @@ import org.junit.Test;
 
 import code.FractalGenerator;
 
-public class CalcCoordEscTimeMaxPassesTest {
+public class EscTimeMaxPassesTest {
+	/**
+	 * @author ThankamAbish
+	 */
 
 	@Test
 	public void MBEscTest() {
