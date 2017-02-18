@@ -6,52 +6,33 @@ public class Pixel {
 	 * 
 	 * Pixels are what we use in each cell of the 2D array to build the fractal.
 	 * The Pixel class holds all the needed data for fractal calculations. 
-	 * When a Pixel object is instantiated, xCalc and yCalc are defined immediately.
-	 * Then the Pixel calculates it's distance from (0,0) and store it internally.
-	 * Pixels can calculate their distance from the point (0,0) on the graph by using the setDistance method. 
-	 * Each Pixel also holds it's own escape-time and number of passes when being updated by a update method in FractalAlgorithms.
-	 * Updates - found in Fractal Generator 
-	 * Seperate update for each fractal 
+	 * When a Pixel object is constructed, xCalc and yCalc are defined immediately.
+	 * Each Pixel holds it's own escape-time as well. This is given to it by the escape-time calculators in FractalAlgorithms
+	 * 
 	 */
 	
-	private double _xCalc;
-	private double _yCalc;
-	private double _dist;
+	private double _xCoord;
+	private double _yCoord;
 	private int _escapeTime;
-	private int _passes; // How many times it is updates
 
-	// The escaoe time is then equal to the # of passes
+	// The escape time is then equal to the # of passes
 	
 	public Pixel(int x, int y,  double minX, double maxX, double minY, double maxY){
-		_xCalc = minX + (x * (maxX - minX)/511);
-		_yCalc = minY + (y * (maxY - minY)/511);
-		this.setDistance();
-		this.setPasses(0);
+		_xCoord = minX + (x * (maxX - minX)/511);
+		_yCoord = minY + (y * (maxY - minY)/511);
 	}
-	
-	public void setDistance(){
-		//From origin
-		_dist = Math.sqrt(((0 - _xCalc)*(0 - _xCalc))+ ((0 - _yCalc)*(0 - _yCalc)));
-		
-			
-		//Sets distance from the point (0,0) using Pythagorean Theorem
-	}
-	public double getDistance(){ return _dist; }
 	
 	//Set x cord
-	public void setX(double x){ _xCalc = x; }
+	public void setX(double x){ _xCoord = x; }
 	//Get x cord
-	public double getX(){ return _xCalc; }
+	public double getX(){ return _xCoord; }
 	//Set y cord
-	public void setY(double y){ _yCalc = y; }
+	public void setY(double y){ _yCoord = y; }
 	//Get y cord
-	public double getY(){ return _yCalc; }
-	//
-	public void setPasses(int pass){ _passes = pass; }
-	public int getPasses(){ return _passes; }
+	public double getY(){ return _yCoord; }
 	
-	public void setEscapeTime(){ _escapeTime = _passes; }
 	public int getEscapeTime(){ return _escapeTime; }
+	public void setEscapeTime(int input){ _escapeTime = input;}
 	
 	
 }

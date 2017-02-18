@@ -12,29 +12,26 @@ public class FractalGenerator implements FractalAlgorithms{
 	 * 
 	 * Each of the following functions creates a fractal on a 2D grid.
 	 * The fractals design is specified by the FractalAlgorithims interface which supplies the methods for making
-	 * the fractal to each pixel on the 2D array. FractalAlgorithms also has the update methods which calculate each 
+	 * the fractal to each pixel on the 2D array. FractalAlgorithms also has the Escape-Time generation methods which calculates each 
 	 * pixel's escape time.
 	 * 
 	 * Once the fractal has been initiated properly, and the escape time of each pixel has been calculated by using the update function,
 	 * the final fractal is ready to be returned. The final fractal is a 2D array of integers that represents each pixel's (of the same index)
-	 * escape-time.
+	 * escape-time. This is done by calling @code getEscapeTimeArray
 	 * 
-	 * Order of each generator method in this Class:
-	 * (Step 1) --> Initiation of the 2D Pixel Array.
-	 * (Step 2) --> Add Pixels to each Position in the Array with the proper parameters. (Uses FractalAlgorithms Interface)
-	 * (Step 3) --> Update pixels to calculate their individual escape-times and store them inside the pixels (Uses FractalAlgorithms Interface)
-	 * (Step 4) --> Return Fractal; Send it out into the world.
+	 * Order of each fractal method in this Class:
+	 * (Step 1) --> Creates new 2D Pixel Array.
+	 * (Step 2.1) --> Calls init_____ function with the input of the 2D Pixel Array. This fills each index in the 2D array with Pixels with the proper parameters. (Uses FractalAlgorithms Interface)
+	 * (Step 2.2) --> After a pixel is created it's individual escape-time is calculated and stored inside the pixel. (Uses FractalAlgorithms Interface)
+	 * (Step 3) --> After this has happened for every index in the Array, The fractal is returned. This fractal is a 2D array of Pixels each with their own properly calculated escape-time.
 	 * 
-	 * From there you can use the return methods below the generators to acquire what you want from the fractal.
-	 * NOTE: If you call return methods before the fractal has been generated, you will get a Null Pointer Exception.
-	 * Don't do this. Please.
-	 
-	 * The method at the bottom, getEscapeTimeArray, simply returns the 2D array that is of
-	 * type int, and is the exact same size as the fractal stored as an instance variable in this class. 
+	 * The method at the bottom, getEscapeTimeArray, simply returns the 2D array of INTEGERS that is the
+	 * same size as the fractal. This 2D array of Integers contains the escape time for each pixel of the same index in the fractal
+	 * 
+	 * Ex: _fractal[0][0].getEscapeTime == 4; So... escapeTimeArray[0][0] == 4; (THIS IS WHAT WE NEED TO RETURN FOR PHASE I)
+	 * 
 	 * Each pixel in the 2D Pixel array should have a escape time by the point this method is called.
-	 * This method then takes the escape time of each pixel and stores that in the 2D integer array
-	 * at the same index of the pixel it came from. Then finally it returns the 2D integer array it
-	 * generated.
+	 * If the getEscapeTimeArray is called before a fractal generation method, you're gonna have a bad time.
 	 * 
 	 */
 	
@@ -43,14 +40,10 @@ public class FractalGenerator implements FractalAlgorithms{
 	//---------------------------------------------------------------//
 	//Pixel is the 2d array - This is fractal MandelBrot
 	//From the pixel class
+	
 	public Pixel[][] genMandelbrot(){
-		//Creates an array of pixel objects 512 by 512
 		_fractal = new Pixel[512][512];
-		//Found in the interface - algortithim 
 		initMandelbrot(_fractal);
-		
-		updateMandelbrot(_fractal);
-		
 		return _fractal;
 
 	}
@@ -60,13 +53,8 @@ public class FractalGenerator implements FractalAlgorithms{
 	//---------------------------------------------------------------//
 	
 	public Pixel[][] genJulia(){
-		
 		_fractal = new Pixel[512][512];
-		
 		initJulia(_fractal);
-		
-		updateJulia(_fractal);
-		
 		return _fractal;
 
 	}
@@ -76,13 +64,8 @@ public class FractalGenerator implements FractalAlgorithms{
 	//---------------------------------------------------------------//
 	
 	public Pixel[][] genBurningShip(){
-		
 		_fractal = new Pixel[512][512];
-		
 		initBurningShip(_fractal);
-		
-		updateBurningShip(_fractal);
-		
 		return _fractal;
 	}
 	
@@ -115,40 +98,15 @@ public class FractalGenerator implements FractalAlgorithms{
 	}
 	
 	public boolean boolContainsNoZerosOrOnes(){ //if the escape time of ANY of the pixels is 1 or 0, this returns true. Otherwise, returns false.
-		boolean bool = false;
-		outerloop:
 		for(int x=0; x<_fractal.length; x++){
 			for(int y=0; y<_fractal[0].length; y++){
 				if (_fractal[x][y].getEscapeTime() == 0 | _fractal[x][y].getEscapeTime() == 1 ){
-					bool = true;
-					break outerloop;
+					return false;
 				}
 			}
 		}
-		return bool;
+		return true;
 	}
-	
-	//---------------------------------------------------------------//
-	//Need to figure out how to get this to work... This method makes me think that maybe the update functions are broken
-	//---------------------------------------------------------------//
-		
-		public int getEscapeTimeOfPixel(double xCalc, double yCalc){
-			
-			int retVal = 0;
-			
-			outerloop:
-			for(int x=0; x<_fractal.length; x++){
-				for(int y=0; y<_fractal[0].length; y++){
-					if (_fractal[x][y].getX() == xCalc && _fractal[x][y].getY() == yCalc){
-						retVal = _fractal[x][y].getEscapeTime();
-						break outerloop;
-					}
-				}
-			}
-			
-			return retVal;
-			
-		}
 }
 
 
