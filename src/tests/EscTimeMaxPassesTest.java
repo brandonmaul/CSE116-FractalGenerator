@@ -14,7 +14,7 @@ public class EscTimeMaxPassesTest {
 	@Test
 	public void MBEscTest() {
 		FractalGenerator fractal = new FractalGenerator();
-		assertEquals(255,fractal.calcMandlebrotEscapeTime(0.3207031250000001, -0.07109374999999386),0.01);
+		assertEquals(255,fractal.calcMandelbrotEscapeTime(0.3207031250000001, -0.07109374999999386),0.01);
 	}
 
 	@Test

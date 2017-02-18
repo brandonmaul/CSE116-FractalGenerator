@@ -13,56 +13,75 @@ public interface FractalAlgorithms {
 	 * 
 	 */
 	
-	//---------------------------------------------------------------//
-	//FRACTAL INITIATORS - PUTS PIXELS INTO ARRAY AND GIVES THEM THEIR INITIAL X/Y COORDINATES
-	//THEN GIVES THE PIXELS THEIR ESCAPE TIME BY CALLING ON THE ESCAPE TIME CALCULATORS
-	//---------------------------------------------------------------//
-		//Coordinates of pixel are separate from indices 
+	//==================================================================================================//
+	//====FRACTAL INITIATORS - PUTS PIXELS INTO ARRAY AND GIVES THEM THEIR INITIAL X/Y COORDINATES======//
+	//=======THEN GIVES THE PIXELS THEIR ESCAPE TIME BY CALLING ON THE ESCAPE TIME CALCULATORS==========//
+	//==================================================================================================//
 	
-		//<<<-----------------------Mandelbrot----------------------->>>//
-		public default void initMandelbrot(Pixel[][] pixelArray){
-			for(int x=0; x<pixelArray.length; x++){//Row
-				for(int y=0; y<pixelArray[0].length; y++){//Col
-					pixelArray[x][y] = new Pixel(x, y, -2.15, 0.6, -1.3, 1.3);
-					Pixel p = pixelArray[x][y];
-					p.setEscapeTime(calcMandlebrotEscapeTime(p.getX(), p.getY()));
-				}
+	//Coordinates of pixel are separate from indices 
+
+	//<<<--------------------------------------------------------->>>//	
+	//<<<-----------------------MandelBrot------------------------>>>//
+	//<<<--------------------------------------------------------->>>//
+	public default void initMandelbrot(Pixel[][] pixelArray){
+		for(int x=0; x<pixelArray.length; x++){//Row
+			for(int y=0; y<pixelArray[0].length; y++){//Col
+				pixelArray[x][y] = new Pixel(x, y, -2.15, 0.6, -1.3, 1.3);
+				Pixel p = pixelArray[x][y];
+				p.setEscapeTime(calcMandelbrotEscapeTime(p.getX(), p.getY()));
 			}
 		}
-		//<<<-----------------------Julia----------------------->>>//
-		public default void initJulia(Pixel[][] pixelArray){
-			for(int x=0; x<pixelArray.length; x++){
-				for(int y=0; y<pixelArray[0].length; y++){
-					pixelArray[x][y] = new Pixel(x, y, -1.7, 1.7, -1.0, 1.0);
-					Pixel p = pixelArray[x][y];
-					p.setEscapeTime(calcJuliaEscapeTime(p.getX(), p.getY()));
-				}
+	}
+	
+	//<<<---------------------------------------------------------->>>//
+	//<<<---------------------------Julia-------------------------->>>//
+	//<<<---------------------------------------------------------->>>//
+	public default void initJulia(Pixel[][] pixelArray){
+		for(int x=0; x<pixelArray.length; x++){
+			for(int y=0; y<pixelArray[0].length; y++){
+				pixelArray[x][y] = new Pixel(x, y, -1.7, 1.7, -1.0, 1.0);
+				Pixel p = pixelArray[x][y];
+				p.setEscapeTime(calcJuliaEscapeTime(p.getX(), p.getY()));
 			}
 		}
-		//<<<-----------------------Burning Ship----------------------->>>//
-		public default void initBurningShip(Pixel[][] pixelArray){
-			for(int x=0; x<pixelArray.length; x++){
-				for(int y=0; y<pixelArray[0].length; y++){
-					pixelArray[x][y] = new Pixel(x, y, -1.8, -1.7, -0.08, 0.025);
-					Pixel p = pixelArray[x][y];
-					p.setEscapeTime(calcBurningShipEscapeTime(p.getX(), p.getY()));
-				}
+	}
+	
+	//<<<---------------------------------------------------------->>>//
+	//<<<-----------------------Burning Ship----------------------->>>//
+	//<<<---------------------------------------------------------->>>//
+	public default void initBurningShip(Pixel[][] pixelArray){
+		for(int x=0; x<pixelArray.length; x++){
+			for(int y=0; y<pixelArray[0].length; y++){
+				pixelArray[x][y] = new Pixel(x, y, -1.8, -1.7, -0.08, 0.025);
+				Pixel p = pixelArray[x][y];
+				p.setEscapeTime(calcBurningShipEscapeTime(p.getX(), p.getY()));
 			}
 		}
+	}
+	
+	
+	//<<<=====================================================================================================>>>//
+	//<<<======ESCAPE TIME CALCULATORS - CALCULATES THE ESCAPE TIME OF A PIXEL GIVEN ITS COORDINATES==========>>>//	
+	//<<<=====================================================================================================>>>//
+	
 		
-	//---------------------------------------------------------------//
-	//ESCAPE TIME CALCULATORS - CALCULATES THE ESCAPE TIME OF A PIXEL GIVEN ITS COORDINATES
-	//---------------------------------------------------------------//
-		
-	//<<<-----------------------MandelBrot----------------------->>>//
-	public default int calcMandlebrotEscapeTime(double xCoord, double yCoord){
+	//<<<--------------------------------------------------------->>>//	
+	//<<<-----------------------MandelBrot------------------------>>>//
+	//<<<--------------------------------------------------------->>>//
+	
+	//If no max distance is given, it is assumed to be 4
+	public default int calcMandelbrotEscapeTime(double xCoord, double yCoord){
+		return calcMandelbrotEscapeTime(4, xCoord, yCoord);
+	}
+	
+	public default int calcMandelbrotEscapeTime(int maxDist, double xCoord, double yCoord){
 		double xCalc = xCoord;
 		double yCalc = yCoord;
 
 		double dist = distanceCalculator(xCalc, yCalc);
 		
 		int passes = 0;
-		while(dist <= 4 & passes < 255){
+		while(dist <= maxDist & passes < 255){
 			double xtemp = ((xCalc*xCalc) - (yCalc*yCalc)) + xCoord;
 			yCalc = 2.0 * xCalc * yCalc + yCoord;
 			xCalc = xtemp;
@@ -73,15 +92,23 @@ public interface FractalAlgorithms {
 		return escapeTime;
 	}
 	
-	//<<<-----------------------Julia----------------------->>>//
+	//<<<---------------------------------------------------------->>>//
+	//<<<---------------------------Julia-------------------------->>>//
+	//<<<---------------------------------------------------------->>>//
+	
+	//If no max distance is given, it is assumed to be 4
 	public default int calcJuliaEscapeTime(double xCoord, double yCoord){
+		return calcJuliaEscapeTime(4, xCoord, yCoord);
+	}
+	
+	public default int calcJuliaEscapeTime(int maxDist, double xCoord, double yCoord){
 		double xCalc = xCoord;
 		double yCalc = yCoord;
 
 		double dist = distanceCalculator(xCalc, yCalc);
 		
 		int passes = 0;
-		while(dist <= 4 & passes < 255){
+		while(dist <= maxDist & passes < 255){
 			double xtemp = ((xCalc*xCalc) - (yCalc*yCalc)) + (-0.72689);
 			yCalc = 2.0 * xCalc * yCalc + 0.188887;
 			xCalc = xtemp;
@@ -92,15 +119,23 @@ public interface FractalAlgorithms {
 		return escapeTime;
 	}
 	
+	//<<<---------------------------------------------------------->>>//
 	//<<<-----------------------Burning Ship----------------------->>>//
+	//<<<---------------------------------------------------------->>>//
+	
+	//If no max distance is given, it is assumed to be 4
 	public default int calcBurningShipEscapeTime(double xCoord, double yCoord){
+		return calcBurningShipEscapeTime(4, xCoord, yCoord);
+	}
+	
+	public default int calcBurningShipEscapeTime(int maxDist, double xCoord, double yCoord){
 		double xCalc = xCoord;
 		double yCalc = yCoord;
 
 		double dist = distanceCalculator(xCalc, yCalc);
 		
 		int passes = 0;
-		while(dist <= 4 & passes < 255){
+		while(dist <= maxDist & passes < 255){
 			double xtemp = ((xCalc*xCalc) - (yCalc*yCalc)) + xCoord;
 			yCalc = Math.abs(2.0 * xCalc * yCalc) + yCoord;
 			xCalc = xtemp;
@@ -111,9 +146,9 @@ public interface FractalAlgorithms {
 		return escapeTime;
 	}
 	
-	//---------------------------------------------------------------//
-	//DISTANCE CALC - Uses Pythagorean Theorem to calculate distance from @param (xInput, yInput) to (0,0)
-	//---------------------------------------------------------------//
+	//<<<=====================================================================================================>>>//
+	//<<<===================DISTANCE CALCULATOR - CALCULATES THE DISTANCE OF INPUT TO (0,0)===================>>>//	
+	//<<<=====================================================================================================>>>//
 	
 	public default double distanceCalculator(double xInput, double yInput){
 		double dist = Math.sqrt(((xInput)*(xInput)) + ((yInput)*(yInput)));

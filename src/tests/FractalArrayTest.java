@@ -9,7 +9,7 @@ import code.Pixel;
 
 public class FractalArrayTest {
 	/**
-	 * @author ThankamAbish
+	 * @author Thankam Abish
 	 */
 	@Test
 	public void MBSizeTest() {
