@@ -1,0 +1,21 @@
+Meeting Minutes for Feb 18, 2017:
+
+Meeting Attendance:
+  Brandon Maul - M
+  Jeff Landberg
+  Giselle Ashby
+  Thankam Abish
+
+Tasks completed since last meeting:
+  Code package works! JUnit tests have been started! 
+
+Tasks started, but not completed, since last meeting:
+  At this meeting we talked it over to make sure the JUnit tests were returning the right values.
+
+Tasks to be worked on (and by which team members) for the next meeting:
+  None needed! Just some minor refactoring for nicer-looking code. Also maybe more JavaDoc annotations. But all the requirements for the JUnit testing has been met!
+ 
+
+Schedule for the next week's set of pair programming meetings:
+ N/A
+  

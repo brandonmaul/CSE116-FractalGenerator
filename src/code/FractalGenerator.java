@@ -2,7 +2,7 @@ package code;
 
 public class FractalGenerator implements FractalAlgorithms{
 	
-	Pixel[][] _fractal;
+	private Pixel[][] _fractal;
 	
 	public FractalGenerator(){
 	}
@@ -73,17 +73,17 @@ public class FractalGenerator implements FractalAlgorithms{
 	//PHASE 1 ESCAPE-TIME GENERATOR - GENERATES 2D ARRAY OF TYPE INT THAT CONTAINS THE ESCAPE TIME OF EACH PIXEL
 	//---------------------------------------------------------------//
 		
-		public int[][] getEscapeTimeArray(){
-			
-			int[][] fractal = new int[_fractal.length][_fractal[0].length];
-			
-			for(int x=0; x<_fractal.length; x++){
-				for(int y=0; y<_fractal[0].length; y++){
-					fractal[x][y] = _fractal[x][y].getEscapeTime();
-				}
+	public int[][] getEscapeTimeArray(){
+		
+		int[][] fractal = new int[_fractal.length][_fractal[0].length];
+		
+		for(int x=0; x<_fractal.length; x++){
+			for(int y=0; y<_fractal[0].length; y++){
+				fractal[x][y] = _fractal[x][y].getEscapeTime();
 			}
-			return fractal;
 		}
+		return fractal;
+	}
 	
 	//---------------------------------------------------------------//
 	//OTHER RETURN METHODS: Could be useful for some of the unit tests... maybe. Idk. ¯\_(ツ)_/¯
@@ -91,10 +91,6 @@ public class FractalGenerator implements FractalAlgorithms{
 	
 	public Pixel[][] getFractal() { //return the raw fractal stored in this class
 		return _fractal;
-	}
-
-	public int getEscapeTimeFromIndex(int x, int y) { //get just one escape time from a single pixel (given index)
-		return _fractal[x][y].getEscapeTime();
 	}
 	
 	public boolean boolContainsNoZerosOrOnes(){ //if the escape time of ANY of the pixels is 1 or 0, this returns true. Otherwise, returns false.

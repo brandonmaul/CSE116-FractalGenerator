@@ -1,0 +1,21 @@
+Meeting Minutes for Feb 17, 2017:
+
+Meeting Attendance:
+  Brandon Maul - M
+  Jeff Landberg
+  Giselle Ashby
+  Thankam Abish
+
+Tasks completed since last meeting:
+  Code package has been mostly configured, but still contains a few bugs
+
+Tasks started, but not completed, since last meeting:
+  Debugging and simplification of the code package
+
+Tasks to be worked on (and by which team members) for the next meeting:
+  Since the calculation functions are mostly done, JUnit test cases will begin development
+  Jeff Giselle and Thankam will start the JUnit tests and Brandon will look over the code package and try to resolve the bugs
+ 
+
+Schedule for the next week's set of pair programming meetings:
+  We will be meeting up tomorrow (Feb 18, 2017) and evaluating our progress

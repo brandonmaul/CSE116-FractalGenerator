@@ -33,6 +33,8 @@ public class TestDriver {
 		fractal.genJulia();
 		System.out.println("Julia Escape Time: " + fractal.calcJuliaEscapeTime(1.6933593749999853, 0.9765625));
 		
+		fractal.genMandelbrot();
+		System.out.println("Mandelbrot Escape Time: " + fractal.calcMandlebrotEscapeTime(0.0, 0.0));
 		
 		
 		
