@@ -59,6 +59,19 @@ public interface FractalAlgorithms {
 		}
 	}
 	
+	//<<<---------------------------------------------------------->>>//
+	//<<<-------------------------Multibrot------------------------>>>//
+	//<<<---------------------------------------------------------->>>//
+	public default void initMultibrot(Pixel[][] pixelArray){
+		for(int x=0; x<pixelArray.length; x++){
+			for(int y=0; y<pixelArray[0].length; y++){
+				pixelArray[x][y] = new Pixel(x, y, -1.0, 1.0, -1.3, 1.3);
+				Pixel p = pixelArray[x][y];
+				p.setEscapeTime(calcMultibrotEscapeTime(p.getX(), p.getY()));
+			}
+		}
+	}
+	
 	
 	//<<<=====================================================================================================>>>//
 	//<<<======ESCAPE TIME CALCULATORS - CALCULATES THE ESCAPE TIME OF A PIXEL GIVEN ITS COORDINATES==========>>>//	
@@ -138,6 +151,33 @@ public interface FractalAlgorithms {
 		while(dist <= maxDist & passes < 255){
 			double xtemp = ((xCalc*xCalc) - (yCalc*yCalc)) + xCoord;
 			yCalc = Math.abs(2.0 * xCalc * yCalc) + yCoord;
+			xCalc = xtemp;
+			passes = passes + 1;
+			dist = distanceCalculator(xCalc, yCalc);
+		}
+		int escapeTime = passes;
+		return escapeTime;
+	}
+	
+	//<<<---------------------------------------------------------->>>//
+	//<<<------------------------Multibrot------------------------->>>//
+	//<<<---------------------------------------------------------->>>//
+	
+	//If no max distance is given, it is assumed to be 4
+	public default int calcMultibrotEscapeTime(double xCoord, double yCoord){
+		return calcBurningShipEscapeTime(4, xCoord, yCoord);
+	}
+	
+	public default int calcMultibrotEscapeTime(int maxDist, double xCoord, double yCoord){
+		double xCalc = xCoord;
+		double yCalc = yCoord;
+
+		double dist = distanceCalculator(xCalc, yCalc);
+		
+		int passes = 0;
+		while(dist <= maxDist & passes < 255){
+			double xtemp = (xCalc*xCalc*xCalc) - (3 * xCalc * (yCalc * yCalc)) + xCoord;
+			yCalc = (3 * (xCalc * xCalc) * yCalc) - (yCalc * yCalc * yCalc) + yCoord;
 			xCalc = xtemp;
 			passes = passes + 1;
 			dist = distanceCalculator(xCalc, yCalc);

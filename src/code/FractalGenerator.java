@@ -70,6 +70,17 @@ public class FractalGenerator implements FractalAlgorithms{
 	}
 	
 	//---------------------------------------------------------------//
+	//MULTIBROT FRACTAL:
+	//---------------------------------------------------------------//
+	
+	public Pixel[][] genMultibrot(){
+		_fractal = new Pixel[512][512];
+		initMultibrot(_fractal);
+		return _fractal;
+
+	}
+	
+	//---------------------------------------------------------------//
 	//PHASE 1 ESCAPE-TIME GENERATOR - GENERATES 2D ARRAY OF TYPE INT THAT CONTAINS THE ESCAPE TIME OF EACH PIXEL
 	//---------------------------------------------------------------//
 		
