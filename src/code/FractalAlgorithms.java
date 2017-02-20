@@ -82,9 +82,9 @@ public interface FractalAlgorithms {
 	//<<<-----------------------MandelBrot------------------------>>>//
 	//<<<--------------------------------------------------------->>>//
 	
-	//If no max distance is given, it is assumed to be 4
+	//If no max distance is given, it is assumed to be 2
 	public default int calcMandelbrotEscapeTime(double xCoord, double yCoord){
-		return calcMandelbrotEscapeTime(4, xCoord, yCoord);
+		return calcMandelbrotEscapeTime(2, xCoord, yCoord);
 	}
 	
 	public default int calcMandelbrotEscapeTime(int maxDist, double xCoord, double yCoord){
@@ -109,9 +109,9 @@ public interface FractalAlgorithms {
 	//<<<---------------------------Julia-------------------------->>>//
 	//<<<---------------------------------------------------------->>>//
 	
-	//If no max distance is given, it is assumed to be 4
+	//If no max distance is given, it is assumed to be 2
 	public default int calcJuliaEscapeTime(double xCoord, double yCoord){
-		return calcJuliaEscapeTime(4, xCoord, yCoord);
+		return calcJuliaEscapeTime(2, xCoord, yCoord);
 	}
 	
 	public default int calcJuliaEscapeTime(int maxDist, double xCoord, double yCoord){
@@ -136,9 +136,9 @@ public interface FractalAlgorithms {
 	//<<<-----------------------Burning Ship----------------------->>>//
 	//<<<---------------------------------------------------------->>>//
 	
-	//If no max distance is given, it is assumed to be 4
+	//If no max distance is given, it is assumed to be 2
 	public default int calcBurningShipEscapeTime(double xCoord, double yCoord){
-		return calcBurningShipEscapeTime(4, xCoord, yCoord);
+		return calcBurningShipEscapeTime(2, xCoord, yCoord);
 	}
 	
 	public default int calcBurningShipEscapeTime(int maxDist, double xCoord, double yCoord){
@@ -163,9 +163,9 @@ public interface FractalAlgorithms {
 	//<<<------------------------Multibrot------------------------->>>//
 	//<<<---------------------------------------------------------->>>//
 	
-	//If no max distance is given, it is assumed to be 4
+	//If no max distance is given, it is assumed to be 2
 	public default int calcMultibrotEscapeTime(double xCoord, double yCoord){
-		return calcBurningShipEscapeTime(4, xCoord, yCoord);
+		return calcBurningShipEscapeTime(2, xCoord, yCoord);
 	}
 	
 	public default int calcMultibrotEscapeTime(int maxDist, double xCoord, double yCoord){
