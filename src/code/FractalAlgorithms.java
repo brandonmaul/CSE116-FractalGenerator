@@ -165,7 +165,7 @@ public interface FractalAlgorithms {
 	
 	//If no max distance is given, it is assumed to be 2
 	public default int calcMultibrotEscapeTime(double xCoord, double yCoord){
-		return calcBurningShipEscapeTime(2, xCoord, yCoord);
+		return calcMultibrotEscapeTime(2, xCoord, yCoord);
 	}
 	
 	public default int calcMultibrotEscapeTime(int maxDist, double xCoord, double yCoord){

@@ -8,7 +8,7 @@ import code.FractalGenerator;
 
 public class EscTimeMaxPassesTest {
 	/**
-	 * @author ThankamAbish
+	 * @author Thankam Abish
 	 */
 
 	@Test
@@ -27,6 +27,12 @@ public class EscTimeMaxPassesTest {
 	public void BurnEscTest() {
 		FractalGenerator fractal = new FractalGenerator();
 		assertEquals(255,fractal.calcBurningShipEscapeTime(-1.7443359374999874, -0.017451171875000338),0.01);
+	}
+	
+	@Test
+	public void MultiEscTest() {
+		FractalGenerator fractal = new FractalGenerator();
+		assertEquals(255,fractal.calcMultibrotEscapeTime(0.5859375, 0.24375000000000108),0.01);
 	}
 
 }
