@@ -97,4 +97,31 @@ public class CoordTest {
 		//(512,..)
 		assertEquals(0.025,burn[0][511].getY(),.1);
 	}	
+	@Test
+	public void xMultitest() {
+		FractalGenerator multifractalx = new FractalGenerator();
+		Pixel[][] multi = multifractalx.genMultibrot();
+		// Index to yCord
+		//xCord range is -1 to -1
+		
+		
+		//(0,..)
+		assertEquals(-1,multi[0][0].getX(),.1);
+		
+		//(512,..)
+		assertEquals(1,multi[511][0].getX(),.1);
+	}	
+	
+	@Test
+	public void yMultiest() {
+		FractalGenerator multifractaly = new FractalGenerator();
+		Pixel[][] multi = multifractaly.genMultibrot();
+		//yCord range is -1.3 to 1.3
+		
+		
+		//(0,..)
+		assertEquals(-1.3,multi[0][0].getY(),.1);
+		//(512,..)
+		assertEquals(1.3,multi[0][511].getY(),.1);
+	}	
 }
