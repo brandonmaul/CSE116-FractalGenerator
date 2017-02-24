@@ -9,6 +9,8 @@ import code.FractalGenerator;
 public class EscTimeMaxPassesTest {
 	/**
 	 * @author Thankam Abish
+	 * 			This test checks if the program can accurately calculate the the escape time for a coordinate whose distance from the 
+	 * 			origin exceeds the escape distance after a single loop pass for each fractal. 
 	 */
 
 	@Test

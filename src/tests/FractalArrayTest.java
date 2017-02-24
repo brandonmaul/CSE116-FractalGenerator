@@ -10,6 +10,7 @@ import code.Pixel;
 public class FractalArrayTest {
 	/**
 	 * @author Thankam Abish
+	 * 			This test checks if the method to calculate the fractal returns a 2-d array with 512 rows and 512 columns.
 	 */
 
 	@Test
