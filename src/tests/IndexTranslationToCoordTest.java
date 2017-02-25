@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 import code.*;
 
-public class CoordTest {
+public class IndexTranslationToCoordTest {
 	/**
 	 * @author Giselle
 	 */

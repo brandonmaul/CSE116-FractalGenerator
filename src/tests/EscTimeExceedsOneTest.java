@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 import code.FractalGenerator;
 
-public class EscTimeMaxDist {
+public class EscTimeExceedsOneTest {
 
 	@Test
 	public void MBEscTest() {

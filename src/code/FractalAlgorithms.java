@@ -1,10 +1,10 @@
 package code;
 
-public interface FractalAlgorithms {
+public abstract class FractalAlgorithms {
 	/**
 	 * @author Brandon Maul
 	 * 
-	 *         This interface holds all the methods needed to properly set up
+	 *         This abstract class holds all the methods needed to properly set up
 	 *         and generate the escape times of each point on a fractal. The
 	 *         Fractal Initiators add pixels to the 2D array and make sure each
 	 *         of those pixels are given the proper parameters to fit the
@@ -38,8 +38,7 @@ public interface FractalAlgorithms {
 	 *            - expected to be empty Pixel array.
 	 *
 	 */
-
-	public default void initMandelbrot(Pixel[][] pixelArray) {
+	public void initMandelbrot(Pixel[][] pixelArray) {
 		for (int x = 0; x < pixelArray.length; x++) {// Row
 			for (int y = 0; y < pixelArray[0].length; y++) {// Col
 				pixelArray[x][y] = new Pixel(x, y, -2.15, 0.6, -1.3, 1.3);
@@ -55,7 +54,7 @@ public interface FractalAlgorithms {
 	 * @param pixelArray
 	 *            - expected to be empty Pixel array.
 	 */
-	public default void initJulia(Pixel[][] pixelArray) {
+	public void initJulia(Pixel[][] pixelArray) {
 		for (int x = 0; x < pixelArray.length; x++) {
 			for (int y = 0; y < pixelArray[0].length; y++) {
 				pixelArray[x][y] = new Pixel(x, y, -1.7, 1.7, -1.0, 1.0);
@@ -71,7 +70,7 @@ public interface FractalAlgorithms {
 	 * @param pixelArray
 	 *            - expected to be empty Pixel array.
 	 */
-	public default void initBurningShip(Pixel[][] pixelArray) {
+	public void initBurningShip(Pixel[][] pixelArray) {
 		for (int x = 0; x < pixelArray.length; x++) {
 			for (int y = 0; y < pixelArray[0].length; y++) {
 				pixelArray[x][y] = new Pixel(x, y, -1.8, -1.7, -0.08, 0.025);
@@ -87,7 +86,7 @@ public interface FractalAlgorithms {
 	 * @param pixelArray
 	 *            - expected to be empty Pixel array.
 	 */
-	public default void initMultibrot(Pixel[][] pixelArray) {
+	public void initMultibrot(Pixel[][] pixelArray) {
 		for (int x = 0; x < pixelArray.length; x++) {
 			for (int y = 0; y < pixelArray[0].length; y++) {
 				pixelArray[x][y] = new Pixel(x, y, -1.0, 1.0, -1.3, 1.3);
@@ -114,11 +113,11 @@ public interface FractalAlgorithms {
 	 *            - Y coordinate of Pixel
 	 * @return Escape Time of the input coordinate.
 	 */
-	public default int calcMandelbrotEscapeTime(double xCoord, double yCoord) {
+	public int calcMandelbrotEscapeTime(double xCoord, double yCoord) {
 		return calcMandelbrotEscapeTime(2, xCoord, yCoord);
 	}
 
-	public default int calcMandelbrotEscapeTime(int maxDist, double xCoord, double yCoord) {
+	public int calcMandelbrotEscapeTime(int maxDist, double xCoord, double yCoord) {
 		double xCalc = xCoord;
 		double yCalc = yCoord;
 
@@ -145,11 +144,11 @@ public interface FractalAlgorithms {
 	 *            - Y coordinate of Pixel
 	 * @return Escape Time of the input coordinate.
 	 */
-	public default int calcJuliaEscapeTime(double xCoord, double yCoord) {
+	public int calcJuliaEscapeTime(double xCoord, double yCoord) {
 		return calcJuliaEscapeTime(2, xCoord, yCoord);
 	}
 
-	public default int calcJuliaEscapeTime(int maxDist, double xCoord, double yCoord) {
+	public int calcJuliaEscapeTime(int maxDist, double xCoord, double yCoord) {
 		double xCalc = xCoord;
 		double yCalc = yCoord;
 
@@ -176,11 +175,11 @@ public interface FractalAlgorithms {
 	 *            - Y coordinate of Pixel
 	 * @return Escape Time of the input coordinate.
 	 */
-	public default int calcBurningShipEscapeTime(double xCoord, double yCoord) {
+	public int calcBurningShipEscapeTime(double xCoord, double yCoord) {
 		return calcBurningShipEscapeTime(2, xCoord, yCoord);
 	}
 
-	public default int calcBurningShipEscapeTime(int maxDist, double xCoord, double yCoord) {
+	public int calcBurningShipEscapeTime(int maxDist, double xCoord, double yCoord) {
 		double xCalc = xCoord;
 		double yCalc = yCoord;
 
@@ -207,11 +206,11 @@ public interface FractalAlgorithms {
 	 *            - Y coordinate of Pixel
 	 * @return Escape Time of the input coordinate.
 	 */
-	public default int calcMultibrotEscapeTime(double xCoord, double yCoord) {
+	public int calcMultibrotEscapeTime(double xCoord, double yCoord) {
 		return calcMultibrotEscapeTime(2, xCoord, yCoord);
 	}
 
-	public default int calcMultibrotEscapeTime(int maxDist, double xCoord, double yCoord) {
+	public int calcMultibrotEscapeTime(int maxDist, double xCoord, double yCoord) {
 		double xCalc = xCoord;
 		double yCalc = yCoord;
 
@@ -241,7 +240,7 @@ public interface FractalAlgorithms {
 	 *            - Y coordinate of a point
 	 * @return The distance from 0,0 to the point input.
 	 */
-	public default double distanceCalculator(double xCoord, double yCoord) {
+	public double distanceCalculator(double xCoord, double yCoord) {
 		double dist = Math.sqrt(((xCoord) * (xCoord)) + ((yCoord) * (yCoord)));
 		return dist;
 	}

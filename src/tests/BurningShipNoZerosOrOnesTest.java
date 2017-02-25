@@ -12,7 +12,7 @@ import code.FractalGenerator;
  *
  */
 
-public class BurnEscTime {
+public class BurningShipNoZerosOrOnesTest {
 	@Test
 	public void BurnEscTimeTest() {
 		FractalGenerator fractal = new FractalGenerator();

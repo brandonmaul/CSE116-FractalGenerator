@@ -1,6 +1,6 @@
 package code;
 
-public class FractalGenerator implements FractalAlgorithms {
+public class FractalGenerator extends FractalAlgorithms {
 
 	private Pixel[][] _fractal;
 
@@ -12,8 +12,8 @@ public class FractalGenerator implements FractalAlgorithms {
 	 * 
 	 *         Each of the following functions creates a fractal on a 2D grid.
 	 *         The fractals design is specified by the FractalAlgorithims
-	 *         interface which supplies the methods for making the fractal to
-	 *         each pixel on the 2D array. FractalAlgorithms also has the
+	 *         abstract class which supplies the methods for making the fractal
+	 *         to each pixel on the 2D array. FractalAlgorithms also has the
 	 *         Escape-Time generation methods which calculates each pixel's
 	 *         escape time.
 	 * 
@@ -24,16 +24,23 @@ public class FractalGenerator implements FractalAlgorithms {
 	 *         index) escape-time. This is done by calling @code
 	 *         getEscapeTimeArray
 	 * 
-	 *         Order of each fractal method in this Class: (Step 1) --> Creates
-	 *         new 2D Pixel Array. (Step 2.1) --> Calls init_____ function with
-	 *         the input of the 2D Pixel Array. This fills each index in the 2D
-	 *         array with Pixels with the proper parameters. (Uses
-	 *         FractalAlgorithms Interface) (Step 2.2) --> After a pixel is
-	 *         created it's individual escape-time is calculated and stored
-	 *         inside the pixel. (Uses FractalAlgorithms Interface) (Step 3) -->
-	 *         After this has happened for every index in the Array, The fractal
-	 *         is returned. This fractal is a 2D array of Pixels each with their
-	 *         own properly calculated escape-time.
+	 *         Order of each fractal method in this Class:
+	 * 
+	 *         (Step 1) --> Creates new 2D Pixel Array.
+	 * 
+	 *         (Step 2.1) --> Calls init_____ function with the input of the 2D
+	 *         Pixel Array. This fills each index in the 2D array with Pixels
+	 *         with the proper parameters. (Uses FractalAlgorithms abstract
+	 *         class)
+	 * 
+	 *         (Step 2.2) --> After a pixel is created it's individual
+	 *         escape-time is calculated and stored created it's individual
+	 *         escape-time is calculated and stored inside the pixel. (Uses
+	 *         FractalAlgorithms abstract class)
+	 * 
+	 *         (Step 3) --> After this has happened for every index in the
+	 *         Array, The fractal is returned. This fractal is a 2D array of
+	 *         Pixels each with their own properly calculated escape-time.
 	 * 
 	 *         The method at the bottom, getEscapeTimeArray, simply returns the
 	 *         2D array of INTEGERS that is the same size as the fractal. This
@@ -120,22 +127,6 @@ public class FractalGenerator implements FractalAlgorithms {
 			}
 		}
 		return fractal;
-	}
-
-	/**
-	 * Other methods - Could be useful for some of the unit tests... maybe. Idk.
-	 * ¯\_(ツ)_/¯
-	 * 
-	 * @return
-	 */
-
-	/**
-	 * Simple getter/accessor method.
-	 * 
-	 * @return local variable _fractal
-	 */
-	public Pixel[][] getFractal() {
-		return _fractal;
 	}
 
 	/**
