@@ -1,4 +1,4 @@
-package code;
+package model;
 
 public class FractalGenerator extends FractalAlgorithms {
 

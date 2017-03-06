@@ -2,7 +2,8 @@ package tests;
 
 import static org.junit.Assert.*;
 import org.junit.Test;
-import code.*;
+import model.FractalGenerator;
+import model.Pixel;
 
 public class IndexTranslationToCoordTest {
 	/**

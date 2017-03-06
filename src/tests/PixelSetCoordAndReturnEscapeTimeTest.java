@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import code.Pixel;
+import model.Pixel;
 
 public class PixelSetCoordAndReturnEscapeTimeTest {
 	//made these tests last minute to please Web-CAT

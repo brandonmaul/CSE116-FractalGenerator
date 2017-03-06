@@ -1,4 +1,4 @@
-package code;
+package model;
 
 public abstract class FractalAlgorithms {
 	/**
