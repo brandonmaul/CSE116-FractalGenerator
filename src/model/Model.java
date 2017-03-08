@@ -1,5 +1,6 @@
 package model;
 
+import java.awt.image.IndexColorModel;
 import java.util.ArrayList;
 import observer_pattern.*;
 
@@ -11,7 +12,7 @@ public class Model implements Observable {
 	
 	private int _escapeDistance;
 	private int _fractalType;
-	private int _colorModel; 
+	private IndexColorModel _colorModel; 
 	
 	public Model(){
 
@@ -21,32 +22,31 @@ public class Model implements Observable {
 		
 		_fractalType = 1;
 		_escapeDistance = 2;
-		_colorModel = 1;
 		
 	}
 	
 	public int[][] generateFractal(){
-		int[][] retVal = null;
+		int[][] completedFractal = null;
 		
 		if (_fractalType == 1){
-			_fractalGenerator.genMandelbrot();
-			retVal = _fractalGenerator.getEscapeTimeArray();
-			System.out.println("Mandelbrot Fractal Has Been Made");
+			_fractalGenerator.genMandelbrot(_escapeDistance);
+			completedFractal = _fractalGenerator.getEscapeTimeArray();
+			System.out.println("Mandelbrot Fractal Has Been Made with an escape distance of " + _escapeDistance);
 		}else if (_fractalType == 2){
-			_fractalGenerator.genJulia();
-			retVal = _fractalGenerator.getEscapeTimeArray();
-			System.out.println("Julia Fractal Has Been Made");
+			_fractalGenerator.genJulia(_escapeDistance);
+			completedFractal = _fractalGenerator.getEscapeTimeArray();
+			System.out.println("Julia Fractal Has Been Made with an escape distance of " + _escapeDistance);
 		}else if (_fractalType == 3){
-			_fractalGenerator.genBurningShip();
-			retVal = _fractalGenerator.getEscapeTimeArray();
-			System.out.println("BurningShip Fractal Has Been Made");
+			_fractalGenerator.genBurningShip(_escapeDistance);
+			completedFractal = _fractalGenerator.getEscapeTimeArray();
+			System.out.println("BurningShip Fractal Has Been Made with an escape distance of " + _escapeDistance);
 		}else if (_fractalType == 4){
-			_fractalGenerator.genMultibrot();
-			retVal = _fractalGenerator.getEscapeTimeArray();
-			System.out.println("Mulibrot Fractal Has Been Made");
+			_fractalGenerator.genMultibrot(_escapeDistance);
+			completedFractal = _fractalGenerator.getEscapeTimeArray();
+			System.out.println("Mulibrot Fractal Has Been Made with an escape distance of " + _escapeDistance);
 		}
 		
-		return retVal;
+		return completedFractal;
 	}
 	
 	public void setFractalType(int i) {
@@ -63,10 +63,10 @@ public class Model implements Observable {
 		return _escapeDistance;
 	}
 	
-	public void setColorModel(int i){
+	public void setColorModel(IndexColorModel i){
 		_colorModel = i;
 	}
-	public int getColorModel() {
+	public IndexColorModel getColorModel() {
 		return _colorModel;
 	}
 

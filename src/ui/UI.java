@@ -4,15 +4,19 @@ import model.*;
 import observer_pattern.*;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.*;
+
+import edu.buffalo.fractal.FractalPanel;
 
 public class UI implements Observer{
 	
 	Model _model;
 	JFrame _window;
 	JPanel _generatePanel;
-	JPanel _fractalPanel;
+	FractalPanel _fractalPanel;
 	JButton _generateButton;
 	JMenuItem _currentEscapeDistance;
 	JMenuBar _menuBar;
@@ -26,19 +30,25 @@ public class UI implements Observer{
 	}
 	
 	public void initUI(){
+
 		_window = new JFrame("Fractal Generator");
 		_window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		_menuBar = new JMenuBar();
-		genFractalTypeMenu();
-		genEscapeDistanceMenu();
-		genColorSchemeMenu();
+		
+		_fractalPanel = new FractalPanel();
+		_fractalPanel.setVisible(false);
 		
 		_generatePanel = new JPanel();
 		_generatePanel.setLayout(new CardLayout(150,200));
 		_generateButton = new JButton("Generate Fractal");
-		_generateButton.addActionListener(new GenerateButtonListener(_model));
+		_generateButton.addActionListener(new GenerateButtonListener(this));
 		_generatePanel.add(_generateButton);
+
+		genFileMenu();
+		genFractalTypeMenu();
+		genEscapeDistanceMenu();
+		genColorSchemeMenu();
 		
 		_window.setJMenuBar(_menuBar);
 		_window.add(_generatePanel);
@@ -46,10 +56,55 @@ public class UI implements Observer{
 		_window.setVisible(true);
 	}
 
-	public void genColorSchemeMenu() {
-		JMenu colorSchemeMenu = new JMenu("Color Scheme");
+	public void genFileMenu(){
+		JMenu fileMenu = new JMenu("File");
 		
-		_menuBar.add(colorSchemeMenu);
+		JMenuItem newFractal = new JMenuItem("New");
+		newFractal.addActionListener(new newFractalListener(this));
+		fileMenu.add(newFractal);
+		
+		JMenuItem exit = new JMenuItem("Exit");
+		exit.addActionListener(new ActionListener() {
+	        public void actionPerformed(ActionEvent event) {
+	            System.exit(0);
+	        }
+		});
+		
+		fileMenu.add(exit);
+		
+		_menuBar.add(fileMenu);
+	}
+	
+	public void genFractalTypeMenu() {
+
+		JMenu fractalTypeMenu = new JMenu("Fractal Type");
+		
+		fractalTypeMenu.addSeparator();
+		ButtonGroup group = new ButtonGroup();
+		JRadioButtonMenuItem fractal1 = new JRadioButtonMenuItem("MandelBrot");
+		JRadioButtonMenuItem fractal2 = new JRadioButtonMenuItem("Julia");
+		JRadioButtonMenuItem fractal3 = new JRadioButtonMenuItem("Burning Ship");
+		JRadioButtonMenuItem fractal4 = new JRadioButtonMenuItem("Multibrot");
+		
+		group.add(fractal1);
+		group.add(fractal2);
+		group.add(fractal3);
+		group.add(fractal4);
+		
+		
+		fractal1.addActionListener(new FractalTypeMenuListener(_model, this, 1));
+		fractal2.addActionListener(new FractalTypeMenuListener(_model, this, 2));
+		fractal3.addActionListener(new FractalTypeMenuListener(_model, this, 3));
+		fractal4.addActionListener(new FractalTypeMenuListener(_model, this, 4));
+		
+		fractalTypeMenu.add(fractal1);
+		fractalTypeMenu.add(fractal2);
+		fractalTypeMenu.add(fractal3);
+		fractalTypeMenu.add(fractal4);
+		
+		fractal1.setSelected(true);
+		
+		_menuBar.add(fractalTypeMenu);
 	}
 
 	public void genEscapeDistanceMenu() {
@@ -68,39 +123,36 @@ public class UI implements Observer{
 		_menuBar.add(escapeDistanceMenu);
 	}
 
-	public void genFractalTypeMenu() {
-
-		JMenu fractalTypeMenu = new JMenu("Fractal Type");
+	public void genColorSchemeMenu() {
+		JMenu colorSchemeMenu = new JMenu("Color Scheme");
 		
-		fractalTypeMenu.addSeparator();
 		ButtonGroup group = new ButtonGroup();
-		JRadioButtonMenuItem fractal1 = new JRadioButtonMenuItem("MandelBrot");
-		JRadioButtonMenuItem fractal2 = new JRadioButtonMenuItem("Julia");
-		JRadioButtonMenuItem fractal3 = new JRadioButtonMenuItem("Burning Ship");
-		JRadioButtonMenuItem fractal4 = new JRadioButtonMenuItem("Multibrot");
+		JRadioButtonMenuItem colorScheme1 = new JRadioButtonMenuItem("Rainbow");
+		JRadioButtonMenuItem colorScheme2 = new JRadioButtonMenuItem("Blue/Green");
+		JRadioButtonMenuItem colorScheme3 = new JRadioButtonMenuItem("Orange/Yellow");
+		JRadioButtonMenuItem colorScheme4 = new JRadioButtonMenuItem("Red/Pink");
 		
-		group.add(fractal1);
-		group.add(fractal2);
-		group.add(fractal3);
-		group.add(fractal4);
+		group.add(colorScheme1);
+		group.add(colorScheme2);
+		group.add(colorScheme3);
+		group.add(colorScheme4);
 		
+		colorScheme1.addActionListener(new ColorSchemeMenuListener(_model, this, ColorModelFactory.createRainbowColorModel(3)));
+		colorScheme2.addActionListener(new ColorSchemeMenuListener(_model, this, ColorModelFactory.createBluesColorModel(3)));
+		colorScheme3.addActionListener(new ColorSchemeMenuListener(_model, this, ColorModelFactory.createGrayColorModel(3)));
+		colorScheme4.addActionListener(new ColorSchemeMenuListener(_model, this, ColorModelFactory.createBluesColorModel(100)));
 		
-		fractal1.addActionListener(new FractalTypeMenuListener(_model, 1));
-		fractal2.addActionListener(new FractalTypeMenuListener(_model, 2));
-		fractal3.addActionListener(new FractalTypeMenuListener(_model, 3));
-		fractal4.addActionListener(new FractalTypeMenuListener(_model, 4));
+		colorSchemeMenu.add(colorScheme1);
+		colorSchemeMenu.add(colorScheme2);
+		colorSchemeMenu.add(colorScheme3);
+		colorSchemeMenu.add(colorScheme4);
 		
-		fractalTypeMenu.add(fractal1);
-		fractalTypeMenu.add(fractal2);
-		fractalTypeMenu.add(fractal3);
-		fractalTypeMenu.add(fractal4);
+		colorScheme1.doClick();
 		
-		fractal1.setSelected(true);
-		
-		_menuBar.add(fractalTypeMenu);
+		_menuBar.add(colorSchemeMenu);
 	}
 	
-	public void EscapeDistancePrompt(){
+	public void escapeDistancePrompt(){
 		int inputNum = 0;
 		String input = JOptionPane.showInputDialog(_window,"Enter a Positive Integer: ");
 		if(input != null){
@@ -108,7 +160,7 @@ public class UI implements Observer{
 				inputNum = Integer.parseInt(input);
 			} catch (NumberFormatException e) {
 				JOptionPane.showMessageDialog(_window, "That was not a valid input.");
-				EscapeDistancePrompt();
+				escapeDistancePrompt();
 			}
 		}
 		if(inputNum > 0){
@@ -119,10 +171,24 @@ public class UI implements Observer{
 		}
 	}
 	
-	@Override
+	public void displayFractal(){
+		_generatePanel.setVisible(false);
+		_window.remove(_generatePanel);
+		_window.add(_fractalPanel);
+		_fractalPanel.setVisible(true);
+	}
+	
+	public void clearFractal(){
+		_window.remove(_fractalPanel);
+		_fractalPanel.setVisible(false);
+		_window.add(_generatePanel);
+		_generatePanel.setVisible(true);
+	}
+	
 	public void update() {
 		_currentEscapeDistance.setText("Current Escape Distance: " + _model.getEscapeDistance());
-		
+//		_fractalPanel.setIndexColorModel(_model.getColorModel());
+		_fractalPanel.updateImage(_model.generateFractal());
 	}
 	
 }

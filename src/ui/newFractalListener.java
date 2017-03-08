@@ -3,17 +3,17 @@ package ui;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class GenerateButtonListener implements ActionListener {
-	private UI _ui;
+public class newFractalListener implements ActionListener {
+	UI _ui;
 	
-	public GenerateButtonListener(UI ui){
+	public newFractalListener(UI ui){
 		_ui = ui;
 	}
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		_ui.clearFractal();
 		_ui.update();
-		_ui.displayFractal();
 	}
 
 }

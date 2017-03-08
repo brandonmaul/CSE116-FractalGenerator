@@ -38,12 +38,12 @@ public abstract class FractalAlgorithms {
 	 *            - expected to be empty Pixel array.
 	 *
 	 */
-	public void initMandelbrot(Pixel[][] pixelArray) {
+	public void initMandelbrot(Pixel[][] pixelArray, int escapeDistance) {
 		for (int x = 0; x < pixelArray.length; x++) {// Row
 			for (int y = 0; y < pixelArray[0].length; y++) {// Col
 				pixelArray[x][y] = new Pixel(x, y, -2.15, 0.6, -1.3, 1.3);
 				Pixel p = pixelArray[x][y];
-				p.setEscapeTime(calcMandelbrotEscapeTime(p.getX(), p.getY()));
+				p.setEscapeTime(calcMandelbrotEscapeTime(escapeDistance, p.getX(), p.getY()));
 			}
 		}
 	}
@@ -54,12 +54,12 @@ public abstract class FractalAlgorithms {
 	 * @param pixelArray
 	 *            - expected to be empty Pixel array.
 	 */
-	public void initJulia(Pixel[][] pixelArray) {
+	public void initJulia(Pixel[][] pixelArray, int escapeDistance) {
 		for (int x = 0; x < pixelArray.length; x++) {
 			for (int y = 0; y < pixelArray[0].length; y++) {
 				pixelArray[x][y] = new Pixel(x, y, -1.7, 1.7, -1.0, 1.0);
 				Pixel p = pixelArray[x][y];
-				p.setEscapeTime(calcJuliaEscapeTime(p.getX(), p.getY()));
+				p.setEscapeTime(calcJuliaEscapeTime(escapeDistance, p.getX(), p.getY()));
 			}
 		}
 	}
@@ -70,7 +70,7 @@ public abstract class FractalAlgorithms {
 	 * @param pixelArray
 	 *            - expected to be empty Pixel array.
 	 */
-	public void initBurningShip(Pixel[][] pixelArray) {
+	public void initBurningShip(Pixel[][] pixelArray, int escapeDistance) {
 		for (int x = 0; x < pixelArray.length; x++) {
 			for (int y = 0; y < pixelArray[0].length; y++) {
 				pixelArray[x][y] = new Pixel(x, y, -1.8, -1.7, -0.08, 0.025);
@@ -86,12 +86,12 @@ public abstract class FractalAlgorithms {
 	 * @param pixelArray
 	 *            - expected to be empty Pixel array.
 	 */
-	public void initMultibrot(Pixel[][] pixelArray) {
+	public void initMultibrot(Pixel[][] pixelArray, int escapeDistance) {
 		for (int x = 0; x < pixelArray.length; x++) {
 			for (int y = 0; y < pixelArray[0].length; y++) {
 				pixelArray[x][y] = new Pixel(x, y, -1.0, 1.0, -1.3, 1.3);
 				Pixel p = pixelArray[x][y];
-				p.setEscapeTime(calcMultibrotEscapeTime(p.getX(), p.getY()));
+				p.setEscapeTime(calcMultibrotEscapeTime(escapeDistance, p.getX(), p.getY()));
 			}
 		}
 	}

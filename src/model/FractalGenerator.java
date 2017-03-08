@@ -70,9 +70,9 @@ public class FractalGenerator extends FractalAlgorithms {
 	 * @return _fractal, a 2D array of Pixels. Each with their own
 	 *         locally-stored escape time and X/Y Coordinates
 	 */
-	public Pixel[][] genMandelbrot() {
+	public Pixel[][] genMandelbrot(int escapeDistance) {
 		_fractal = new Pixel[512][512];
-		initMandelbrot(_fractal);
+		initMandelbrot(_fractal, escapeDistance);
 		return _fractal;
 
 	}
@@ -83,9 +83,9 @@ public class FractalGenerator extends FractalAlgorithms {
 	 * @return _fractal, a 2D array of Pixels. Each with their own
 	 *         locally-stored escape time and X/Y Coordinates
 	 */
-	public Pixel[][] genJulia() {
+	public Pixel[][] genJulia(int escapeDistance) {
 		_fractal = new Pixel[512][512];
-		initJulia(_fractal);
+		initJulia(_fractal, escapeDistance);
 		return _fractal;
 
 	}
@@ -96,9 +96,9 @@ public class FractalGenerator extends FractalAlgorithms {
 	 * @return _fractal, a 2D array of Pixels. Each with their own
 	 *         locally-stored escape time and X/Y Coordinates
 	 */
-	public Pixel[][] genBurningShip() {
+	public Pixel[][] genBurningShip(int escapeDistance) {
 		_fractal = new Pixel[512][512];
-		initBurningShip(_fractal);
+		initBurningShip(_fractal, escapeDistance);
 		return _fractal;
 	}
 
@@ -108,9 +108,9 @@ public class FractalGenerator extends FractalAlgorithms {
 	 * @return _fractal, a 2D array of Pixels. Each with their own
 	 *         locally-stored escape time and X/Y Coordinates
 	 */
-	public Pixel[][] genMultibrot() {
+	public Pixel[][] genMultibrot(int escapeDistance) {
 		_fractal = new Pixel[512][512];
-		initMultibrot(_fractal);
+		initMultibrot(_fractal, escapeDistance);
 		return _fractal;
 
 	}

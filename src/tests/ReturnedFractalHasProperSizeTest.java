@@ -15,7 +15,7 @@ public class ReturnedFractalHasProperSizeTest {
 	@Test
 	public void MBSizeTest() {
 		FractalGenerator fractal = new FractalGenerator();
-		fractal.genMandelbrot();
+		fractal.genMandelbrot(2);
 		int[][] a = fractal.getEscapeTimeArray();
 		// length of a column
 		assertEquals(512, a[0].length);
@@ -26,7 +26,7 @@ public class ReturnedFractalHasProperSizeTest {
 	@Test
 	public void JSizeTest() {
 		FractalGenerator fractal = new FractalGenerator();
-		fractal.genJulia();
+		fractal.genJulia(2);
 		int[][] a = fractal.getEscapeTimeArray();
 		// length of a column
 		assertEquals(512, a[0].length);
@@ -37,7 +37,7 @@ public class ReturnedFractalHasProperSizeTest {
 	@Test
 	public void BurnSizeTest() {
 		FractalGenerator fractal = new FractalGenerator();
-		fractal.genBurningShip();
+		fractal.genBurningShip(2);
 		int[][] a = fractal.getEscapeTimeArray();
 		// length of a column
 		assertEquals(512, a[0].length);
@@ -48,7 +48,7 @@ public class ReturnedFractalHasProperSizeTest {
 	@Test
 	public void MultiSizeTest() {
 		FractalGenerator fractal = new FractalGenerator();
-		fractal.genMultibrot();
+		fractal.genMultibrot(2);
 		int[][] a = fractal.getEscapeTimeArray();
 		// length of a column
 		assertEquals(512, a[0].length);
