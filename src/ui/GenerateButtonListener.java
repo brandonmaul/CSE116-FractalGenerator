@@ -5,10 +5,10 @@ import java.awt.event.ActionListener;
 
 import model.Model;
 
-public class generateButtonListener implements ActionListener {
+public class GenerateButtonListener implements ActionListener {
 	private Model _model;
 	
-	public generateButtonListener(Model m){
+	public GenerateButtonListener(Model m){
 		_model = m;
 	}
 	

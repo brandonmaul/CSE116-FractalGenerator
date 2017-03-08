@@ -1,5 +1,7 @@
 package model;
 
+import ui.UI;
+
 public class FractalGenerator extends FractalAlgorithms {
 
 	private Pixel[][] _fractal;
@@ -56,6 +58,11 @@ public class FractalGenerator extends FractalAlgorithms {
 	 *         before a fractal generation method, you're gonna have a bad time.
 	 * 
 	 */
+	
+	//Main Method!
+	public static void main(String[] args) {
+		new UI(new Model());
+	}
 
 	/**
 	 * Mandelbrot Fractal Generator -

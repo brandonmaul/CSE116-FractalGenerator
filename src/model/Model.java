@@ -1,18 +1,27 @@
 package model;
 
-import ui.*;
+import java.util.ArrayList;
+import observer_pattern.*;
 
-public class Model {
-	private UI _ui;
+public class Model implements Observable {
+	
+	private ArrayList<Observer> _observers;
 	
 	private FractalGenerator _fractalGenerator;
 	
-	private int _escapeDistance = 2;
-	private int _fractalType; //1 == Mandelbrot // 2 == Julia // 3 == BurningShip // 4 == Multibrot
+	private int _escapeDistance;
+	private int _fractalType;
 	private int _colorModel; 
 	
 	public Model(){
-		_ui = new UI(this);
+
+		_observers = new ArrayList<Observer>();
+		
+		_fractalGenerator = new FractalGenerator();
+		
+		_fractalType = 1;
+		_escapeDistance = 2;
+		_colorModel = 1;
 		
 	}
 	
@@ -36,20 +45,47 @@ public class Model {
 			retVal = _fractalGenerator.getEscapeTimeArray();
 			System.out.println("Mulibrot Fractal Has Been Made");
 		}
+		
 		return retVal;
 	}
-
+	
+	public void setFractalType(int i) {
+		_fractalType = i;
+	}
+	public int getFractalType() {
+		return _fractalType;
+	}
+	
+	public void setEscapeDistance(int i) {
+		_escapeDistance = i;
+	}
 	public int getEscapeDistance() {
 		return _escapeDistance;
 	}
+	
+	public void setColorModel(int i){
+		_colorModel = i;
+	}
+	public int getColorModel() {
+		return _colorModel;
+	}
 
-	public void setFractalType(int i) {
-		_fractalType = i;
+	
+	
+	
+	
+	//Observer Methods...
+
+	@Override
+	public void notifyObservers() {
+		for (Observer o : _observers) {
+			o.update();
+		}
+	}
+
+	@Override
+	public void addObserver(Observer o) {
+		_observers.add(o);
 		
 	}
-	
-	
-	
-	
-
 }
