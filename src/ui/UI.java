@@ -25,8 +25,6 @@ public class UI implements Observer{
 		_model = m;
 		_model.addObserver(this);
 		initUI();
-		update();
-		
 	}
 	
 	public void initUI(){
@@ -59,7 +57,7 @@ public class UI implements Observer{
 	public void genFileMenu(){
 		JMenu fileMenu = new JMenu("File");
 		
-		JMenuItem newFractal = new JMenuItem("New");
+		JMenuItem newFractal = new JMenuItem("Clear");
 		newFractal.addActionListener(new newFractalListener(this));
 		fileMenu.add(newFractal);
 		
@@ -128,19 +126,19 @@ public class UI implements Observer{
 		
 		ButtonGroup group = new ButtonGroup();
 		JRadioButtonMenuItem colorScheme1 = new JRadioButtonMenuItem("Rainbow");
-		JRadioButtonMenuItem colorScheme2 = new JRadioButtonMenuItem("Blue/Green");
-		JRadioButtonMenuItem colorScheme3 = new JRadioButtonMenuItem("Orange/Yellow");
-		JRadioButtonMenuItem colorScheme4 = new JRadioButtonMenuItem("Red/Pink");
+		JRadioButtonMenuItem colorScheme2 = new JRadioButtonMenuItem("Blues");
+		JRadioButtonMenuItem colorScheme3 = new JRadioButtonMenuItem("Grey");
+		JRadioButtonMenuItem colorScheme4 = new JRadioButtonMenuItem("Custom");
 		
 		group.add(colorScheme1);
 		group.add(colorScheme2);
 		group.add(colorScheme3);
 		group.add(colorScheme4);
 		
-		colorScheme1.addActionListener(new ColorSchemeMenuListener(_model, this, ColorModelFactory.createRainbowColorModel(3)));
-		colorScheme2.addActionListener(new ColorSchemeMenuListener(_model, this, ColorModelFactory.createBluesColorModel(3)));
-		colorScheme3.addActionListener(new ColorSchemeMenuListener(_model, this, ColorModelFactory.createGrayColorModel(3)));
-		colorScheme4.addActionListener(new ColorSchemeMenuListener(_model, this, ColorModelFactory.createBluesColorModel(100)));
+		colorScheme1.addActionListener(new ColorSchemeMenuListener(_model, this, ColorModelFactory.createRainbowColorModel(256)));
+		colorScheme2.addActionListener(new ColorSchemeMenuListener(_model, this, ColorModelFactory.createBluesColorModel(256)));
+		colorScheme3.addActionListener(new ColorSchemeMenuListener(_model, this, ColorModelFactory.createGrayColorModel(256)));
+		colorScheme4.addActionListener(new ColorSchemeMenuListener(_model, this, ColorModelFactory.createLamaColorModel(256)));
 		
 		colorSchemeMenu.add(colorScheme1);
 		colorSchemeMenu.add(colorScheme2);
@@ -187,7 +185,7 @@ public class UI implements Observer{
 	
 	public void update() {
 		_currentEscapeDistance.setText("Current Escape Distance: " + _model.getEscapeDistance());
-//		_fractalPanel.setIndexColorModel(_model.getColorModel());
+		_fractalPanel.setIndexColorModel(_model.getColorModel());
 		_fractalPanel.updateImage(_model.generateFractal());
 	}
 	
