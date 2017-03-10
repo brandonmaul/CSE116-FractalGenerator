@@ -166,6 +166,7 @@ public class UI implements Observer{
 			update();
 		}else if(inputNum < 0){
 			JOptionPane.showMessageDialog(_window, "Please Enter a POSITIVE Integer... ");
+			escapeDistancePrompt();
 		}
 	}
 	
