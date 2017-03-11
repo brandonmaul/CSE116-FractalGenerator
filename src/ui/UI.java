@@ -128,7 +128,7 @@ public class UI implements Observer{
 		JRadioButtonMenuItem colorScheme1 = new JRadioButtonMenuItem("Rainbow");
 		JRadioButtonMenuItem colorScheme2 = new JRadioButtonMenuItem("Blues");
 		JRadioButtonMenuItem colorScheme3 = new JRadioButtonMenuItem("Grey");
-		JRadioButtonMenuItem colorScheme4 = new JRadioButtonMenuItem("Custom");
+		JRadioButtonMenuItem colorScheme4 = new JRadioButtonMenuItem("Hawaii");
 		
 		group.add(colorScheme1);
 		group.add(colorScheme2);
