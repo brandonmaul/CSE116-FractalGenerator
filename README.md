@@ -9,5 +9,5 @@ Click on the 'Generate Fractal' button to view the panel that displays the fract
 
 Each change you make to the fractal will update in real-time.
 
-In the 'File' menu you can clear the fractal and reset the options to the defaults with 'Reset'.
+In the 'File' menu you can reset the fractal and the options to the defaults with 'Clear'.
 You can also exit the program by clicking on 'Exit'.
