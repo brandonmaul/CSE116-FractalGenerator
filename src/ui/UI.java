@@ -2,13 +2,10 @@ package ui;
 
 import model.*;
 import observer_pattern.*;
-
-import java.awt.*;
+import java.awt.CardLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.*;
-
 import edu.buffalo.fractal.FractalPanel;
 
 public class UI implements Observer{
@@ -43,10 +40,10 @@ public class UI implements Observer{
 		_generateButton.addActionListener(new GenerateButtonListener(this));
 		_generatePanel.add(_generateButton);
 
-		genFileMenu();
-		genFractalTypeMenu();
-		genEscapeDistanceMenu();
-		genColorSchemeMenu();
+		initFileMenu();
+		initFractalTypeMenu();
+		initEscapeDistanceMenu();
+		initColorSchemeMenu();
 		
 		_window.setJMenuBar(_menuBar);
 		_window.add(_generatePanel);
@@ -54,12 +51,12 @@ public class UI implements Observer{
 		_window.setVisible(true);
 	}
 
-	public void genFileMenu(){
+	public void initFileMenu(){
 		JMenu fileMenu = new JMenu("File");
 		
 		JMenuItem newFractal = new JMenuItem("Clear");
-		newFractal.addActionListener(new newFractalListener(this));
-		fileMenu.add(newFractal);
+		newFractal.addActionListener(new ClearButtonListener(this));
+		
 		
 		JMenuItem exit = new JMenuItem("Exit");
 		exit.addActionListener(new ActionListener() {
@@ -68,16 +65,16 @@ public class UI implements Observer{
 	        }
 		});
 		
+		fileMenu.add(newFractal);
 		fileMenu.add(exit);
 		
 		_menuBar.add(fileMenu);
 	}
 	
-	public void genFractalTypeMenu() {
+	public void initFractalTypeMenu() {
 
 		JMenu fractalTypeMenu = new JMenu("Fractal Type");
 		
-		fractalTypeMenu.addSeparator();
 		ButtonGroup group = new ButtonGroup();
 		JRadioButtonMenuItem fractal1 = new JRadioButtonMenuItem("MandelBrot");
 		JRadioButtonMenuItem fractal2 = new JRadioButtonMenuItem("Julia");
@@ -105,7 +102,7 @@ public class UI implements Observer{
 		_menuBar.add(fractalTypeMenu);
 	}
 
-	public void genEscapeDistanceMenu() {
+	public void initEscapeDistanceMenu() {
 		JMenu escapeDistanceMenu = new JMenu("Ecape Distance");
 		
 		escapeDistanceMenu.addSeparator();
@@ -121,7 +118,7 @@ public class UI implements Observer{
 		_menuBar.add(escapeDistanceMenu);
 	}
 
-	public void genColorSchemeMenu() {
+	public void initColorSchemeMenu() {
 		JMenu colorSchemeMenu = new JMenu("Color Scheme");
 		
 		ButtonGroup group = new ButtonGroup();
@@ -180,8 +177,15 @@ public class UI implements Observer{
 	public void clearFractal(){
 		_window.remove(_fractalPanel);
 		_fractalPanel.setVisible(false);
+		
+		_menuBar.getMenu(1).getItem(0).doClick();
+		_menuBar.getMenu(3).getItem(0).doClick();
+		_model.setEscapeDistance(2);
+		
 		_window.add(_generatePanel);
 		_generatePanel.setVisible(true);
+		
+		update();
 	}
 	
 	public void update() {
