@@ -17,7 +17,7 @@ public class BurningShipNoZerosOrOnesTest {
 	public void BurnEscTimeTest() {
 		FractalGenerator fractal = new FractalGenerator();
 
-		fractal.genBurningShip(2);
+		fractal.genBurningShip(2, 255);
 
 		assertTrue(fractal.boolContainsNoZerosOrOnes());
 

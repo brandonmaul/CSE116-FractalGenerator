@@ -135,10 +135,10 @@ public class UI implements Observer{
 		group.add(colorScheme3);
 		group.add(colorScheme4);
 		
-		colorScheme1.addActionListener(new ColorSchemeMenuListener(_model, this, ColorModelFactory.createRainbowColorModel(256)));
-		colorScheme2.addActionListener(new ColorSchemeMenuListener(_model, this, ColorModelFactory.createBluesColorModel(256)));
-		colorScheme3.addActionListener(new ColorSchemeMenuListener(_model, this, ColorModelFactory.createGrayColorModel(256)));
-		colorScheme4.addActionListener(new ColorSchemeMenuListener(_model, this, ColorModelFactory.createLamaColorModel(256)));
+		colorScheme1.addActionListener(new ColorSchemeMenuListener(_model, this, ColorModelFactory.createRainbowColorModel(_model.getMaxPasses() + 1)));
+		colorScheme2.addActionListener(new ColorSchemeMenuListener(_model, this, ColorModelFactory.createBluesColorModel(_model.getMaxPasses() + 1)));
+		colorScheme3.addActionListener(new ColorSchemeMenuListener(_model, this, ColorModelFactory.createGrayColorModel(_model.getMaxPasses() + 1)));
+		colorScheme4.addActionListener(new ColorSchemeMenuListener(_model, this, ColorModelFactory.createLamaColorModel(_model.getMaxPasses() + 1)));
 		
 		colorSchemeMenu.add(colorScheme1);
 		colorSchemeMenu.add(colorScheme2);

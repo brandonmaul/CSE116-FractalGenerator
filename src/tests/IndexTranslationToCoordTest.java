@@ -13,7 +13,7 @@ public class IndexTranslationToCoordTest {
 	public void xMBtest() {
 
 		FractalGenerator mbfractalx = new FractalGenerator();
-		Pixel[][] mandelbrot = mbfractalx.genMandelbrot(2);
+		Pixel[][] mandelbrot = mbfractalx.genMandelbrot(2, 255);
 		// Index to xCord
 		// xCord range is -2.15 to 0.6
 
@@ -27,7 +27,7 @@ public class IndexTranslationToCoordTest {
 	@Test
 	public void yMBtest() {
 		FractalGenerator mbfractaly = new FractalGenerator();
-		Pixel[][] mandelbrot = mbfractaly.genMandelbrot(2);
+		Pixel[][] mandelbrot = mbfractaly.genMandelbrot(2, 255);
 		// Index to yCord
 		// yCord range is -1.3 to 1.3
 
@@ -42,7 +42,7 @@ public class IndexTranslationToCoordTest {
 	@Test
 	public void xJtest() {
 		FractalGenerator jfractalx = new FractalGenerator();
-		Pixel[][] julia = jfractalx.genJulia(2);
+		Pixel[][] julia = jfractalx.genJulia(2, 255);
 		// Index to yCord
 		// xCord range is -1.7 to 1.7
 
@@ -57,7 +57,7 @@ public class IndexTranslationToCoordTest {
 	@Test
 	public void yJtest() {
 		FractalGenerator jfractaly = new FractalGenerator();
-		Pixel[][] julia = jfractaly.genJulia(2);
+		Pixel[][] julia = jfractaly.genJulia(2, 255);
 		// Index to yCord
 		// yCord range is -1.0 to 1.0
 
@@ -72,7 +72,7 @@ public class IndexTranslationToCoordTest {
 	@Test
 	public void xBurntest() {
 		FractalGenerator burnfractalx = new FractalGenerator();
-		Pixel[][] burn = burnfractalx.genBurningShip(2);
+		Pixel[][] burn = burnfractalx.genBurningShip(2, 255);
 		// Index to yCord
 		// xCord range is -1.8 to -1.7
 
@@ -86,7 +86,7 @@ public class IndexTranslationToCoordTest {
 	@Test
 	public void yBurntest() {
 		FractalGenerator burnfractaly = new FractalGenerator();
-		Pixel[][] burn = burnfractaly.genBurningShip(2);
+		Pixel[][] burn = burnfractaly.genBurningShip(2, 255);
 		// yCord range is -0.08 to 0.025
 
 		// (0,..)
@@ -98,7 +98,7 @@ public class IndexTranslationToCoordTest {
 	@Test
 	public void xMultitest() {
 		FractalGenerator multifractalx = new FractalGenerator();
-		Pixel[][] multi = multifractalx.genMultibrot(2);
+		Pixel[][] multi = multifractalx.genMultibrot(2, 255);
 		// Index to yCord
 		// xCord range is -1 to -1
 
@@ -112,7 +112,7 @@ public class IndexTranslationToCoordTest {
 	@Test
 	public void yMultiest() {
 		FractalGenerator multifractaly = new FractalGenerator();
-		Pixel[][] multi = multifractaly.genMultibrot(2);
+		Pixel[][] multi = multifractaly.genMultibrot(2, 255);
 		// yCord range is -1.3 to 1.3
 
 		// (0,..)
