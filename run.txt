@@ -1,2 +1,5 @@
 @author Jeff Landberg
-First, Right-Click on "SemesterProjectMaster. Then go to "Run as" and run it as a java application. Then select "Fractal generator" on the next pop up window.
+First
+Right-Click on "SemesterProjectMaster.
+ Then go to "Run as" and run it as a java application.
+  Then select "Fractal generator" on the next pop up window.

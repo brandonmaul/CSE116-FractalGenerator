@@ -1,0 +1,21 @@
+Each team include a file named update.txt which tells the TAs how to update the escape time and verify invalid times are rejected/impossible. 
+
+Update the escape time : 
+While the program is running 
+There is a tab called escape distance. Click it. 
+Then press Set Escape Distance 
+Enter a positive integer and then press ok. 
+
+
+Verify invalid times are rejected/impossible:
+
+If a user enters a String an error message saying
+ "That is not a valid input will appear."
+ 
+ If a user enters a negative number: 
+ The program will say "Enter a POSITIVE integer."
+ 
+ If a user enters a decimal an error message saying:
+ "That is not a valid input" will appear
+ 
+ 
