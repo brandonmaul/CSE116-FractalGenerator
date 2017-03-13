@@ -4,6 +4,15 @@ import java.awt.image.IndexColorModel;
 import java.util.ArrayList;
 import observer_pattern.*;
 
+/**
+ * 
+ * @author Brandon Maul
+ * 
+ * Class that holds the abstract model of the fractal as well as calls the actual Fractal Generator class that 
+ * calculates the fractal.
+ *
+ */
+
 public class Model implements Observable {
 	
 	private ArrayList<Observer> _observers;
@@ -11,6 +20,7 @@ public class Model implements Observable {
 	private FractalGenerator _fractalGenerator;
 	
 	private int _escapeDistance;
+	//_fractalType is a numerical representation of the 4 different fractals. 1 = Mandelbrot ; 2 = Julia ; 3 = Burning Ship ; 4 = Multibrot
 	private int _fractalType;
 	private int _maxPasses;
 	private IndexColorModel _colorModel; 
@@ -24,6 +34,12 @@ public class Model implements Observable {
 		_maxPasses = 255;
 		
 	}
+	
+	/**
+	 * Calls the generation method based on the information stored inside this model.
+	 * 
+	 * @return Numerical 2d array of integers that represent the escape time of each point on the fractal.
+	 */
 	
 	public int[][] generateFractal(){
 		int[][] completedFractal = null;
@@ -44,6 +60,10 @@ public class Model implements Observable {
 		
 		return completedFractal;
 	}
+	
+	/**
+	 * Getter and Setter methods for each of the private instance variables.
+	 */
 	
 	public void setFractalType(int i) {
 		_fractalType = i;

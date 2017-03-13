@@ -8,6 +8,17 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 import edu.buffalo.fractal.FractalPanel;
 
+/**
+ * 
+ * @author Brandon Maul
+ * 
+ * This UI Class specifies the interface for which the user will generate the fractals. It contains a menu bar
+ * which is used for manipulation of the fractals and updates the displayed fractal in real time.
+ * Within this menu bar is also a 'File' menu which can be used to reset the fractal to default
+ * settings or exit the program entirely.
+ *
+ */
+
 public class UI implements Observer{
 	
 	Model _model;
@@ -18,11 +29,21 @@ public class UI implements Observer{
 	JMenuItem _currentEscapeDistance;
 	JMenuBar _menuBar;
 	
+	/**
+	 * 
+	 * @param m a Model object that this class will maintain a reference to, allowing the user inputs to affect the model.
+	 * 
+	 */
+	
 	public UI(Model m){
 		_model = m;
 		_model.addObserver(this);
 		initUI();
 	}
+	
+	/**
+	 * Initialization method for the interface. Creates the javax.swing elements. 
+	 */
 	
 	public void initUI(){
 
@@ -50,6 +71,10 @@ public class UI implements Observer{
 		_window.setSize(600, 600);
 		_window.setVisible(true);
 	}
+	
+	/**
+	 * Sub-initialization method for the 'File' menu in the menu bar. 
+	 */
 
 	public void initFileMenu(){
 		JMenu fileMenu = new JMenu("File");
@@ -70,6 +95,10 @@ public class UI implements Observer{
 		
 		_menuBar.add(fileMenu);
 	}
+	
+	/**
+	 * Sub-initialization method for the 'Fractal Type' menu in the menu bar. 
+	 */
 	
 	public void initFractalTypeMenu() {
 
@@ -101,6 +130,10 @@ public class UI implements Observer{
 		
 		_menuBar.add(fractalTypeMenu);
 	}
+	
+	/**
+	 * Sub-initialization method for the 'Escape Distance' menu in the menu bar. 
+	 */
 
 	public void initEscapeDistanceMenu() {
 		JMenu escapeDistanceMenu = new JMenu("Ecape Distance");
@@ -117,6 +150,10 @@ public class UI implements Observer{
 		
 		_menuBar.add(escapeDistanceMenu);
 	}
+	
+	/**
+	 * Sub-initialization method for the 'Color Scheme' menu in the menu bar. 
+	 */
 
 	public void initColorSchemeMenu() {
 		JMenu colorSchemeMenu = new JMenu("Color Scheme");
@@ -147,6 +184,12 @@ public class UI implements Observer{
 		_menuBar.add(colorSchemeMenu);
 	}
 	
+	/**
+	 * Method that displays the prompt for entering an escape distance, then checks to see if it was valid.
+	 * 
+	 * If input is valid, calls _model.setEscapeDistance() to update the escape distance in the model.
+	 */
+	
 	public void escapeDistancePrompt(){
 		int inputNum = 0;
 		String input = JOptionPane.showInputDialog(_window,"Enter a Positive Integer: ");
@@ -167,12 +210,20 @@ public class UI implements Observer{
 		}
 	}
 	
+	/**
+	 * Displays the FractalPanel in the window, and removes the GeneratePanel with the generate button.
+	 */
+	
 	public void displayFractal(){
 		_generatePanel.setVisible(false);
 		_window.remove(_generatePanel);
 		_window.add(_fractalPanel);
 		_fractalPanel.setVisible(true);
 	}
+	
+	/**
+	 * Removes the FractalPanel object from display JFrame. Then goes ahead and resets the options to their default values.
+	 */
 	
 	public void clearFractal(){
 		_window.remove(_fractalPanel);
@@ -187,6 +238,10 @@ public class UI implements Observer{
 		
 		update();
 	}
+	
+	/**
+	 * Updates the display and Escape Distance displayed in the UI. Called whenever a change to the Model is made.
+	 */
 	
 	public void update() {
 		_currentEscapeDistance.setText("Current Escape Distance: " + _model.getEscapeDistance());
