@@ -1,7 +1,7 @@
 # Fractal Generator
 A fractal generator when calculates the escape times of 4 different fractals on a coordinate plane, and then displays them with a simple user interface.
 
-To use this program run the main method found in FractalGenerator.java.
+To use this program run the main method found in model.Driver.java.
 
 The program displays a menu bar with a selection of fractal types, as well as options that change the fractal. 
 
