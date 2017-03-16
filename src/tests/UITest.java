@@ -1,17 +1,27 @@
 package tests;
 
 import static org.junit.Assert.*;
-
 import org.junit.Test;
-import model.Driver;
-public class UITest {
+import ui.*;
+import model.*;
 
+public class UITest {
+	
 	@Test
-	public void test() {
+	public void constructUITest(){
+		UI ui = new UI(new Model());
+		assertNotNull(ui);
+	}
+	
+	@Test
+	public void displayFractalTest(){
 		try{
-			Driver.main(null);
-		}catch(Exception e){
-			fail("The Driver did not execute properly and threw a checked Exception");
+			UI ui = new UI(new Model());
+			ui.displayFractal();
+			ui.clearFractal();
+			
+		}catch (Exception e){
+			fail("Exception was thrown");
 		}
 	}
 }
