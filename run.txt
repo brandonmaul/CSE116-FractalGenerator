@@ -2,4 +2,5 @@
 First
 Right-Click on "SemesterProjectMaster.
  Then go to "Run as" and run it as a java application.
-  Then select "Fractal generator" on the next pop up window.
+  Then select "Driver" on the next pop up window.
+  The Main method is located in model.Driver
