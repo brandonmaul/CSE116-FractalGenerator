@@ -27,6 +27,7 @@ public class UI implements Observer{
 	FractalPanel _fractalPanel;
 	JButton _generateButton;
 	JMenuItem _currentEscapeDistance;
+	JMenuItem _currentMaxEscapeTime;
 	JMenuBar _menuBar;
 	
 	/**
@@ -64,11 +65,15 @@ public class UI implements Observer{
 		initFileMenu();
 		initFractalTypeMenu();
 		initEscapeDistanceMenu();
+		initMaxEscapeTimeMenu();
 		initColorSchemeMenu();
 		
 		_window.setJMenuBar(_menuBar);
 		_window.add(_generatePanel);
 		_window.setSize(600, 600);
+		
+		update();
+		
 		_window.setVisible(true);
 	}
 	
@@ -136,7 +141,7 @@ public class UI implements Observer{
 	 */
 
 	public void initEscapeDistanceMenu() {
-		JMenu escapeDistanceMenu = new JMenu("Ecape Distance");
+		JMenu escapeDistanceMenu = new JMenu("Escape Distance");
 		
 		escapeDistanceMenu.addSeparator();
 		_currentEscapeDistance = new JMenuItem();
@@ -184,6 +189,21 @@ public class UI implements Observer{
 		_menuBar.add(colorSchemeMenu);
 	}
 	
+	public void initMaxEscapeTimeMenu() {
+		JMenu maxEscapeTimeMenu = new JMenu("Max Escape Time");
+		
+		maxEscapeTimeMenu.addSeparator();
+		_currentMaxEscapeTime = new JMenuItem();
+		_currentMaxEscapeTime.setEnabled(false);
+		maxEscapeTimeMenu.add(_currentMaxEscapeTime);
+		
+		maxEscapeTimeMenu.addSeparator();
+		JButton maxEscapeTimeSetter = new JButton("Set Maximum Escape Time");
+		maxEscapeTimeSetter.addActionListener(new SetEscapeTimeButtonListener(_model, this));
+		maxEscapeTimeMenu.add(maxEscapeTimeSetter);
+		
+		_menuBar.add(maxEscapeTimeMenu);
+	}
 	/**
 	 * Method that displays the prompt for entering an escape distance, then checks to see if it was valid.
 	 * 
@@ -210,6 +230,26 @@ public class UI implements Observer{
 		}
 	}
 	
+	public void maxEscapeTimePrompt() {
+		int inputNum = 0;
+		String input = JOptionPane.showInputDialog(_window,"Enter a Integer between 1 and 255: ");
+		if(input != null){
+			try {
+				inputNum = Integer.parseInt(input);
+			} catch (NumberFormatException e) {
+				JOptionPane.showMessageDialog(_window, "That was not a valid input.");
+				maxEscapeTimePrompt();
+			}
+		}
+		if(inputNum >= 1 && inputNum <= 255){
+			_model.setMaxEscapeTime(inputNum);
+			update();
+		}else if(inputNum < 1 || inputNum > 255){
+			JOptionPane.showMessageDialog(_window, "That was not a valid input.");
+		}
+		//TODO: Fix this so it can be cancelled out properly ^^^^^
+	}
+	
 	/**
 	 * Displays the FractalPanel in the window, and removes the GeneratePanel with the generate button.
 	 */
@@ -230,8 +270,9 @@ public class UI implements Observer{
 		_fractalPanel.setVisible(false);
 		
 		_menuBar.getMenu(1).getItem(0).doClick();
-		_menuBar.getMenu(3).getItem(0).doClick();
+		_menuBar.getMenu(4).getItem(0).doClick();
 		_model.setEscapeDistance(2);
+		_model.setMaxEscapeTime(255);
 		
 		_window.add(_generatePanel);
 		_generatePanel.setVisible(true);
@@ -245,6 +286,7 @@ public class UI implements Observer{
 	
 	public void update() {
 		_currentEscapeDistance.setText("Current Escape Distance: " + _model.getEscapeDistance());
+		_currentMaxEscapeTime.setText("Current Maximum Escape Time: " + _model.getEscapeTime());
 		_fractalPanel.setIndexColorModel(_model.getColorModel());
 		_fractalPanel.updateImage(_model.generateFractal());
 	}

@@ -111,4 +111,13 @@ public class Model implements Observable {
 		_observers.add(o);
 		
 	}
+
+	public void setMaxEscapeTime(int inputNum) {
+		_maxPasses = inputNum;
+		
+	}
+
+	public int getEscapeTime() {
+		return _maxPasses;
+	}
 }

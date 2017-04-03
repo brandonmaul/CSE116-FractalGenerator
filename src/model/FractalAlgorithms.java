@@ -121,7 +121,7 @@ public abstract class FractalAlgorithms {
 		double dist = distanceCalculator(xCalc, yCalc);
 
 		int passes = 0;
-		while (dist <= maxDist & passes < 255) {
+		while (dist <= maxDist & passes < maxPasses) {
 			double xtemp = ((xCalc * xCalc) - (yCalc * yCalc)) + xCoord;
 			yCalc = 2.0 * xCalc * yCalc + yCoord;
 			xCalc = xtemp;
