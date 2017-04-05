@@ -216,17 +216,17 @@ public class UI implements Observer{
 		if(input != null){
 			try {
 				inputNum = Integer.parseInt(input);
+				if(inputNum > 0){
+					_model.setEscapeDistance(inputNum);
+					update();
+				}else if(inputNum < 0){
+					JOptionPane.showMessageDialog(_window, "Please Enter a POSITIVE Integer... ");
+					escapeDistancePrompt();
+				}
 			} catch (NumberFormatException e) {
 				JOptionPane.showMessageDialog(_window, "That was not a valid input.");
 				escapeDistancePrompt();
 			}
-		}
-		if(inputNum > 0){
-			_model.setEscapeDistance(inputNum);
-			update();
-		}else if(inputNum < 0){
-			JOptionPane.showMessageDialog(_window, "Please Enter a POSITIVE Integer... ");
-			escapeDistancePrompt();
 		}
 	}
 	
@@ -236,18 +236,18 @@ public class UI implements Observer{
 		if(input != null){
 			try {
 				inputNum = Integer.parseInt(input);
+				if(inputNum >= 1 && inputNum <= 255){
+					_model.setMaxEscapeTime(inputNum);
+					update();
+				}else if(inputNum < 1 || inputNum > 255){
+					JOptionPane.showMessageDialog(_window, "Input must be between 1 and 255.");
+					maxEscapeTimePrompt();
+				}
 			} catch (NumberFormatException e) {
 				JOptionPane.showMessageDialog(_window, "That was not a valid input.");
 				maxEscapeTimePrompt();
 			}
 		}
-		if(inputNum >= 1 && inputNum <= 255){
-			_model.setMaxEscapeTime(inputNum);
-			update();
-		}else if(inputNum < 1 || inputNum > 255){
-			JOptionPane.showMessageDialog(_window, "That was not a valid input.");
-		}
-		//TODO: Fix this so it can be cancelled out properly ^^^^^
 	}
 	
 	/**
