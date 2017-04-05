@@ -12,17 +12,17 @@ import observer_pattern.*;
  * calculates the fractal.
  *
  */
-
 public class Model implements Observable {
 	
 	private ArrayList<Observer> _observers;
 	
 	private FractalGenerator _fractalGenerator;
 	
-	private int _escapeDistance;
-	//_fractalType is a numerical representation of the 4 different fractals. 1 = Mandelbrot ; 2 = Julia ; 3 = Burning Ship ; 4 = Multibrot
+	private int _escapeDistance; //1 = Mandelbrot; 2 = Julia; 3 = Burning Ship; 4 = Multibrot;
 	private int _fractalType;
 	private int _maxPasses;
+	private int _regionStart[];
+	private int _regionEnd[];
 	private IndexColorModel _colorModel; 
 	
 	public Model(){
@@ -32,6 +32,8 @@ public class Model implements Observable {
 		_fractalType = 1;
 		_escapeDistance = 2;
 		_maxPasses = 255;
+		_regionStart = new int[]{0, 0}; 
+		_regionEnd = new int[]{511, 511};
 		
 	}
 	
@@ -45,16 +47,16 @@ public class Model implements Observable {
 		int[][] completedFractal = null;
 		
 		if (_fractalType == 1){
-			_fractalGenerator.genMandelbrot(_escapeDistance, _maxPasses);
+			_fractalGenerator.genMandelbrot(_regionStart, _regionEnd, _escapeDistance, _maxPasses);
 			completedFractal = _fractalGenerator.getEscapeTimeArray();
 		}else if (_fractalType == 2){
-			_fractalGenerator.genJulia(_escapeDistance, _maxPasses);
+			_fractalGenerator.genJulia(_regionStart, _regionEnd, _escapeDistance, _maxPasses);
 			completedFractal = _fractalGenerator.getEscapeTimeArray();
 		}else if (_fractalType == 3){
-			_fractalGenerator.genBurningShip(_escapeDistance, _maxPasses);
+			_fractalGenerator.genBurningShip(_regionStart, _regionEnd, _escapeDistance, _maxPasses);
 			completedFractal = _fractalGenerator.getEscapeTimeArray();
 		}else if (_fractalType == 4){
-			_fractalGenerator.genMultibrot(_escapeDistance, _maxPasses);
+			_fractalGenerator.genMultibrot(_regionStart, _regionEnd, _escapeDistance, _maxPasses);
 			completedFractal = _fractalGenerator.getEscapeTimeArray();
 		}
 		
@@ -92,10 +94,39 @@ public class Model implements Observable {
 	public int getMaxPasses(){
 		return _maxPasses;
 	}
+	
+	public void setMaxEscapeTime(int inputNum) {
+		_maxPasses = inputNum;
+		
+	}
 
+	public int getEscapeTime() {
+		return _maxPasses;
+	}
 	
+	public boolean setDisplayRegion(int xRegionStart, int yRegionStart, int xRegionEnd, int yRegionEnd){
+		boolean retVal = false;
+		if(xRegionStart >= 0 && xRegionStart < 512){
+			if(yRegionStart >= 0 && yRegionStart < 512){
+				if(xRegionEnd >= 0 && xRegionEnd < 512){
+					if(yRegionEnd >= 0 && yRegionEnd < 512){
+						_regionStart[0] = xRegionStart;
+						_regionStart[1]= yRegionStart;
+						_regionEnd[0] = xRegionEnd;
+						_regionEnd[1] = yRegionEnd;
+						
+						retVal = true;
+					}
+				}
+			}
+		}
+		return retVal;
+		//im so sorry for this horrible method... Ill figure out a way to make it better... eventually...
+	}
 	
-	
+	public String getDisplayRegion() {
+		return "(" + _regionStart[0] + ", " + _regionStart[1] + ") and (" + _regionEnd[0] + ", " + _regionEnd[1] + ")";
+	}
 	
 	//Observer Methods...
 
@@ -112,12 +143,5 @@ public class Model implements Observable {
 		
 	}
 
-	public void setMaxEscapeTime(int inputNum) {
-		_maxPasses = inputNum;
-		
-	}
-
-	public int getEscapeTime() {
-		return _maxPasses;
-	}
+	
 }

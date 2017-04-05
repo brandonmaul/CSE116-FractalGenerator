@@ -36,12 +36,9 @@ public class Pixel {
 	 * @param maxY
 	 *            - Maximum Y coordinate allowed for a Cartesian Plane
 	 */
-	public Pixel(){
-	}
-	
-	public Pixel(int x, int y, double minX, double maxX, double minY, double maxY) {
-		_xCoord = minX + (x * (maxX - minX) / 511);
-		_yCoord = minY + (y * (maxY - minY) / 511);
+	public Pixel(double xCoord, double yCoord){
+		_xCoord = xCoord;
+		_yCoord = yCoord;
 	}
 
 	/**

@@ -38,11 +38,43 @@ public abstract class FractalAlgorithms {
 	 *            - expected to be empty Pixel array.
 	 *
 	 */
-	public void initMandelbrot(Pixel[][] pixelArray, int escapeDistance, int maxPasses) {
-		for (int x = 0; x < pixelArray.length; x++) {// Row
-			for (int y = 0; y < pixelArray[0].length; y++) {// Col
-				pixelArray[x][y] = new Pixel(x, y, -2.15, 0.6, -1.3, 1.3);
-				Pixel p = pixelArray[x][y];
+	
+	public void initMandelbrot(Pixel[][] pixelArray, int[] regionStart, int[] regionEnd, int escapeDistance, int maxPasses) {
+		double xC_0 = -2.15;
+		double xC_511 = .6;
+		double yC_0 = -1.3;
+		double yC_511 = 1.3;
+		
+		double deltaX = ((xC_511 - xC_0)/pixelArray.length); 
+		double deltaY = ((yC_511 - yC_0)/pixelArray.length);
+		
+		for (int xIndex = 0; xIndex < pixelArray.length; xIndex++) {// Row
+			for (int yIndex = 0; yIndex < pixelArray[0].length; yIndex++) {// Col
+				double xCoord = xC_0 + (xIndex * deltaX);
+				double yCoord = yC_0 + (yIndex * deltaY);
+				
+				Pixel p = new Pixel(xCoord, yCoord);
+				pixelArray[xIndex][yIndex] = p;
+				p.setEscapeTime(calcMandelbrotEscapeTime(escapeDistance, p.getX(), p.getY(), maxPasses));
+			}
+		}
+		
+		//Zoom method:
+		
+		xC_0 = pixelArray[regionStart[0]][regionStart[1]].getX();
+		xC_511 = pixelArray[regionEnd[0]][regionEnd[1]].getX();
+		yC_0 = pixelArray[regionStart[0]][regionStart[1]].getY();
+		yC_511 = pixelArray[regionEnd[0]][regionEnd[1]].getY();
+		
+		deltaX = ((xC_511 - xC_0)/pixelArray.length);
+		deltaY = ((yC_511 - yC_0)/pixelArray.length);
+		
+		for (int xIndex = 0; xIndex < pixelArray.length; xIndex++) {// Row
+			for (int yIndex = 0; yIndex < pixelArray[0].length; yIndex++) {// Col
+				double xCoord = xC_0 + (xIndex * deltaX);
+				double yCoord = yC_0 + (yIndex * deltaY);
+				Pixel p = new Pixel(xCoord, yCoord);
+				pixelArray[xIndex][yIndex] = p;
 				p.setEscapeTime(calcMandelbrotEscapeTime(escapeDistance, p.getX(), p.getY(), maxPasses));
 			}
 		}
@@ -54,11 +86,42 @@ public abstract class FractalAlgorithms {
 	 * @param pixelArray
 	 *            - expected to be empty Pixel array.
 	 */
-	public void initJulia(Pixel[][] pixelArray, int escapeDistance, int maxPasses) {
-		for (int x = 0; x < pixelArray.length; x++) {
-			for (int y = 0; y < pixelArray[0].length; y++) {
-				pixelArray[x][y] = new Pixel(x, y, -1.7, 1.7, -1.0, 1.0);
-				Pixel p = pixelArray[x][y];
+	public void initJulia(Pixel[][] pixelArray, int[] regionStart, int[] regionEnd, int escapeDistance, int maxPasses) {
+		double xC_0 = -1.7;
+		double xC_511 = 1.7;
+		double yC_0 = -1.0;
+		double yC_511 = 1.0;
+		
+		double deltaX = ((xC_511 - xC_0)/pixelArray.length); 
+		double deltaY = ((yC_511 - yC_0)/pixelArray.length);
+		
+		for (int xIndex = 0; xIndex < pixelArray.length; xIndex++) {// Row
+			for (int yIndex = 0; yIndex < pixelArray[0].length; yIndex++) {// Col
+				double xCoord = xC_0 + (xIndex * deltaX);
+				double yCoord = yC_0 + (yIndex * deltaY);
+				
+				Pixel p = new Pixel(xCoord, yCoord);
+				pixelArray[xIndex][yIndex] = p;
+				p.setEscapeTime(calcJuliaEscapeTime(escapeDistance, p.getX(), p.getY(), maxPasses));
+			}
+		}
+		
+		//Zoom method:
+		
+		xC_0 = pixelArray[regionStart[0]][regionStart[1]].getX();
+		xC_511 = pixelArray[regionEnd[0]][regionEnd[1]].getX();
+		yC_0 = pixelArray[regionStart[0]][regionStart[1]].getY();
+		yC_511 = pixelArray[regionEnd[0]][regionEnd[1]].getY();
+		
+		deltaX = ((xC_511 - xC_0)/pixelArray.length);
+		deltaY = ((yC_511 - yC_0)/pixelArray.length);
+		
+		for (int xIndex = 0; xIndex < pixelArray.length; xIndex++) {// Row
+			for (int yIndex = 0; yIndex < pixelArray[0].length; yIndex++) {// Col
+				double xCoord = xC_0 + (xIndex * deltaX);
+				double yCoord = yC_0 + (yIndex * deltaY);
+				Pixel p = new Pixel(xCoord, yCoord);
+				pixelArray[xIndex][yIndex] = p;
 				p.setEscapeTime(calcJuliaEscapeTime(escapeDistance, p.getX(), p.getY(), maxPasses));
 			}
 		}
@@ -70,11 +133,42 @@ public abstract class FractalAlgorithms {
 	 * @param pixelArray
 	 *            - expected to be empty Pixel array.
 	 */
-	public void initBurningShip(Pixel[][] pixelArray, int escapeDistance, int maxPasses) {
-		for (int x = 0; x < pixelArray.length; x++) {
-			for (int y = 0; y < pixelArray[0].length; y++) {
-				pixelArray[x][y] = new Pixel(x, y, -1.8, -1.7, -0.08, 0.025);
-				Pixel p = pixelArray[x][y];
+	public void initBurningShip(Pixel[][] pixelArray, int[] regionStart, int[] regionEnd, int escapeDistance, int maxPasses) {		
+		double xC_0 = -1.8;
+		double xC_511 = -1.7;
+		double yC_0 = -0.08;
+		double yC_511 = 0.025;
+		
+		double deltaX = ((xC_511 - xC_0)/pixelArray.length); 
+		double deltaY = ((yC_511 - yC_0)/pixelArray.length);
+		
+		for (int xIndex = 0; xIndex < pixelArray.length; xIndex++) {// Row
+			for (int yIndex = 0; yIndex < pixelArray[0].length; yIndex++) {// Col
+				double xCoord = xC_0 + (xIndex * deltaX);
+				double yCoord = yC_0 + (yIndex * deltaY);
+				
+				Pixel p = new Pixel(xCoord, yCoord);
+				pixelArray[xIndex][yIndex] = p;
+				p.setEscapeTime(calcBurningShipEscapeTime(escapeDistance, p.getX(), p.getY(), maxPasses));
+			}
+		}
+		
+		//Zoom method:
+		
+		xC_0 = pixelArray[regionStart[0]][regionStart[1]].getX();
+		xC_511 = pixelArray[regionEnd[0]][regionEnd[1]].getX();
+		yC_0 = pixelArray[regionStart[0]][regionStart[1]].getY();
+		yC_511 = pixelArray[regionEnd[0]][regionEnd[1]].getY();
+		
+		deltaX = ((xC_511 - xC_0)/pixelArray.length);
+		deltaY = ((yC_511 - yC_0)/pixelArray.length);
+		
+		for (int xIndex = 0; xIndex < pixelArray.length; xIndex++) {// Row
+			for (int yIndex = 0; yIndex < pixelArray[0].length; yIndex++) {// Col
+				double xCoord = xC_0 + (xIndex * deltaX);
+				double yCoord = yC_0 + (yIndex * deltaY);
+				Pixel p = new Pixel(xCoord, yCoord);
+				pixelArray[xIndex][yIndex] = p;
 				p.setEscapeTime(calcBurningShipEscapeTime(escapeDistance, p.getX(), p.getY(), maxPasses));
 			}
 		}
@@ -86,11 +180,42 @@ public abstract class FractalAlgorithms {
 	 * @param pixelArray
 	 *            - expected to be empty Pixel array.
 	 */
-	public void initMultibrot(Pixel[][] pixelArray, int escapeDistance, int maxPasses) {
-		for (int x = 0; x < pixelArray.length; x++) {
-			for (int y = 0; y < pixelArray[0].length; y++) {
-				pixelArray[x][y] = new Pixel(x, y, -1.0, 1.0, -1.3, 1.3);
-				Pixel p = pixelArray[x][y];
+	public void initMultibrot(Pixel[][] pixelArray, int[] regionStart, int[] regionEnd, int escapeDistance, int maxPasses) {
+		double xC_0 = -1.0;
+		double xC_511 = 1.0;
+		double yC_0 = -1.3;
+		double yC_511 = 1.3;
+		
+		double deltaX = ((xC_511 - xC_0)/pixelArray.length); 
+		double deltaY = ((yC_511 - yC_0)/pixelArray.length);
+		
+		for (int xIndex = 0; xIndex < pixelArray.length; xIndex++) {// Row
+			for (int yIndex = 0; yIndex < pixelArray[0].length; yIndex++) {// Col
+				double xCoord = xC_0 + (xIndex * deltaX);
+				double yCoord = yC_0 + (yIndex * deltaY);
+				
+				Pixel p = new Pixel(xCoord, yCoord);
+				pixelArray[xIndex][yIndex] = p;
+				p.setEscapeTime(calcMultibrotEscapeTime(escapeDistance, p.getX(), p.getY(), maxPasses));
+			}
+		}
+		
+		//Zoom method:
+		
+		xC_0 = pixelArray[regionStart[0]][regionStart[1]].getX();
+		xC_511 = pixelArray[regionEnd[0]][regionEnd[1]].getX();
+		yC_0 = pixelArray[regionStart[0]][regionStart[1]].getY();
+		yC_511 = pixelArray[regionEnd[0]][regionEnd[1]].getY();
+		
+		deltaX = ((xC_511 - xC_0)/pixelArray.length);
+		deltaY = ((yC_511 - yC_0)/pixelArray.length);
+		
+		for (int xIndex = 0; xIndex < pixelArray.length; xIndex++) {// Row
+			for (int yIndex = 0; yIndex < pixelArray[0].length; yIndex++) {// Col
+				double xCoord = xC_0 + (xIndex * deltaX);
+				double yCoord = yC_0 + (yIndex * deltaY);
+				Pixel p = new Pixel(xCoord, yCoord);
+				pixelArray[xIndex][yIndex] = p;
 				p.setEscapeTime(calcMultibrotEscapeTime(escapeDistance, p.getX(), p.getY(), maxPasses));
 			}
 		}
@@ -214,6 +339,7 @@ public abstract class FractalAlgorithms {
 		int escapeTime = passes;
 		return escapeTime;
 	}
+	
 
 	/**
 	 * Distance Calculator - Calculates the distance of the input to the point
