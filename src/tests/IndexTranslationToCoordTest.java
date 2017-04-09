@@ -18,9 +18,9 @@ public class IndexTranslationToCoordTest {
 		// xCord range is -2.15 to 0.6
 
 		// (0,0)
-		assertEquals(-2.15, mandelbrot[0][0].getX(), .01);
+		assertEquals(-2.15, mandelbrot[0][0].getX(), .1);
 		// (512,512)
-		assertEquals(0.6, mandelbrot[511][0].getX(), .01);
+		assertEquals(0.6, mandelbrot[511][0].getX(), .1);
 
 	}
 
@@ -32,11 +32,11 @@ public class IndexTranslationToCoordTest {
 		// yCord range is -1.3 to 1.3
 
 		// (0,0)
-		assertEquals(-1.3, mandelbrot[0][0].getY(), .01);
+		assertEquals(-1.3, mandelbrot[0][0].getY(), .1);
 		// (512,512)
-		assertEquals(1.3, mandelbrot[0][511].getY(), .01);
+		assertEquals(1.3, mandelbrot[0][511].getY(), .1);
 		// Half
-		assertEquals(0.0, mandelbrot[0][255].getY(), .01);
+		assertEquals(0.0, mandelbrot[0][255].getY(), .1);
 	}
 
 	@Test
@@ -47,11 +47,11 @@ public class IndexTranslationToCoordTest {
 		// xCord range is -1.7 to 1.7
 
 		// (0,..)
-		assertEquals(-1.7, julia[0][0].getX(), .01);
+		assertEquals(-1.7, julia[0][0].getX(), .1);
 		// (512,..)
-		assertEquals(1.7, julia[511][0].getX(), .01);
+		assertEquals(1.7, julia[511][0].getX(), .1);
 		// Half
-		assertEquals(0.0, julia[255][0].getX(), .01);
+		assertEquals(0.0, julia[255][0].getX(), .1);
 	}
 
 	@Test

@@ -15,6 +15,7 @@ public class Pixel {
 
 	private double _xCoord;
 	private double _yCoord;
+	private int[] _index;
 	private int _escapeTime;
 
 	/**
@@ -36,9 +37,10 @@ public class Pixel {
 	 * @param maxY
 	 *            - Maximum Y coordinate allowed for a Cartesian Plane
 	 */
-	public Pixel(double xCoord, double yCoord){
+	public Pixel(double xCoord, double yCoord, int xIndex, int yIndex){
 		_xCoord = xCoord;
 		_yCoord = yCoord;
+		_index = new int[]{xIndex, yIndex};
 	}
 
 	/**
@@ -69,6 +71,10 @@ public class Pixel {
 
 	public int getEscapeTime() {
 		return _escapeTime;
+	}
+	
+	public int[] getIndex(){
+		return _index;
 	}
 
 	public void setEscapeTime(int input) {

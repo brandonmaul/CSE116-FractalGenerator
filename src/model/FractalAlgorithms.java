@@ -53,7 +53,7 @@ public abstract class FractalAlgorithms {
 				double xCoord = xC_0 + (xIndex * deltaX);
 				double yCoord = yC_0 + (yIndex * deltaY);
 				
-				Pixel p = new Pixel(xCoord, yCoord);
+				Pixel p = new Pixel(xCoord, yCoord, xIndex, yIndex);
 				pixelArray[xIndex][yIndex] = p;
 				p.setEscapeTime(calcMandelbrotEscapeTime(escapeDistance, p.getX(), p.getY(), maxPasses));
 			}
@@ -73,7 +73,7 @@ public abstract class FractalAlgorithms {
 			for (int yIndex = 0; yIndex < pixelArray[0].length; yIndex++) {// Col
 				double xCoord = xC_0 + (xIndex * deltaX);
 				double yCoord = yC_0 + (yIndex * deltaY);
-				Pixel p = new Pixel(xCoord, yCoord);
+				Pixel p = new Pixel(xCoord, yCoord, xIndex, yIndex);
 				pixelArray[xIndex][yIndex] = p;
 				p.setEscapeTime(calcMandelbrotEscapeTime(escapeDistance, p.getX(), p.getY(), maxPasses));
 			}
@@ -100,7 +100,7 @@ public abstract class FractalAlgorithms {
 				double xCoord = xC_0 + (xIndex * deltaX);
 				double yCoord = yC_0 + (yIndex * deltaY);
 				
-				Pixel p = new Pixel(xCoord, yCoord);
+				Pixel p = new Pixel(xCoord, yCoord, xIndex, yIndex);
 				pixelArray[xIndex][yIndex] = p;
 				p.setEscapeTime(calcJuliaEscapeTime(escapeDistance, p.getX(), p.getY(), maxPasses));
 			}
@@ -120,7 +120,7 @@ public abstract class FractalAlgorithms {
 			for (int yIndex = 0; yIndex < pixelArray[0].length; yIndex++) {// Col
 				double xCoord = xC_0 + (xIndex * deltaX);
 				double yCoord = yC_0 + (yIndex * deltaY);
-				Pixel p = new Pixel(xCoord, yCoord);
+				Pixel p = new Pixel(xCoord, yCoord, xIndex, yIndex);
 				pixelArray[xIndex][yIndex] = p;
 				p.setEscapeTime(calcJuliaEscapeTime(escapeDistance, p.getX(), p.getY(), maxPasses));
 			}
@@ -147,7 +147,7 @@ public abstract class FractalAlgorithms {
 				double xCoord = xC_0 + (xIndex * deltaX);
 				double yCoord = yC_0 + (yIndex * deltaY);
 				
-				Pixel p = new Pixel(xCoord, yCoord);
+				Pixel p = new Pixel(xCoord, yCoord, xIndex, yIndex);
 				pixelArray[xIndex][yIndex] = p;
 				p.setEscapeTime(calcBurningShipEscapeTime(escapeDistance, p.getX(), p.getY(), maxPasses));
 			}
@@ -167,7 +167,7 @@ public abstract class FractalAlgorithms {
 			for (int yIndex = 0; yIndex < pixelArray[0].length; yIndex++) {// Col
 				double xCoord = xC_0 + (xIndex * deltaX);
 				double yCoord = yC_0 + (yIndex * deltaY);
-				Pixel p = new Pixel(xCoord, yCoord);
+				Pixel p = new Pixel(xCoord, yCoord, xIndex, yIndex);
 				pixelArray[xIndex][yIndex] = p;
 				p.setEscapeTime(calcBurningShipEscapeTime(escapeDistance, p.getX(), p.getY(), maxPasses));
 			}
@@ -194,7 +194,7 @@ public abstract class FractalAlgorithms {
 				double xCoord = xC_0 + (xIndex * deltaX);
 				double yCoord = yC_0 + (yIndex * deltaY);
 				
-				Pixel p = new Pixel(xCoord, yCoord);
+				Pixel p = new Pixel(xCoord, yCoord, xIndex, yIndex);
 				pixelArray[xIndex][yIndex] = p;
 				p.setEscapeTime(calcMultibrotEscapeTime(escapeDistance, p.getX(), p.getY(), maxPasses));
 			}
@@ -214,7 +214,7 @@ public abstract class FractalAlgorithms {
 			for (int yIndex = 0; yIndex < pixelArray[0].length; yIndex++) {// Col
 				double xCoord = xC_0 + (xIndex * deltaX);
 				double yCoord = yC_0 + (yIndex * deltaY);
-				Pixel p = new Pixel(xCoord, yCoord);
+				Pixel p = new Pixel(xCoord, yCoord, xIndex, yIndex);
 				pixelArray[xIndex][yIndex] = p;
 				p.setEscapeTime(calcMultibrotEscapeTime(escapeDistance, p.getX(), p.getY(), maxPasses));
 			}
