@@ -5,6 +5,8 @@ import observer_pattern.*;
 import java.awt.CardLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+
 import javax.swing.*;
 import edu.buffalo.fractal.FractalPanel;
 
@@ -29,6 +31,8 @@ public class UI implements Observer{
 	JMenuItem _currentMaxEscapeTime;
 	JMenuItem _currentZoomCoords;
 	JMenuBar _menuBar;
+	
+	MouseEvent _zoomBox;
 	
 	/**
 	 * 
@@ -69,7 +73,11 @@ public class UI implements Observer{
 		
 		_window.setJMenuBar(_menuBar);
 		_window.add(_generatePanel);
-		_window.setSize(768, 768);
+		_window.setSize(512, 512);
+		_window.setResizable(false);
+		_fractalPanel.addMouseListener(new ZoomBoxListener(_model, this));
+		
+		
 		
 		update();
 		
