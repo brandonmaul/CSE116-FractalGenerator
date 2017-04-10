@@ -15,9 +15,10 @@ import observer_pattern.*;
 public class Model implements Observable {
 	
 	private ArrayList<Observer> _observers;
-	
+
+	private Pixel[][] _fractal;
 	private FractalGenerator _fractalGenerator;
-	
+	private FractalZoomTool _fractalZoomTool;
 	private int _escapeDistance; //1 = Mandelbrot; 2 = Julia; 3 = Burning Ship; 4 = Multibrot;
 	private int _fractalType;
 	private int _maxPasses;
@@ -28,7 +29,15 @@ public class Model implements Observable {
 	public Model(){
 
 		_observers = new ArrayList<Observer>();
-		_fractalGenerator = new FractalGenerator();
+		
+		_fractal = new Pixel[512][512];
+		for (int xIndex = 0; xIndex < _fractal.length; xIndex++) {// Row
+			for (int yIndex = 0; yIndex < _fractal[0].length; yIndex++) {// Col
+				_fractal[xIndex][yIndex] =  new Pixel(xIndex, yIndex);
+			}
+		}
+		_fractalGenerator = new FractalGenerator(_fractal);
+		_fractalZoomTool = new FractalZoomTool(_fractal);
 		_fractalType = 1;
 		_escapeDistance = 2;
 		_maxPasses = 255;
@@ -43,24 +52,34 @@ public class Model implements Observable {
 	 * @return Numerical 2d array of integers that represent the escape time of each point on the fractal.
 	 */
 	
-	public int[][] generateFractal(){
-		int[][] completedFractal = null;
+	public Pixel[][] generateFractal(){
 		
 		if (_fractalType == 1){
-			_fractalGenerator.genMandelbrot(_regionStart, _regionEnd, _escapeDistance, _maxPasses);
-			completedFractal = _fractalGenerator.getEscapeTimeArray();
+			_fractal = _fractalGenerator.genMandelbrot(_escapeDistance, _maxPasses);
 		}else if (_fractalType == 2){
-			_fractalGenerator.genJulia(_regionStart, _regionEnd, _escapeDistance, _maxPasses);
-			completedFractal = _fractalGenerator.getEscapeTimeArray();
+			_fractal = _fractalGenerator.genJulia(_regionStart, _regionEnd, _escapeDistance, _maxPasses);
 		}else if (_fractalType == 3){
-			_fractalGenerator.genBurningShip(_regionStart, _regionEnd, _escapeDistance, _maxPasses);
-			completedFractal = _fractalGenerator.getEscapeTimeArray();
+			_fractal = _fractalGenerator.genBurningShip(_regionStart, _regionEnd, _escapeDistance, _maxPasses);
 		}else if (_fractalType == 4){
-			_fractalGenerator.genMultibrot(_regionStart, _regionEnd, _escapeDistance, _maxPasses);
-			completedFractal = _fractalGenerator.getEscapeTimeArray();
+			_fractal = _fractalGenerator.genMultibrot(_regionStart, _regionEnd, _escapeDistance, _maxPasses);
+		}
+		return _fractal;
+	}
+	
+	public Pixel[][] zoomFractal(){
+		
+		if (_fractalType == 1){
+			_fractalZoomTool.zoomMandelbrot(_regionStart, _regionEnd, _escapeDistance, _maxPasses);
+		}else if (_fractalType == 2){
+			_fractalZoomTool.zoomJulia(_regionStart, _regionEnd, _escapeDistance, _maxPasses);
+		}else if (_fractalType == 3){
+			_fractalZoomTool.zoomBurningShip(_regionStart, _regionEnd, _escapeDistance, _maxPasses);
+		}else if (_fractalType == 4){
+			_fractalZoomTool.zoomMultibrot(_regionStart, _regionEnd, _escapeDistance, _maxPasses);
 		}
 		
-		return completedFractal;
+		setDisplayRegion(0, 0, 511, 511);
+		return _fractal;
 	}
 	
 	/**
@@ -128,12 +147,34 @@ public class Model implements Observable {
 		return "(" + _regionStart[0] + ", " + _regionStart[1] + ") and (" + _regionEnd[0] + ", " + _regionEnd[1] + ")";
 	}
 	
+	/**
+	 * 2D Escape Time Array - After a generator has been called, call this
+	 * method to return an Array of Integers, the same size as _fractal. If a
+	 * generator has not been called before you call this method, you're gonna
+	 * have a bad time.
+	 * 
+	 * @return 2D array of Integers that correspond to each Pixel (of the same
+	 *         index) in _fractal.
+	 */
+	public int[][] getEscapeTimeArray() {
+
+		int[][] escapeTimes = new int[_fractal.length][_fractal.length];
+		
+		for(Pixel[] pixRow : _fractal){
+			for(Pixel p : pixRow){
+				escapeTimes[p.getX()][p.getY()] = p.getEscapeTime();
+			}
+		}
+		
+		return escapeTimes;
+	}
+	
 	//Observer Methods...
 
 	@Override
 	public void notifyObservers() {
 		for (Observer o : _observers) {
-			o.update();
+			o.updateFractal();
 		}
 	}
 

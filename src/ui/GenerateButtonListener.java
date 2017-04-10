@@ -12,7 +12,7 @@ public class GenerateButtonListener implements ActionListener {
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		_ui.update();
+		_ui.updateFractal();
 		_ui.displayFractal();
 	}
 

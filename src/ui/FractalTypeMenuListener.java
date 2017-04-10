@@ -21,7 +21,7 @@ public class FractalTypeMenuListener implements ActionListener {
 		_model.setFractalType(_myFractalID);
 		JRadioButtonMenuItem thisButton = (JRadioButtonMenuItem) e.getSource();
 		thisButton.setSelected(true);
-		_ui.update();
+		_ui.updateFractal();
 	}
 	
 }

@@ -13,9 +13,9 @@ public class Pixel {
 	 * 
 	 */
 
-	private double _xCoord;
-	private double _yCoord;
-	private int[] _index;
+	private int _xIndex;
+	private int _yIndex;
+	private double[] _coords;
 	private int _escapeTime;
 
 	/**
@@ -28,19 +28,11 @@ public class Pixel {
 	 *            - The X INDEX of the Pixel in a 2D array.
 	 * @param y
 	 *            - The Y INDEX of the Pixel in a 2D array.
-	 * @param minX
-	 *            - Minimum X coordinate allowed for a Cartesian Plane
-	 * @param maxX
-	 *            - Maximum X coordinate allowed for a Cartesian Plane
-	 * @param minY
-	 *            - Minimum Y coordinate allowed for a Cartesian Plane
-	 * @param maxY
-	 *            - Maximum Y coordinate allowed for a Cartesian Plane
 	 */
-	public Pixel(double xCoord, double yCoord, int xIndex, int yIndex){
-		_xCoord = xCoord;
-		_yCoord = yCoord;
-		_index = new int[]{xIndex, yIndex};
+	public Pixel(int xIndex, int yIndex){
+		_xIndex = xIndex;
+		_yIndex = yIndex;
+		_coords = new double[2];
 	}
 
 	/**
@@ -49,32 +41,28 @@ public class Pixel {
 	 * 
 	 */
 
-	// Set x cord
-	public void setX(double x) {
-		_xCoord = x;
-	}
 
 	// Get x cord
-	public double getX() {
-		return _xCoord;
-	}
-
-	// Set y cord
-	public void setY(double y) {
-		_yCoord = y;
+	public int getX() {
+		return _xIndex;
 	}
 
 	// Get y cord
-	public double getY() {
-		return _yCoord;
+	public int getY() {
+		return _yIndex;
+	}
+	
+	public double[] getCoords(){
+		return _coords;
+	}
+	
+	public void setCoords(double x, double y){
+		_coords[0] = x;
+		_coords[1] = y;
 	}
 
 	public int getEscapeTime() {
 		return _escapeTime;
-	}
-	
-	public int[] getIndex(){
-		return _index;
 	}
 
 	public void setEscapeTime(int input) {

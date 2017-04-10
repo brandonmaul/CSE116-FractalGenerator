@@ -3,10 +3,9 @@ package model;
 public class FractalGenerator extends FractalAlgorithms {
 
 	private Pixel[][] _fractal;
-	private int _gridSize;
 
-	public FractalGenerator() {
-		_gridSize = 512; //size of the whole fractal grid
+	public FractalGenerator(Pixel[][] fractal) {
+		_fractal = fractal;
 	}
 
 	/**
@@ -65,16 +64,13 @@ public class FractalGenerator extends FractalAlgorithms {
 	 * @return _fractal, a 2D array of Pixels. Each with their own
 	 *         locally-stored escape time and X/Y Coordinates
 	 */
-	
-	public Pixel[][] genMandelbrot(int escapeDistance, int maxPasses){
-		int regionStart[] = {0, 0}; int regionEnd[] = {511, 511};
-		return genMandelbrot(regionStart, regionEnd, escapeDistance, maxPasses);
-	}
-	public Pixel[][] genMandelbrot(int[] regionStart, int[] regionEnd, int escapeDistance, int maxPasses) {
-		_fractal = new Pixel[_gridSize][_gridSize];
-		initMandelbrot(_fractal, regionStart, regionEnd, escapeDistance, maxPasses);
+	public Pixel[][] genMandelbrot(int escapeDistance, int maxPasses) {
+		for(Pixel[] pixRow : _fractal){
+			for(Pixel p : pixRow){
+				calcMandelbrotEscapeTime(p, p.getX(), p.getY(), escapeDistance, maxPasses, _fractal.length);
+			}
+		}
 		return _fractal;
-
 	}
 
 	/**
@@ -83,15 +79,13 @@ public class FractalGenerator extends FractalAlgorithms {
 	 * @return _fractal, a 2D array of Pixels. Each with their own
 	 *         locally-stored escape time and X/Y Coordinates
 	 */
-	public Pixel[][] genJulia(int escapeDistance, int maxPasses){
-		int regionStart[] = {0, 0}; int regionEnd[] = {511, 511};
-		return genJulia(regionStart, regionEnd, escapeDistance, maxPasses);
-	}
 	public Pixel[][] genJulia(int[] regionStart, int[] regionEnd, int escapeDistance, int maxPasses) {
-		_fractal = new Pixel[_gridSize][_gridSize];
-		initJulia(_fractal, regionStart, regionEnd, escapeDistance, maxPasses);
+		for(Pixel[] pixRow : _fractal){
+			for(Pixel p : pixRow){
+				calcJuliaEscapeTime(p, p.getX(), p.getY(), escapeDistance, maxPasses, _fractal.length);
+			}
+		}
 		return _fractal;
-
 	}
 
 	/**
@@ -100,14 +94,13 @@ public class FractalGenerator extends FractalAlgorithms {
 	 * @return _fractal, a 2D array of Pixels. Each with their own
 	 *         locally-stored escape time and X/Y Coordinates
 	 */
-	public Pixel[][] genBurningShip(int escapeDistance, int maxPasses){
-		int regionStart[] = {0, 0}; int regionEnd[] = {511, 511};
-		return genBurningShip(regionStart, regionEnd, escapeDistance, maxPasses);
-	}
 	public Pixel[][] genBurningShip(int[] regionStart, int[] regionEnd, int escapeDistance, int maxPasses) {
-		_fractal = new Pixel[_gridSize][_gridSize];
-		initBurningShip(_fractal, regionStart, regionEnd, escapeDistance, maxPasses);
-		return _fractal;
+		for(Pixel[] pixRow : _fractal){
+			for(Pixel p : pixRow){
+				calcBurningShipEscapeTime(p, p.getX(), p.getY(), escapeDistance, maxPasses, _fractal.length);
+			}
+		}
+	return _fractal;
 	}
 
 	/**
@@ -116,36 +109,13 @@ public class FractalGenerator extends FractalAlgorithms {
 	 * @return _fractal, a 2D array of Pixels. Each with their own
 	 *         locally-stored escape time and X/Y Coordinates
 	 */
-	public Pixel[][] genMultibrot(int escapeDistance, int maxPasses){
-		int regionStart[] = {0, 0}; int regionEnd[] = {511, 511};
-		return genMultibrot(regionStart, regionEnd, escapeDistance, maxPasses);
-	}
 	public Pixel[][] genMultibrot(int[] regionStart, int[] regionEnd, int escapeDistance, int maxPasses) {
-		_fractal = new Pixel[_gridSize][_gridSize];
-		initMultibrot(_fractal, regionStart, regionEnd, escapeDistance, maxPasses);
-		return _fractal;
-
-	}
-
-	/**
-	 * 2D Escape Time Array - After a generator has been called, call this
-	 * method to return an Array of Integers, the same size as _fractal. If a
-	 * generator has not been called before you call this method, you're gonna
-	 * have a bad time.
-	 * 
-	 * @return 2D array of Integers that correspond to each Pixel (of the same
-	 *         index) in _fractal.
-	 */
-	public int[][] getEscapeTimeArray() {
-
-		int[][] fractal = new int[_fractal.length][_fractal[0].length];
-
-		for (int x = 0; x < _fractal.length; x++) {
-			for (int y = 0; y < _fractal[0].length; y++) {
-				fractal[x][y] = _fractal[x][y].getEscapeTime();
+		for(Pixel[] pixRow : _fractal){
+			for(Pixel p : pixRow){
+				calcMultibrotEscapeTime(p,  p.getX(), p.getY(), escapeDistance, maxPasses, _fractal.length);
 			}
 		}
-		return fractal;
+		return _fractal;
 	}
 
 	/**

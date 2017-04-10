@@ -79,7 +79,7 @@ public class UI implements Observer{
 		
 		
 		
-		update();
+		updateFractal();
 		
 		_window.setVisible(true);
 	}
@@ -164,7 +164,7 @@ public class UI implements Observer{
 	 * Sub-initialization method for the 'Color Scheme' menu in the menu bar. 
 	 */
 	public void initColorSchemeMenu() {
-		JMenu colorSchemeMenu = new JMenu("Color Scheme");
+		JMenu colorSchemeMenu = new JMenu("Color");
 		
 		ButtonGroup group = new ButtonGroup();
 		JRadioButtonMenuItem colorScheme1 = new JRadioButtonMenuItem("Rainbow");
@@ -244,7 +244,7 @@ public class UI implements Observer{
 				inputNum = Integer.parseInt(input);
 				if(inputNum > 0){
 					_model.setEscapeDistance(inputNum);
-					update();
+					updateFractalDetails();
 				}else if(inputNum < 0){
 					JOptionPane.showMessageDialog(_window, "Please Enter a POSITIVE Integer... ");
 					escapeDistancePrompt();
@@ -269,7 +269,7 @@ public class UI implements Observer{
 				inputNum = Integer.parseInt(input);
 				if(inputNum >= 1 && inputNum <= 255){
 					_model.setMaxEscapeTime(inputNum);
-					update();
+					updateFractalDetails();
 				}else if(inputNum < 1 || inputNum > 255){
 					JOptionPane.showMessageDialog(_window, "Input must be between 1 and 255.");
 					maxEscapeTimePrompt();
@@ -306,18 +306,30 @@ public class UI implements Observer{
 		_window.add(_generatePanel);
 		_generatePanel.setVisible(true);
 		
-		update();
+		updateFractal();
 	}
 	
 	/**
 	 * Updates the display and Escape Distance displayed in the UI. Called whenever a change to the Model is made.
 	 */
-	public void update() {
+	public void updateFractal() {
 		_currentEscapeDistance.setText("Current Escape Distance: " + _model.getEscapeDistance());
 		_currentMaxEscapeTime.setText("Current Maximum Escape Time: " + _model.getEscapeTime());
 		_currentZoomCoords.setText("Showing pixels between " + _model.getDisplayRegion());
 		_fractalPanel.setIndexColorModel(_model.getColorModel());
-		_fractalPanel.updateImage(_model.generateFractal());
+		_model.generateFractal();
+		_fractalPanel.updateImage(_model.getEscapeTimeArray());
+		
+	}
+	
+	public void updateFractalDetails() {
+		_currentEscapeDistance.setText("Current Escape Distance: " + _model.getEscapeDistance());
+		_currentMaxEscapeTime.setText("Current Maximum Escape Time: " + _model.getEscapeTime());
+		_currentZoomCoords.setText("Showing pixels between " + _model.getDisplayRegion());
+		_fractalPanel.setIndexColorModel(_model.getColorModel());
+		_model.zoomFractal();
+		_fractalPanel.updateImage(_model.getEscapeTimeArray());
+		
 	}
 	
 }

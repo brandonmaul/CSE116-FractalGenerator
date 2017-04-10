@@ -19,227 +19,32 @@ public abstract class FractalAlgorithms {
 	 */
 
 	/**
-	 * 
-	 * Fractal Initiators - adds pixels to an array.
-	 * 
-	 * After a pixel has been added the pixel calculates its own X and Y
-	 * coordinates (Specified in the Pixel Class).
-	 * 
-	 * Immediately following, the Escape Time Calculator for the respective
-	 * fractal is called for that pixel. That escape time is then stored inside
-	 * that Pixel object.
-	 * 
-	 */
-
-	/**
-	 * Initialize Mandelbrot Array of Pixels -
-	 * 
-	 * @param pixelArray
-	 *            - expected to be empty Pixel array.
-	 *
-	 */
-	
-	public void initMandelbrot(Pixel[][] pixelArray, int[] regionStart, int[] regionEnd, int escapeDistance, int maxPasses) {
-		double xC_0 = -2.15;
-		double xC_511 = .6;
-		double yC_0 = -1.3;
-		double yC_511 = 1.3;
-		
-		double deltaX = ((xC_511 - xC_0)/pixelArray.length); 
-		double deltaY = ((yC_511 - yC_0)/pixelArray.length);
-		
-		for (int xIndex = 0; xIndex < pixelArray.length; xIndex++) {// Row
-			for (int yIndex = 0; yIndex < pixelArray[0].length; yIndex++) {// Col
-				double xCoord = xC_0 + (xIndex * deltaX);
-				double yCoord = yC_0 + (yIndex * deltaY);
-				
-				Pixel p = new Pixel(xCoord, yCoord, xIndex, yIndex);
-				pixelArray[xIndex][yIndex] = p;
-				p.setEscapeTime(calcMandelbrotEscapeTime(escapeDistance, p.getX(), p.getY(), maxPasses));
-			}
-		}
-		
-		//Zoom method:
-		
-		xC_0 = pixelArray[regionStart[0]][regionStart[1]].getX();
-		xC_511 = pixelArray[regionEnd[0]][regionEnd[1]].getX();
-		yC_0 = pixelArray[regionStart[0]][regionStart[1]].getY();
-		yC_511 = pixelArray[regionEnd[0]][regionEnd[1]].getY();
-		
-		deltaX = ((xC_511 - xC_0)/pixelArray.length);
-		deltaY = ((yC_511 - yC_0)/pixelArray.length);
-		
-		for (int xIndex = 0; xIndex < pixelArray.length; xIndex++) {// Row
-			for (int yIndex = 0; yIndex < pixelArray[0].length; yIndex++) {// Col
-				double xCoord = xC_0 + (xIndex * deltaX);
-				double yCoord = yC_0 + (yIndex * deltaY);
-				Pixel p = new Pixel(xCoord, yCoord, xIndex, yIndex);
-				pixelArray[xIndex][yIndex] = p;
-				p.setEscapeTime(calcMandelbrotEscapeTime(escapeDistance, p.getX(), p.getY(), maxPasses));
-			}
-		}
-	}
-
-	/**
-	 * Initialize Julia Array of Pixels -
-	 * 
-	 * @param pixelArray
-	 *            - expected to be empty Pixel array.
-	 */
-	public void initJulia(Pixel[][] pixelArray, int[] regionStart, int[] regionEnd, int escapeDistance, int maxPasses) {
-		double xC_0 = -1.7;
-		double xC_511 = 1.7;
-		double yC_0 = -1.0;
-		double yC_511 = 1.0;
-		
-		double deltaX = ((xC_511 - xC_0)/pixelArray.length); 
-		double deltaY = ((yC_511 - yC_0)/pixelArray.length);
-		
-		for (int xIndex = 0; xIndex < pixelArray.length; xIndex++) {// Row
-			for (int yIndex = 0; yIndex < pixelArray[0].length; yIndex++) {// Col
-				double xCoord = xC_0 + (xIndex * deltaX);
-				double yCoord = yC_0 + (yIndex * deltaY);
-				
-				Pixel p = new Pixel(xCoord, yCoord, xIndex, yIndex);
-				pixelArray[xIndex][yIndex] = p;
-				p.setEscapeTime(calcJuliaEscapeTime(escapeDistance, p.getX(), p.getY(), maxPasses));
-			}
-		}
-		
-		//Zoom method:
-		
-		xC_0 = pixelArray[regionStart[0]][regionStart[1]].getX();
-		xC_511 = pixelArray[regionEnd[0]][regionEnd[1]].getX();
-		yC_0 = pixelArray[regionStart[0]][regionStart[1]].getY();
-		yC_511 = pixelArray[regionEnd[0]][regionEnd[1]].getY();
-		
-		deltaX = ((xC_511 - xC_0)/pixelArray.length);
-		deltaY = ((yC_511 - yC_0)/pixelArray.length);
-		
-		for (int xIndex = 0; xIndex < pixelArray.length; xIndex++) {// Row
-			for (int yIndex = 0; yIndex < pixelArray[0].length; yIndex++) {// Col
-				double xCoord = xC_0 + (xIndex * deltaX);
-				double yCoord = yC_0 + (yIndex * deltaY);
-				Pixel p = new Pixel(xCoord, yCoord, xIndex, yIndex);
-				pixelArray[xIndex][yIndex] = p;
-				p.setEscapeTime(calcJuliaEscapeTime(escapeDistance, p.getX(), p.getY(), maxPasses));
-			}
-		}
-	}
-
-	/**
-	 * Initialize Burning Ship Array of Pixels -
-	 * 
-	 * @param pixelArray
-	 *            - expected to be empty Pixel array.
-	 */
-	public void initBurningShip(Pixel[][] pixelArray, int[] regionStart, int[] regionEnd, int escapeDistance, int maxPasses) {		
-		double xC_0 = -1.8;
-		double xC_511 = -1.7;
-		double yC_0 = -0.08;
-		double yC_511 = 0.025;
-		
-		double deltaX = ((xC_511 - xC_0)/pixelArray.length); 
-		double deltaY = ((yC_511 - yC_0)/pixelArray.length);
-		
-		for (int xIndex = 0; xIndex < pixelArray.length; xIndex++) {// Row
-			for (int yIndex = 0; yIndex < pixelArray[0].length; yIndex++) {// Col
-				double xCoord = xC_0 + (xIndex * deltaX);
-				double yCoord = yC_0 + (yIndex * deltaY);
-				
-				Pixel p = new Pixel(xCoord, yCoord, xIndex, yIndex);
-				pixelArray[xIndex][yIndex] = p;
-				p.setEscapeTime(calcBurningShipEscapeTime(escapeDistance, p.getX(), p.getY(), maxPasses));
-			}
-		}
-		
-		//Zoom method:
-		
-		xC_0 = pixelArray[regionStart[0]][regionStart[1]].getX();
-		xC_511 = pixelArray[regionEnd[0]][regionEnd[1]].getX();
-		yC_0 = pixelArray[regionStart[0]][regionStart[1]].getY();
-		yC_511 = pixelArray[regionEnd[0]][regionEnd[1]].getY();
-		
-		deltaX = ((xC_511 - xC_0)/pixelArray.length);
-		deltaY = ((yC_511 - yC_0)/pixelArray.length);
-		
-		for (int xIndex = 0; xIndex < pixelArray.length; xIndex++) {// Row
-			for (int yIndex = 0; yIndex < pixelArray[0].length; yIndex++) {// Col
-				double xCoord = xC_0 + (xIndex * deltaX);
-				double yCoord = yC_0 + (yIndex * deltaY);
-				Pixel p = new Pixel(xCoord, yCoord, xIndex, yIndex);
-				pixelArray[xIndex][yIndex] = p;
-				p.setEscapeTime(calcBurningShipEscapeTime(escapeDistance, p.getX(), p.getY(), maxPasses));
-			}
-		}
-	}
-
-	/**
-	 * Initialize Multibrot Array of Pixels -
-	 * 
-	 * @param pixelArray
-	 *            - expected to be empty Pixel array.
-	 */
-	public void initMultibrot(Pixel[][] pixelArray, int[] regionStart, int[] regionEnd, int escapeDistance, int maxPasses) {
-		double xC_0 = -1.0;
-		double xC_511 = 1.0;
-		double yC_0 = -1.3;
-		double yC_511 = 1.3;
-		
-		double deltaX = ((xC_511 - xC_0)/pixelArray.length); 
-		double deltaY = ((yC_511 - yC_0)/pixelArray.length);
-		
-		for (int xIndex = 0; xIndex < pixelArray.length; xIndex++) {// Row
-			for (int yIndex = 0; yIndex < pixelArray[0].length; yIndex++) {// Col
-				double xCoord = xC_0 + (xIndex * deltaX);
-				double yCoord = yC_0 + (yIndex * deltaY);
-				
-				Pixel p = new Pixel(xCoord, yCoord, xIndex, yIndex);
-				pixelArray[xIndex][yIndex] = p;
-				p.setEscapeTime(calcMultibrotEscapeTime(escapeDistance, p.getX(), p.getY(), maxPasses));
-			}
-		}
-		
-		//Zoom method:
-		
-		xC_0 = pixelArray[regionStart[0]][regionStart[1]].getX();
-		xC_511 = pixelArray[regionEnd[0]][regionEnd[1]].getX();
-		yC_0 = pixelArray[regionStart[0]][regionStart[1]].getY();
-		yC_511 = pixelArray[regionEnd[0]][regionEnd[1]].getY();
-		
-		deltaX = ((xC_511 - xC_0)/pixelArray.length);
-		deltaY = ((yC_511 - yC_0)/pixelArray.length);
-		
-		for (int xIndex = 0; xIndex < pixelArray.length; xIndex++) {// Row
-			for (int yIndex = 0; yIndex < pixelArray[0].length; yIndex++) {// Col
-				double xCoord = xC_0 + (xIndex * deltaX);
-				double yCoord = yC_0 + (yIndex * deltaY);
-				Pixel p = new Pixel(xCoord, yCoord, xIndex, yIndex);
-				pixelArray[xIndex][yIndex] = p;
-				p.setEscapeTime(calcMultibrotEscapeTime(escapeDistance, p.getX(), p.getY(), maxPasses));
-			}
-		}
-	}
-
-	/**
-	 * Escape Time Calculators - There are two methods for each fractal. These
-	 * methods have the same name, but different parameters. This is done so
-	 * that if the Escape Distance is not specified (as it might be in later
-	 * phases of the project) the escape distance is assumed to be 2.
-	 *
-	 */
-
-	/**
 	 * Calculate Escape Time for Mandelbrot -
 	 * 
-	 * @param xCoord
-	 *            - X coordinate of Pixel
-	 * @param yCoord
-	 *            - Y coordinate of Pixel
+	 * @param xIndex
+	 *            - X index of Pixel
+	 * @param yIndex
+	 *            - Y index of Pixel
 	 * @return Escape Time of the input coordinate.
 	 */
-
-	public int calcMandelbrotEscapeTime(int maxDist, double xCoord, double yCoord, int maxPasses) {
+	
+	public void calcMandelbrotEscapeTime(Pixel p, int xIndex, int yIndex, int maxDist, int maxPasses, int arrayLength) {
+		double[] constants = new double[]{-2.15, .6, -1.3, 1.3};
+		calcMandelbrotEscapeTime(p, constants, xIndex, yIndex, maxDist, maxPasses, arrayLength);
+	}
+	
+	public void calcMandelbrotEscapeTime(Pixel p, double[] constants, int xIndex, int yIndex, int maxDist, int maxPasses, int arrayLength) {
+		double xC_0 = constants[0];
+		double xC_511 = constants[1];
+		double yC_0 = constants[2];
+		double yC_511 = constants[3];
+		
+		double deltaX = ((xC_511 - xC_0) / arrayLength); 
+		double deltaY = ((yC_511 - yC_0) / arrayLength);
+		
+		double xCoord = xC_0 + (xIndex * deltaX);
+		double yCoord = yC_0 + (yIndex * deltaY);
+		
 		double xCalc = xCoord;
 		double yCalc = yCoord;
 
@@ -254,19 +59,36 @@ public abstract class FractalAlgorithms {
 			dist = distanceCalculator(xCalc, yCalc);
 		}
 		int escapeTime = passes;
-		return escapeTime;
+		p.setEscapeTime(escapeTime);
+		p.setCoords(xCoord, yCoord);
 	}
 
 	/**
 	 * Calculate Escape Time for Julia -
 	 * 
 	 * @param xCoord
-	 *            - X coordinate of Pixel
+	 *            - X index of Pixel
 	 * @param yCoord
-	 *            - Y coordinate of Pixel
+	 *            - Y index of Pixel
 	 * @return Escape Time of the input coordinate.
 	 */
-	public int calcJuliaEscapeTime(int maxDist, double xCoord, double yCoord, int maxPasses) {
+	public void calcJuliaEscapeTime(Pixel p, int xIndex, int yIndex, int maxDist, int maxPasses, int arrayLength) {
+		double[] constants = new double[]{-1.7, 1.7, -1.0, 1.0};
+		calcJuliaEscapeTime(p, constants, xIndex, yIndex, maxDist, maxPasses, arrayLength);
+	}
+	
+	public void calcJuliaEscapeTime(Pixel p, double[] constants, int xIndex, int yIndex, int maxDist, int maxPasses, int arrayLength) {
+		double xC_0 = constants[0];
+		double xC_511 = constants[1];
+		double yC_0 = constants[2];
+		double yC_511 = constants[3];
+		
+		double deltaX = ((xC_511 - xC_0) / arrayLength); 
+		double deltaY = ((yC_511 - yC_0) / arrayLength);
+		
+		double xCoord = xC_0 + (xIndex * deltaX);
+		double yCoord = yC_0 + (yIndex * deltaY);
+		
 		double xCalc = xCoord;
 		double yCalc = yCoord;
 
@@ -281,25 +103,42 @@ public abstract class FractalAlgorithms {
 			dist = distanceCalculator(xCalc, yCalc);
 		}
 		int escapeTime = passes;
-		return escapeTime;
+		p.setEscapeTime(escapeTime);
+		p.setCoords(xCoord, yCoord);
 	}
 
 	/**
 	 * Calculate Escape Time for Burning Ship -
 	 * 
 	 * @param xCoord
-	 *            - X coordinate of Pixel
+	 *            - X index of Pixel
 	 * @param yCoord
-	 *            - Y coordinate of Pixel
+	 *            - Y index of Pixel
 	 * @return Escape Time of the input coordinate.
 	 */
 
-	public int calcBurningShipEscapeTime(int maxDist, double xCoord, double yCoord, int maxPasses) {
+	public void calcBurningShipEscapeTime(Pixel p, int xIndex, int yIndex, int maxDist, int maxPasses, int arrayLength) {
+		double[] constants = new double[]{-1.8, -1.7, -.08, .025};
+		calcBurningShipEscapeTime(p, constants, xIndex, yIndex, maxDist, maxPasses, arrayLength);
+	}
+	
+	public void calcBurningShipEscapeTime(Pixel p, double[] constants, int xIndex, int yIndex, int maxDist, int maxPasses, int arrayLength) {
+		double xC_0 = constants[0];
+		double xC_511 = constants[1];
+		double yC_0 = constants[2];
+		double yC_511 = constants[3];
+		
+		double deltaX = ((xC_511 - xC_0) / arrayLength); 
+		double deltaY = ((yC_511 - yC_0) / arrayLength);
+		
+		double xCoord = xC_0 + (xIndex * deltaX);
+		double yCoord = yC_0 + (yIndex * deltaY);
+		
 		double xCalc = xCoord;
 		double yCalc = yCoord;
-
+		
 		double dist = distanceCalculator(xCalc, yCalc);
-
+	
 		int passes = 0;
 		while (dist <= maxDist & passes < maxPasses) {
 			double xtemp = ((xCalc * xCalc) - (yCalc * yCalc)) + xCoord;
@@ -309,20 +148,37 @@ public abstract class FractalAlgorithms {
 			dist = distanceCalculator(xCalc, yCalc);
 		}
 		int escapeTime = passes;
-		return escapeTime;
+		p.setEscapeTime(escapeTime);
+		p.setCoords(xCoord, yCoord);
 	}
 
 	/**
 	 * Calculate Escape Time for Multibrot -
 	 * 
 	 * @param xCoord
-	 *            - X coordinate of Pixel
+	 *            - X index of Pixel
 	 * @param yCoord
-	 *            - Y coordinate of Pixel
+	 *            - Y index of Pixel
 	 * @return Escape Time of the input coordinate.
 	 */
 
-	public int calcMultibrotEscapeTime(int maxDist, double xCoord, double yCoord, int maxPasses) {
+	public void calcMultibrotEscapeTime(Pixel p, int xIndex, int yIndex, int maxDist, int maxPasses, int arrayLength) {
+		double[] constants = new double[]{-1, 1, -1.3, 1.3};
+		calcMultibrotEscapeTime(p, constants, xIndex, yIndex, maxDist, maxPasses, arrayLength);
+	}
+	
+	public void calcMultibrotEscapeTime(Pixel p, double[] constants, int xIndex, int yIndex, int maxDist, int maxPasses, int arrayLength) {
+		double xC_0 = constants[0];
+		double xC_511 = constants[1];
+		double yC_0 = constants[2];
+		double yC_511 = constants[3];
+		
+		double deltaX = ((xC_511 - xC_0) / arrayLength); 
+		double deltaY = ((yC_511 - yC_0) / arrayLength);
+		
+		double xCoord = xC_0 + (xIndex * deltaX);
+		double yCoord = yC_0 + (yIndex * deltaY);
+		
 		double xCalc = xCoord;
 		double yCalc = yCoord;
 
@@ -337,7 +193,8 @@ public abstract class FractalAlgorithms {
 			dist = distanceCalculator(xCalc, yCalc);
 		}
 		int escapeTime = passes;
-		return escapeTime;
+		p.setEscapeTime(escapeTime);
+		p.setCoords(xCoord, yCoord);
 	}
 	
 
