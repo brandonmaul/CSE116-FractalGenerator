@@ -64,12 +64,17 @@ public class FractalGenerator extends FractalAlgorithms {
 	 * @return _fractal, a 2D array of Pixels. Each with their own
 	 *         locally-stored escape time and X/Y Coordinates
 	 */
-	public Pixel[][] genMandelbrot(int escapeDistance, int maxPasses) {
+	public Pixel[][] genMandelbrot(int maxDist, int maxPasses) {
+		double[] constants = new double[]{-2.15, .6, -1.3, 1.3};
+		
 		for(Pixel[] pixRow : _fractal){
 			for(Pixel p : pixRow){
-				calcMandelbrotEscapeTime(p, p.getX(), p.getY(), escapeDistance, maxPasses, _fractal.length);
+				calcPixelCoordinates(p, constants, _fractal.length);
+				calcMandelbrotEscapeTime(p, maxDist, maxPasses);
 			}
+		
 		}
+		
 		return _fractal;
 	}
 
@@ -79,11 +84,15 @@ public class FractalGenerator extends FractalAlgorithms {
 	 * @return _fractal, a 2D array of Pixels. Each with their own
 	 *         locally-stored escape time and X/Y Coordinates
 	 */
-	public Pixel[][] genJulia(int[] regionStart, int[] regionEnd, int escapeDistance, int maxPasses) {
+	public Pixel[][] genJulia(int[] regionStart, int[] regionEnd, int maxDist, int maxPasses) {
+		double[] constants = new double[]{-1.7, 1.7, -1.0, 1.0};
+		
 		for(Pixel[] pixRow : _fractal){
 			for(Pixel p : pixRow){
-				calcJuliaEscapeTime(p, p.getX(), p.getY(), escapeDistance, maxPasses, _fractal.length);
+				calcPixelCoordinates(p, constants, _fractal.length);
+				calcJuliaEscapeTime(p, maxDist, maxPasses);
 			}
+		
 		}
 		return _fractal;
 	}
@@ -94,13 +103,17 @@ public class FractalGenerator extends FractalAlgorithms {
 	 * @return _fractal, a 2D array of Pixels. Each with their own
 	 *         locally-stored escape time and X/Y Coordinates
 	 */
-	public Pixel[][] genBurningShip(int[] regionStart, int[] regionEnd, int escapeDistance, int maxPasses) {
+	public Pixel[][] genBurningShip(int[] regionStart, int[] regionEnd, int maxDist, int maxPasses) {
+		double[] constants = new double[]{-1.8, -1.7, -.08, .025};
+		
 		for(Pixel[] pixRow : _fractal){
 			for(Pixel p : pixRow){
-				calcBurningShipEscapeTime(p, p.getX(), p.getY(), escapeDistance, maxPasses, _fractal.length);
+				calcPixelCoordinates(p, constants, _fractal.length);
+				calcBurningShipEscapeTime(p, maxDist, maxPasses);
 			}
+		
 		}
-	return _fractal;
+		return _fractal;
 	}
 
 	/**
@@ -109,31 +122,16 @@ public class FractalGenerator extends FractalAlgorithms {
 	 * @return _fractal, a 2D array of Pixels. Each with their own
 	 *         locally-stored escape time and X/Y Coordinates
 	 */
-	public Pixel[][] genMultibrot(int[] regionStart, int[] regionEnd, int escapeDistance, int maxPasses) {
+	public Pixel[][] genMultibrot(int[] regionStart, int[] regionEnd, int maxDist, int maxPasses) {
+		double[] constants = new double[]{-1, 1, -1.3, 1.3};
+		
 		for(Pixel[] pixRow : _fractal){
 			for(Pixel p : pixRow){
-				calcMultibrotEscapeTime(p,  p.getX(), p.getY(), escapeDistance, maxPasses, _fractal.length);
+				calcPixelCoordinates(p, constants, _fractal.length);
+				calcMultibrotEscapeTime(p, maxDist, maxPasses);
 			}
+		
 		}
 		return _fractal;
-	}
-
-	/**
-	 * Does the fractal contain any 0's or 1's?
-	 * 
-	 * Searches through each pixel in _fractal and checks to see if their escape
-	 * time is 0 or a 1. Used for the Burning Ship test.
-	 * 
-	 * @return false if a 0 or 1 was found, true if none were found.
-	 */
-	public boolean boolContainsNoZerosOrOnes() {
-		for (int x = 0; x < _fractal.length; x++) {
-			for (int y = 0; y < _fractal[0].length; y++) {
-				if (_fractal[x][y].getEscapeTime() == 0 | _fractal[x][y].getEscapeTime() == 1) {
-					return false;
-				}
-			}
-		}
-		return true;
 	}
 }

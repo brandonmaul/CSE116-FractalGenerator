@@ -21,29 +21,18 @@ public abstract class FractalAlgorithms {
 	/**
 	 * Calculate Escape Time for Mandelbrot -
 	 * 
-	 * @param xIndex
-	 *            - X index of Pixel
-	 * @param yIndex
-	 *            - Y index of Pixel
-	 * @return Escape Time of the input coordinate.
+	 * @param p
+	 *            - Pixel who's index and coordinates have already been set.
+	 * @param maxDist
+	 *            - The maximum escape distance allowed for the Pixel while calculating its escape time.
+	 * @param maxPasses
+	 * 			  - The maximum escape time allowed for each pixel on the fractal.
 	 */
-	
-	public void calcMandelbrotEscapeTime(Pixel p, int xIndex, int yIndex, int maxDist, int maxPasses, int arrayLength) {
-		double[] constants = new double[]{-2.15, .6, -1.3, 1.3};
-		calcMandelbrotEscapeTime(p, constants, xIndex, yIndex, maxDist, maxPasses, arrayLength);
-	}
-	
-	public void calcMandelbrotEscapeTime(Pixel p, double[] constants, int xIndex, int yIndex, int maxDist, int maxPasses, int arrayLength) {
-		double xC_0 = constants[0];
-		double xC_511 = constants[1];
-		double yC_0 = constants[2];
-		double yC_511 = constants[3];
+	public void calcMandelbrotEscapeTime(Pixel p, int maxDist, int maxPasses) {
 		
-		double deltaX = ((xC_511 - xC_0) / arrayLength); 
-		double deltaY = ((yC_511 - yC_0) / arrayLength);
-		
-		double xCoord = xC_0 + (xIndex * deltaX);
-		double yCoord = yC_0 + (yIndex * deltaY);
+		double[] coords = p.getCoords();
+		double xCoord = coords[0];
+		double yCoord = coords[1];
 		
 		double xCalc = xCoord;
 		double yCalc = yCoord;
@@ -66,28 +55,18 @@ public abstract class FractalAlgorithms {
 	/**
 	 * Calculate Escape Time for Julia -
 	 * 
-	 * @param xCoord
-	 *            - X index of Pixel
-	 * @param yCoord
-	 *            - Y index of Pixel
-	 * @return Escape Time of the input coordinate.
+	 * @param p
+	 *            - Pixel who's index and coordinates have already been set.
+	 * @param maxDist
+	 *            - The maximum escape distance allowed for the Pixel while calculating its escape time.
+	 * @param maxPasses
+	 * 			  - The maximum escape time allowed for each pixel on the fractal.
 	 */
-	public void calcJuliaEscapeTime(Pixel p, int xIndex, int yIndex, int maxDist, int maxPasses, int arrayLength) {
-		double[] constants = new double[]{-1.7, 1.7, -1.0, 1.0};
-		calcJuliaEscapeTime(p, constants, xIndex, yIndex, maxDist, maxPasses, arrayLength);
-	}
-	
-	public void calcJuliaEscapeTime(Pixel p, double[] constants, int xIndex, int yIndex, int maxDist, int maxPasses, int arrayLength) {
-		double xC_0 = constants[0];
-		double xC_511 = constants[1];
-		double yC_0 = constants[2];
-		double yC_511 = constants[3];
+	public void calcJuliaEscapeTime(Pixel p, int maxDist, int maxPasses) {
 		
-		double deltaX = ((xC_511 - xC_0) / arrayLength); 
-		double deltaY = ((yC_511 - yC_0) / arrayLength);
-		
-		double xCoord = xC_0 + (xIndex * deltaX);
-		double yCoord = yC_0 + (yIndex * deltaY);
+		double[] coords = p.getCoords();
+		double xCoord = coords[0];
+		double yCoord = coords[1];
 		
 		double xCalc = xCoord;
 		double yCalc = yCoord;
@@ -110,29 +89,18 @@ public abstract class FractalAlgorithms {
 	/**
 	 * Calculate Escape Time for Burning Ship -
 	 * 
-	 * @param xCoord
-	 *            - X index of Pixel
-	 * @param yCoord
-	 *            - Y index of Pixel
-	 * @return Escape Time of the input coordinate.
+	 * @param p
+	 *            - Pixel who's index and coordinates have already been set.
+	 * @param maxDist
+	 *            - The maximum escape distance allowed for the Pixel while calculating its escape time.
+	 * @param maxPasses
+	 * 			  - The maximum escape time allowed for each pixel on the fractal.
 	 */
-
-	public void calcBurningShipEscapeTime(Pixel p, int xIndex, int yIndex, int maxDist, int maxPasses, int arrayLength) {
-		double[] constants = new double[]{-1.8, -1.7, -.08, .025};
-		calcBurningShipEscapeTime(p, constants, xIndex, yIndex, maxDist, maxPasses, arrayLength);
-	}
-	
-	public void calcBurningShipEscapeTime(Pixel p, double[] constants, int xIndex, int yIndex, int maxDist, int maxPasses, int arrayLength) {
-		double xC_0 = constants[0];
-		double xC_511 = constants[1];
-		double yC_0 = constants[2];
-		double yC_511 = constants[3];
+	public void calcBurningShipEscapeTime(Pixel p, int maxDist, int maxPasses) {
 		
-		double deltaX = ((xC_511 - xC_0) / arrayLength); 
-		double deltaY = ((yC_511 - yC_0) / arrayLength);
-		
-		double xCoord = xC_0 + (xIndex * deltaX);
-		double yCoord = yC_0 + (yIndex * deltaY);
+		double[] coords = p.getCoords();
+		double xCoord = coords[0];
+		double yCoord = coords[1];
 		
 		double xCalc = xCoord;
 		double yCalc = yCoord;
@@ -155,29 +123,18 @@ public abstract class FractalAlgorithms {
 	/**
 	 * Calculate Escape Time for Multibrot -
 	 * 
-	 * @param xCoord
-	 *            - X index of Pixel
-	 * @param yCoord
-	 *            - Y index of Pixel
-	 * @return Escape Time of the input coordinate.
+	 * @param p
+	 *            - Pixel who's index and coordinates have already been set.
+	 * @param maxDist
+	 *            - The maximum escape distance allowed for the Pixel while calculating its escape time.
+	 * @param maxPasses
+	 * 			  - The maximum escape time allowed for each pixel on the fractal.
 	 */
-
-	public void calcMultibrotEscapeTime(Pixel p, int xIndex, int yIndex, int maxDist, int maxPasses, int arrayLength) {
-		double[] constants = new double[]{-1, 1, -1.3, 1.3};
-		calcMultibrotEscapeTime(p, constants, xIndex, yIndex, maxDist, maxPasses, arrayLength);
-	}
-	
-	public void calcMultibrotEscapeTime(Pixel p, double[] constants, int xIndex, int yIndex, int maxDist, int maxPasses, int arrayLength) {
-		double xC_0 = constants[0];
-		double xC_511 = constants[1];
-		double yC_0 = constants[2];
-		double yC_511 = constants[3];
+	public void calcMultibrotEscapeTime(Pixel p, int maxDist, int maxPasses) {
 		
-		double deltaX = ((xC_511 - xC_0) / arrayLength); 
-		double deltaY = ((yC_511 - yC_0) / arrayLength);
-		
-		double xCoord = xC_0 + (xIndex * deltaX);
-		double yCoord = yC_0 + (yIndex * deltaY);
+		double[] coords = p.getCoords();
+		double xCoord = coords[0];
+		double yCoord = coords[1];
 		
 		double xCalc = xCoord;
 		double yCalc = yCoord;
@@ -197,6 +154,32 @@ public abstract class FractalAlgorithms {
 		p.setCoords(xCoord, yCoord);
 	}
 	
+	/**
+	 * Calculates the pixel's coordinates in the region bounded by the constants.
+	 * Honestly, I'm ashamed to say I didn't think of this method weeks ago...
+	 * Would have made life a lot easier. 
+	 * 
+	 * @param p
+	 *            - Pixel who's xIndex and yIndex have already been set.
+	 * @param constants
+	 *            - The coordinate bounds of the region the pixel will have to reside in. 
+	 * @param arrayLength
+	 * 			  - The length of the whole array, so that the pixels index can have some context.
+	 */
+	public void calcPixelCoordinates(Pixel p, double[] constants, int arrayLength){
+		double xC_0 = constants[0];
+		double xC_511 = constants[1];
+		double yC_0 = constants[2];
+		double yC_511 = constants[3];
+		
+		double deltaX = ((xC_511 - xC_0) / arrayLength); 
+		double deltaY = ((yC_511 - yC_0) / arrayLength);
+		
+		double xCoord = xC_0 + (p.getX() * deltaX);
+		double yCoord = yC_0 + (p.getY() * deltaY);
+		
+		p.setCoords(xCoord, yCoord);
+	}
 
 	/**
 	 * Distance Calculator - Calculates the distance of the input to the point

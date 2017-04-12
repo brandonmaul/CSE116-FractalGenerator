@@ -2,122 +2,177 @@ package tests;
 
 import static org.junit.Assert.*;
 import org.junit.Test;
-import model.FractalGenerator;
-import model.Pixel;
+import model.*;
 
 public class IndexTranslationToCoordTest {
 	/**
 	 * @author Giselle
 	 */
+	
+	Model _model = new Model();
+	
 	@Test
 	public void xMBtest() {
-
-		FractalGenerator mbfractalx = new FractalGenerator();
-		Pixel[][] mandelbrot = mbfractalx.genMandelbrot(2, 255);
+		
+		_model.setFractalType(1); // Set fractal to Mandelbrot
+		Pixel[][] mandelbrot = _model.generateFractal(); // Generate Fractal
+		
 		// Index to xCord
 		// xCord range is -2.15 to 0.6
 
-		// (0,0)
-		assertEquals(-2.15, mandelbrot[0][0].getX(), .1);
-		// (512,512)
-		assertEquals(0.6, mandelbrot[511][0].getX(), .1);
+		// Get coordinates of the Pixel at (0,0)
+		double[] coord_0_0 = mandelbrot[0][0].getCoords();
+		
+		// TEST Get coordinates of the Pixel at (511,511)
+		double[] coord_511_511 = mandelbrot[511][511].getCoords();
+		
+		// TEST Check the X Coordinate of the Pixel at (0,0)
+		assertEquals(-2.15, coord_0_0[0], .1);
+		
+		// TEST Check the X Coordinate of the Pixel at (511,511)
+		assertEquals(0.6, coord_511_511[0], .1);
 
 	}
 
 	@Test
 	public void yMBtest() {
-		FractalGenerator mbfractaly = new FractalGenerator();
-		Pixel[][] mandelbrot = mbfractaly.genMandelbrot(2, 255);
-		// Index to yCord
+		
+		Pixel[][] mandelbrot = _model.generateFractal(); // Generate Fractal
+		
 		// yCord range is -1.3 to 1.3
 
-		// (0,0)
-		assertEquals(-1.3, mandelbrot[0][0].getY(), .1);
-		// (512,512)
-		assertEquals(1.3, mandelbrot[0][511].getY(), .1);
-		// Half
-		assertEquals(0.0, mandelbrot[0][255].getY(), .1);
+		// Get coordinates of the Pixel at (0,0)
+		double[] coord_0_0 = mandelbrot[0][0].getCoords();
+		
+		// Get coordinates of the Pixel at (511,511)
+		double[] coord_511_511 = mandelbrot[511][511].getCoords();
+		
+		// TEST Check the X Coordinate of the Pixel at (0,0)
+		assertEquals(-1.3, coord_0_0[1], .1);
+		
+		// TEST Check the X Coordinate of the Pixel at (511,511)
+		assertEquals(1.3, coord_511_511[1], .1);
+
+		// TEST Halfway point
+		assertEquals(0.0, mandelbrot[255][255].getCoords()[1], .1);
+		
 	}
 
 	@Test
 	public void xJtest() {
-		FractalGenerator jfractalx = new FractalGenerator();
-		Pixel[][] julia = jfractalx.genJulia(2, 255);
-		// Index to yCord
-		// xCord range is -1.7 to 1.7
+		_model.setFractalType(2); // Set fractal to Julia
+		Pixel[][] julia = _model.generateFractal(); // Generate Fractal
 
-		// (0,..)
-		assertEquals(-1.7, julia[0][0].getX(), .1);
-		// (512,..)
-		assertEquals(1.7, julia[511][0].getX(), .1);
-		// Half
-		assertEquals(0.0, julia[255][0].getX(), .1);
+		// Get coordinates of the Pixel at (0,0)
+		double[] coord_0_0 = julia[0][0].getCoords();
+		
+		// Get coordinates of the Pixel at (511,511)
+		double[] coord_511_511 = julia[511][511].getCoords();
+		
+		// TEST Check the X Coordinate of the Pixel at (0,0)
+		assertEquals(-1.7, coord_0_0[0], .1);
+		
+		// TEST Check the X Coordinate of the Pixel at (511,511)
+		assertEquals(1.7, coord_511_511[0], .1);
+		
+		// TEST Halfway point
+		assertEquals(0.0, julia[255][255].getCoords()[0], .1);
 	}
 
 	@Test
 	public void yJtest() {
-		FractalGenerator jfractaly = new FractalGenerator();
-		Pixel[][] julia = jfractaly.genJulia(2, 255);
-		// Index to yCord
-		// yCord range is -1.0 to 1.0
+		
+		_model.setFractalType(2); // Set fractal to Julia
+		Pixel[][] julia = _model.generateFractal(); // Generate Fractal
+		
+		// Index to xCord
+		// xCord range is -2.15 to 0.6
 
-		// (0,..)
-		assertEquals(-1.0, julia[0][0].getY(), .01);
-		// (512,..)
-		assertEquals(1.0, julia[0][511].getY(), .01);
-		// Half
-		assertEquals(0.0, julia[0][255].getY(), .01);
+		// Get coordinates of the Pixel at (0,0)
+		double[] coord_0_0 = julia[0][0].getCoords();
+		
+		// Get coordinates of the Pixel at (511,511)
+		double[] coord_511_511 = julia[511][511].getCoords();
+		
+		// TEST Check the X Coordinate of the Pixel at (0,0)
+		assertEquals(-1, coord_0_0[1], .1);
+		
+		// TEST Check the X Coordinate of the Pixel at (511,511)
+		assertEquals(1, coord_511_511[1], .1);
+		
+		// TEST Halfway point
+		assertEquals(0.0, julia[255][255].getCoords()[1], .1);
 	}
 
 	@Test
 	public void xBurntest() {
-		FractalGenerator burnfractalx = new FractalGenerator();
-		Pixel[][] burn = burnfractalx.genBurningShip(2, 255);
-		// Index to yCord
-		// xCord range is -1.8 to -1.7
+		_model.setFractalType(3); // Set fractal to Burning Ship
+		Pixel[][] burningship = _model.generateFractal(); // Generate Fractal
 
-		// (0,..)
-		assertEquals(-1.8, burn[0][0].getX(), .1);
-
-		// (512,..)
-		assertEquals(-1.7, burn[511][0].getX(), .1);
+		// Get coordinates of the Pixel at (0,0)
+		double[] coord_0_0 = burningship[0][0].getCoords();
+		
+		// Get coordinates of the Pixel at (511,511)
+		double[] coord_511_511 = burningship[511][511].getCoords();
+		
+		// TEST Check the X Coordinate of the Pixel at (0,0)
+		assertEquals(-1.8, coord_0_0[0], .1);
+		
+		// TEST Check the X Coordinate of the Pixel at (511,511)
+		assertEquals(-1.7, coord_511_511[0], .1);
 	}
 
 	@Test
 	public void yBurntest() {
-		FractalGenerator burnfractaly = new FractalGenerator();
-		Pixel[][] burn = burnfractaly.genBurningShip(2, 255);
-		// yCord range is -0.08 to 0.025
+	_model.setFractalType(3); // Set fractal to Burning Ship
+	Pixel[][] burningship = _model.generateFractal(); // Generate Fractal
 
-		// (0,..)
-		assertEquals(-0.08, burn[0][0].getY(), .1);
-		// (512,..)
-		assertEquals(0.025, burn[0][511].getY(), .1);
+	// Get coordinates of the Pixel at (0,0)
+	double[] coord_0_0 = burningship[0][0].getCoords();
+	
+	// Get coordinates of the Pixel at (511,511)
+	double[] coord_511_511 = burningship[511][511].getCoords();
+	
+	// TEST Check the X Coordinate of the Pixel at (0,0)
+	assertEquals(-0.08, coord_0_0[1], .1);
+	
+	// TEST Check the X Coordinate of the Pixel at (511,511)
+	assertEquals(0.025, coord_511_511[1], .1);
 	}
 
 	@Test
 	public void xMultitest() {
-		FractalGenerator multifractalx = new FractalGenerator();
-		Pixel[][] multi = multifractalx.genMultibrot(2, 255);
-		// Index to yCord
-		// xCord range is -1 to -1
+		_model.setFractalType(4); // Set fractal to Multibrot
+		Pixel[][] multibrot = _model.generateFractal(); // Generate Fractal
 
-		// (0,..)
-		assertEquals(-1, multi[0][0].getX(), .1);
-
-		// (512,..)
-		assertEquals(1, multi[511][0].getX(), .1);
+		// Get coordinates of the Pixel at (0,0)
+		double[] coord_0_0 = multibrot[0][0].getCoords();
+		
+		// Get coordinates of the Pixel at (511,511)
+		double[] coord_511_511 = multibrot[511][511].getCoords();
+		
+		// TEST Check the X Coordinate of the Pixel at (0,0)
+		assertEquals(-1, coord_0_0[0], .1);
+		
+		// TEST Check the X Coordinate of the Pixel at (511,511)
+		assertEquals(1, coord_511_511[0], .1);
 	}
 
 	@Test
 	public void yMultiest() {
-		FractalGenerator multifractaly = new FractalGenerator();
-		Pixel[][] multi = multifractaly.genMultibrot(2, 255);
-		// yCord range is -1.3 to 1.3
+		_model.setFractalType(4); // Set fractal to Multibrot
+		Pixel[][] multibrot = _model.generateFractal(); // Generate Fractal
 
-		// (0,..)
-		assertEquals(-1.3, multi[0][0].getY(), .1);
-		// (512,..)
-		assertEquals(1.3, multi[0][511].getY(), .1);
+		// Get coordinates of the Pixel at (0,0)
+		double[] coord_0_0 = multibrot[0][0].getCoords();
+		
+		// Get coordinates of the Pixel at (511,511)
+		double[] coord_511_511 = multibrot[511][511].getCoords();
+		
+		// TEST Check the X Coordinate of the Pixel at (0,0)
+		assertEquals(-1.3, coord_0_0[1], .1);
+		
+		// TEST Check the X Coordinate of the Pixel at (511,511)
+		assertEquals(1.3, coord_511_511[1], .1);
 	}
 }

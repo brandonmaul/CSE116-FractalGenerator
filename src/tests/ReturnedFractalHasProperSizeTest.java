@@ -4,19 +4,21 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import model.FractalGenerator;
+import model.*;
 
 public class ReturnedFractalHasProperSizeTest {
 	/**
 	 * @author Thankam Abish
 	 * 			This test checks if the method to calculate the fractal returns a 2-d array with 512 rows and 512 columns.
 	 */
+	
+	Model _model = new Model();
 
 	@Test
 	public void MBSizeTest() {
-		FractalGenerator fractal = new FractalGenerator();
-		fractal.genMandelbrot(2, 255);
-		int[][] a = fractal.getEscapeTimeArray();
+		_model.setFractalType(1); // Set fractal to Mandelbrot
+		_model.generateFractal();
+		int[][] a = _model.getEscapeTimeArray();
 		// length of a column
 		assertEquals(512, a[0].length);
 		// length of a row
@@ -25,9 +27,9 @@ public class ReturnedFractalHasProperSizeTest {
 
 	@Test
 	public void JSizeTest() {
-		FractalGenerator fractal = new FractalGenerator();
-		fractal.genJulia(2, 255);
-		int[][] a = fractal.getEscapeTimeArray();
+		_model.setFractalType(3); // Set fractal to Julia
+		_model.generateFractal();
+		int[][] a = _model.getEscapeTimeArray();
 		// length of a column
 		assertEquals(512, a[0].length);
 		// length of a row
@@ -36,9 +38,9 @@ public class ReturnedFractalHasProperSizeTest {
 
 	@Test
 	public void BurnSizeTest() {
-		FractalGenerator fractal = new FractalGenerator();
-		fractal.genBurningShip(2, 255);
-		int[][] a = fractal.getEscapeTimeArray();
+		_model.setFractalType(3); // Set fractal to BurningShip
+		_model.generateFractal();
+		int[][] a = _model.getEscapeTimeArray();
 		// length of a column
 		assertEquals(512, a[0].length);
 		// length of a row
@@ -47,9 +49,9 @@ public class ReturnedFractalHasProperSizeTest {
 
 	@Test
 	public void MultiSizeTest() {
-		FractalGenerator fractal = new FractalGenerator();
-		fractal.genMultibrot(2, 255);
-		int[][] a = fractal.getEscapeTimeArray();
+		_model.setFractalType(4); // Set fractal to Multibrot
+		_model.generateFractal();
+		int[][] a = _model.getEscapeTimeArray();
 		// length of a column
 		assertEquals(512, a[0].length);
 		// length of a row

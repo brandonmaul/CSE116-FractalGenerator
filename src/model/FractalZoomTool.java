@@ -14,7 +14,8 @@ public class FractalZoomTool extends FractalAlgorithms{
 		
 		for(Pixel[] pixRow : _fractal){
 			for(Pixel p : pixRow){
-				calcMandelbrotEscapeTime(p, newConstants, p.getX(), p.getY(), maxDist, maxPasses, _fractal.length);
+				calcPixelCoordinates(p, newConstants, _fractal.length);
+				calcMandelbrotEscapeTime(p, maxDist, maxPasses);
 			}
 		}
 	}
@@ -26,7 +27,8 @@ public class FractalZoomTool extends FractalAlgorithms{
 		
 		for(Pixel[] pixRow : _fractal){
 			for(Pixel p : pixRow){
-				calcJuliaEscapeTime(p, newConstants, p.getX(), p.getY(), maxDist, maxPasses, _fractal.length);
+				calcPixelCoordinates(p, newConstants, _fractal.length);
+				calcJuliaEscapeTime(p, maxDist, maxPasses);
 			}
 		}
 	}
@@ -37,7 +39,8 @@ public class FractalZoomTool extends FractalAlgorithms{
 		
 		for(Pixel[] pixRow : _fractal){
 			for(Pixel p : pixRow){
-				calcBurningShipEscapeTime(p, newConstants, p.getX(), p.getY(), maxDist, maxPasses, _fractal.length);
+				calcPixelCoordinates(p, newConstants, _fractal.length);
+				calcBurningShipEscapeTime(p, maxDist, maxPasses);
 			}
 		}
 	}
@@ -48,7 +51,8 @@ public class FractalZoomTool extends FractalAlgorithms{
 		
 		for(Pixel[] pixRow : _fractal){
 			for(Pixel p : pixRow){
-				calcMultibrotEscapeTime(p, newConstants, p.getX(), p.getY(), maxDist, maxPasses, _fractal.length);
+				calcPixelCoordinates(p, newConstants, _fractal.length);
+				calcMultibrotEscapeTime(p, maxDist, maxPasses);
 			}
 		}
 	}
