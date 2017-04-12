@@ -12,7 +12,7 @@ public class DistanceNeverExceedsEscapeDistanceTest {
 	
 	//Mandelbrot Set
 	@Test
-	public void MandelbrotDistanceNeverExceedsEscapeDistanceTest() {
+	public void MandelbrotEscapeDistanceOfTwoNeverExceededTest() {
 		FractalGenerator fractal = new FractalGenerator(new Pixel[0][0]);
 		Pixel p = new Pixel(0,0);
 		p.setCoords(0.3207031250000001, -0.07109374999999386);
@@ -23,7 +23,7 @@ public class DistanceNeverExceedsEscapeDistanceTest {
 	
 	// Julia Set
 	@Test
-	public void JuliaDistanceNeverExceedsEscapeDistanceTest() {
+	public void JuliaEscapeDistanceOfTwoNeverExceededTest() {
 		FractalGenerator fractal = new FractalGenerator(new Pixel[0][0]);
 		Pixel p = new Pixel(0,0);
 		p.setCoords(1.0492187499999897, -0.234375);
@@ -35,7 +35,7 @@ public class DistanceNeverExceedsEscapeDistanceTest {
 	
 	//Burning Ship Set
 	@Test
-	public void BurningShipDistanceNeverExceedsEscapeDistanceTest() {
+	public void BurningShipEscapeDistanceOfTwoNeverExceededTest() {
 		FractalGenerator fractal = new FractalGenerator(new Pixel[0][0]);
 		Pixel p = new Pixel(0,0);
 		p.setCoords(-1.7443359374999874, -0.017451171875000338);
@@ -46,7 +46,7 @@ public class DistanceNeverExceedsEscapeDistanceTest {
 	
 	//Multibrot Set
 	@Test
-	public void MultibrotDistanceNeverExceedsEscapeDistanceTest() {
+	public void MultibrotEscapeDistanceOfTwoNeverExceededTest() {
 		FractalGenerator fractal = new FractalGenerator(new Pixel[0][0]);
 		Pixel p = new Pixel(0,0);
 		p.setCoords(0.5859375, 0.24375000000000108);
