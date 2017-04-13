@@ -6,7 +6,7 @@ import org.junit.Test;
 
 import model.*;
 
-public class Esc3Test {
+public class EscapeDistanceOfThreeNeverExceededTest {
 	
 	//Mandelbrot Set: (0.46007827788650374, -0.3383561643835661)
 	@Test
