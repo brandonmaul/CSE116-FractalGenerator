@@ -302,7 +302,7 @@ public class UI implements Observer{
 		_menuBar.getMenu(5).getItem(0).doClick();
 		_model.setEscapeDistance(2);
 		_model.setMaxEscapeTime(255);
-		
+		_model.setDisplayRegion(0, 0, 511, 511);
 		_window.add(_generatePanel);
 		_generatePanel.setVisible(true);
 		
@@ -313,19 +313,14 @@ public class UI implements Observer{
 	 * Updates the display and Escape Distance displayed in the UI. Called whenever a change to the Model is made.
 	 */
 	public void updateFractal() {
-		_currentEscapeDistance.setText("Current Escape Distance: " + _model.getEscapeDistance());
-		_currentMaxEscapeTime.setText("Current Maximum Escape Time: " + _model.getEscapeTime());
-		_currentZoomCoords.setText("Showing pixels between " + _model.getDisplayRegion());
-		_fractalPanel.setIndexColorModel(_model.getColorModel());
 		_model.generateFractal();
-		_fractalPanel.updateImage(_model.getEscapeTimeArray());
-		
+		updateFractalDetails();
 	}
 	
 	public void updateFractalDetails() {
 		_currentEscapeDistance.setText("Current Escape Distance: " + _model.getEscapeDistance());
 		_currentMaxEscapeTime.setText("Current Maximum Escape Time: " + _model.getEscapeTime());
-		_currentZoomCoords.setText("Showing pixels between " + _model.getDisplayRegion());
+		_currentZoomCoords.setText("Showing "+ _model.getDisplayRegionPercentage() + "% of the Fractal");
 		_fractalPanel.setIndexColorModel(_model.getColorModel());
 		_model.zoomFractal();
 		_fractalPanel.updateImage(_model.getEscapeTimeArray());

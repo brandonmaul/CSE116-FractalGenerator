@@ -57,11 +57,11 @@ public class Model implements Observable {
 		if (_fractalType == 1){
 			_fractal = _fractalGenerator.genMandelbrot(_escapeDistance, _maxPasses);
 		}else if (_fractalType == 2){
-			_fractal = _fractalGenerator.genJulia(_regionStart, _regionEnd, _escapeDistance, _maxPasses);
+			_fractal = _fractalGenerator.genJulia(_escapeDistance, _maxPasses);
 		}else if (_fractalType == 3){
-			_fractal = _fractalGenerator.genBurningShip(_regionStart, _regionEnd, _escapeDistance, _maxPasses);
+			_fractal = _fractalGenerator.genBurningShip(_escapeDistance, _maxPasses);
 		}else if (_fractalType == 4){
-			_fractal = _fractalGenerator.genMultibrot(_regionStart, _regionEnd, _escapeDistance, _maxPasses);
+			_fractal = _fractalGenerator.genMultibrot(_escapeDistance, _maxPasses);
 		}
 		return _fractal;
 	}
@@ -143,7 +143,10 @@ public class Model implements Observable {
 		//im so sorry for this horrible method... Ill figure out a way to make it better... eventually...
 	}
 	
-	public String getDisplayRegion() {
+	public double getDisplayRegionPercentage() {
+		int[] before = new int[]{1,1,512,512};
+		int[] after = new int[]{_regionStart[0] + 1,_regionStart[1] + 1,_regionEnd[0] + 1,_regionEnd[0] + 1};
+		
 		return "(" + _regionStart[0] + ", " + _regionStart[1] + ") and (" + _regionEnd[0] + ", " + _regionEnd[1] + ")";
 	}
 	

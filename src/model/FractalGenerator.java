@@ -84,7 +84,7 @@ public class FractalGenerator extends FractalAlgorithms {
 	 * @return _fractal, a 2D array of Pixels. Each with their own
 	 *         locally-stored escape time and X/Y Coordinates
 	 */
-	public Pixel[][] genJulia(int[] regionStart, int[] regionEnd, int maxDist, int maxPasses) {
+	public Pixel[][] genJulia(int maxDist, int maxPasses) {
 		double[] constants = new double[]{-1.7, 1.7, -1.0, 1.0};
 		
 		for(Pixel[] pixRow : _fractal){
@@ -103,7 +103,7 @@ public class FractalGenerator extends FractalAlgorithms {
 	 * @return _fractal, a 2D array of Pixels. Each with their own
 	 *         locally-stored escape time and X/Y Coordinates
 	 */
-	public Pixel[][] genBurningShip(int[] regionStart, int[] regionEnd, int maxDist, int maxPasses) {
+	public Pixel[][] genBurningShip(int maxDist, int maxPasses) {
 		double[] constants = new double[]{-1.8, -1.7, -.08, .025};
 		
 		for(Pixel[] pixRow : _fractal){
@@ -122,7 +122,7 @@ public class FractalGenerator extends FractalAlgorithms {
 	 * @return _fractal, a 2D array of Pixels. Each with their own
 	 *         locally-stored escape time and X/Y Coordinates
 	 */
-	public Pixel[][] genMultibrot(int[] regionStart, int[] regionEnd, int maxDist, int maxPasses) {
+	public Pixel[][] genMultibrot(int maxDist, int maxPasses) {
 		double[] constants = new double[]{-1, 1, -1.3, 1.3};
 		
 		for(Pixel[] pixRow : _fractal){
