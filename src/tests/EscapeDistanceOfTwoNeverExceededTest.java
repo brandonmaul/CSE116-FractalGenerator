@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 import model.*;
 import org.junit.Test;
 
-public class DistanceNeverExceedsEscapeDistanceTest {
+public class EscapeDistanceOfTwoNeverExceededTest {
 	/**
 	 * @author Brandon Maul
 	 */
