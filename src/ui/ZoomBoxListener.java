@@ -1,7 +1,10 @@
 package ui;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Stroke;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
@@ -39,6 +42,7 @@ public class ZoomBoxListener implements MouseListener, MouseMotionListener{
 			_dispRegion[3] = e.getY();
 			
 			if(_dispRegion[0] >= _dispRegion[2] || _dispRegion[1] >= _dispRegion[3]){
+				_fp.repaint();
 				return;
 			}else{
 				_model.setDisplayRegion(_dispRegion[0], _dispRegion[1], _dispRegion[2], _dispRegion[3]);
@@ -66,25 +70,35 @@ public class ZoomBoxListener implements MouseListener, MouseMotionListener{
 
 	@Override
 	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
+		_fp.repaint();
+		return;		
 	}
 
 
 	@Override
 	public void mouseDragged(MouseEvent e) {
+		
 		int width = e.getX() - _dispRegion[0];
 		int height = e.getY() - _dispRegion[1];
-		_fp.getSize();
-		Graphics g = _fp.getGraphics();
+		
+		_fp.repaint(_dispRegion[0],_dispRegion[1], width, height);
+		Graphics2D g = (Graphics2D) _fp.getGraphics();
 		g.setColor(new Color(255,255,255,100));
-		g.drawRoundRect(_dispRegion[0],_dispRegion[1], width, height, 1, 1);
+		g.setStroke(new BasicStroke(5));
+		g.drawRect(_dispRegion[0],_dispRegion[1], width, height);
+		System.out.println("Painted on " + e.getX() + ", " + e.getY());
+		
+		return;
+		
+		
 		
 	}
 
 
 	@Override
 	public void mouseMoved(MouseEvent e) {
+		System.out.println("MouseMoved");
+		
 		
 	}
 
