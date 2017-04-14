@@ -43,6 +43,7 @@ public class UI implements Observer{
 		_model = m;
 		_model.addObserver(this);
 		initUI();
+		
 	}
 	
 	/**
@@ -56,6 +57,7 @@ public class UI implements Observer{
 		_menuBar = new JMenuBar();
 		
 		_fractalPanel = new FractalPanel();
+		_fractalPanel.setSize(511, 511);
 		_fractalPanel.setVisible(false);
 		
 		_generatePanel = new JPanel();
@@ -73,17 +75,14 @@ public class UI implements Observer{
 		
 		_window.setJMenuBar(_menuBar);
 		_window.add(_generatePanel);
-		_window.setSize(512, 512);
 		_window.setResizable(false);
 		ZoomBoxListener listener = new ZoomBoxListener(_model, this, _fractalPanel);
 		_fractalPanel.addMouseListener(listener);
 		_fractalPanel.addMouseMotionListener(listener);
 		
-		
-		
-		//updateFractal();
-		
+		_window.setSize(512, 563); // this was tough to figure out... Turns out the size of the menu bar is 51 pixels.
 		_window.setVisible(true);
+	
 	}
 
 	/**
@@ -319,8 +318,7 @@ public class UI implements Observer{
 		_currentMaxEscapeTime.setText("Current Maximum Escape Time: " + _model.getEscapeTime());
 		_fractalPanel.setIndexColorModel(_model.getColorModel());
 		_model.zoomFractal();
-		_fractalPanel.updateImage(_model.getEscapeTimeArray());
-		
+		_fractalPanel.updateImage(_model.getEscapeTimeArray());		
 	}
 	
 }

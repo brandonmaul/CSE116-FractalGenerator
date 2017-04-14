@@ -5,6 +5,7 @@ import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.util.concurrent.TimeUnit;
 
 import edu.buffalo.fractal.FractalPanel;
 import model.Model;
@@ -28,28 +29,31 @@ public class ZoomBoxListener implements MouseListener, MouseMotionListener{
 	public void mousePressed(MouseEvent e) {
 		_dispRegion[0] = e.getX();
 		_dispRegion[1] = e.getY();
-		System.out.println("MousePressed");
 		
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		_dispRegion[2] = e.getX();
-		_dispRegion[3] = e.getY();
-		System.out.println("MouseReleased");
-		
-		if(_dispRegion[0] == _dispRegion[2] && _dispRegion[1] == _dispRegion[3]){
+		try{
+			_dispRegion[2] = e.getX();
+			_dispRegion[3] = e.getY();
+			
+			if(_dispRegion[0] >= _dispRegion[2] || _dispRegion[1] >= _dispRegion[3]){
+				return;
+			}else{
+				_model.setDisplayRegion(_dispRegion[0], _dispRegion[1], _dispRegion[2], _dispRegion[3]);
+				_ui.updateFractalDetails();
+			}
+		}catch(ArrayIndexOutOfBoundsException except){
+			_fp.repaint();
 			return;
-		}else{
-			_model.setDisplayRegion(_dispRegion[0], _dispRegion[1], _dispRegion[2], _dispRegion[3]);
-			_ui.updateFractalDetails();
-		}	
+		}
 	}
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		System.out.println("MouseClicked");
-		
+		_fp.repaint();
+		return;
 	}
 
 
@@ -69,13 +73,12 @@ public class ZoomBoxListener implements MouseListener, MouseMotionListener{
 
 	@Override
 	public void mouseDragged(MouseEvent e) {
-		
 		int width = e.getX() - _dispRegion[0];
 		int height = e.getY() - _dispRegion[1];
+		_fp.getSize();
 		Graphics g = _fp.getGraphics();
-		g.setColor(new Color(0, 255, 0, 50));
-		g.drawRect(_dispRegion[0],_dispRegion[1], width, height);
-		System.out.println("MouseDragged");
+		g.setColor(new Color(255,255,255,100));
+		g.drawRoundRect(_dispRegion[0],_dispRegion[1], width, height, 1, 1);
 		
 	}
 

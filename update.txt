@@ -1,13 +1,13 @@
 Each team include a file named update.txt which tells the TAs how to update the escape time and verify invalid times are rejected/impossible. 
 
-Update the escape time : 
+Update the escape distance : 
 While the program is running 
 There is a tab called escape distance. Click it. 
 Then press Set Escape Distance 
 Enter a positive integer and then press ok. 
 
 
-Verify invalid times are rejected/impossible:
+Verify invalid distances are rejected/impossible:
 
 If a user enters a String an error message saying
  "That is not a valid input will appear."
@@ -18,4 +18,11 @@ If a user enters a String an error message saying
  If a user enters a decimal an error message saying:
  "That is not a valid input" will appear
  
+ 
+ PHASE 3 UPDATE:
+ 
+ For Phase 3 we added the ability to enter the max Escape Time in as well.
+ 
+ The menu bar contains a Max Escape Time submenu. Click on that to view the current Max Escape Time, or change it.
+ You may only enter values in from 1 - 255. Other entries will result in nothing happening and an error message.
  

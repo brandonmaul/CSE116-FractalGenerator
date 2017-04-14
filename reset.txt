@@ -1,0 +1,10 @@
+How to Zoom and Reset Zoom:
+
+The Zoom method can be used by just clicking (with either left or right mouse button) and dragging anywhere on the fractal. 
+Note that the zoom can only be used if dragged TOP LEFT TO BOTTOM RIGHT. 
+Trying to zoom in other direction will cancel the zoom operation!
+Also, you can single click with the opposite mouse button to cancel the zoom as well.
+
+To reset the zoom to view 100% of the fractal --
+	In the menu bar there is a "Zoom" menu with one button within it. This button is called "Reset Zoom"...
+	This will set the zoomed region back to the maximum size for the fractal.
