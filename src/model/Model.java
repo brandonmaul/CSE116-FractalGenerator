@@ -43,7 +43,6 @@ public class Model implements Observable {
 		_maxPasses = 255;
 		_regionStart = new int[]{0, 0}; 
 		_regionEnd = new int[]{511, 511};
-		
 	}
 	
 	/**
@@ -54,6 +53,7 @@ public class Model implements Observable {
 	
 	public Pixel[][] generateFractal(){
 		
+		setDisplayRegion(0,0,511,511);
 		if (_fractalType == 1){
 			_fractal = _fractalGenerator.genMandelbrot(_escapeDistance, _maxPasses);
 		}else if (_fractalType == 2){
@@ -123,31 +123,11 @@ public class Model implements Observable {
 		return _maxPasses;
 	}
 	
-	public boolean setDisplayRegion(int xRegionStart, int yRegionStart, int xRegionEnd, int yRegionEnd){
-		boolean retVal = false;
-		if(xRegionStart >= 0 && xRegionStart < 512){
-			if(yRegionStart >= 0 && yRegionStart < 512){
-				if(xRegionEnd >= 0 && xRegionEnd < 512){
-					if(yRegionEnd >= 0 && yRegionEnd < 512){
-						_regionStart[0] = xRegionStart;
-						_regionStart[1]= yRegionStart;
-						_regionEnd[0] = xRegionEnd;
-						_regionEnd[1] = yRegionEnd;
-						
-						retVal = true;
-					}
-				}
-			}
-		}
-		return retVal;
-		//im so sorry for this horrible method... Ill figure out a way to make it better... eventually...
-	}
-	
-	public double getDisplayRegionPercentage() {
-		int[] before = new int[]{1,1,512,512};
-		int[] after = new int[]{_regionStart[0] + 1,_regionStart[1] + 1,_regionEnd[0] + 1,_regionEnd[0] + 1};
-		
-		return "(" + _regionStart[0] + ", " + _regionStart[1] + ") and (" + _regionEnd[0] + ", " + _regionEnd[1] + ")";
+	public void setDisplayRegion(int xRegionStart, int yRegionStart, int xRegionEnd, int yRegionEnd){
+		_regionStart[0] = xRegionStart;
+		_regionStart[1]= yRegionStart;
+		_regionEnd[0] = xRegionEnd;
+		_regionEnd[1] = yRegionEnd;
 	}
 	
 	/**

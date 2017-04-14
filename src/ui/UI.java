@@ -75,11 +75,13 @@ public class UI implements Observer{
 		_window.add(_generatePanel);
 		_window.setSize(512, 512);
 		_window.setResizable(false);
-		_fractalPanel.addMouseListener(new ZoomBoxListener(_model, this));
+		ZoomBoxListener listener = new ZoomBoxListener(_model, this, _fractalPanel);
+		_fractalPanel.addMouseListener(listener);
+		_fractalPanel.addMouseMotionListener(listener);
 		
 		
 		
-		updateFractal();
+		//updateFractal();
 		
 		_window.setVisible(true);
 	}
@@ -218,13 +220,8 @@ public class UI implements Observer{
 		JMenu zoomMenu = new JMenu("Zoom");
 		
 		zoomMenu.addSeparator();
-		_currentZoomCoords = new JMenuItem();
-		_currentZoomCoords.setEnabled(false);
-		zoomMenu.add(_currentZoomCoords);
-		
-		zoomMenu.addSeparator();
 		JButton zoomResetButton = new JButton("Reset Zoom");
-		zoomResetButton.addActionListener(new resetZoomListener(_model, this));
+		zoomResetButton.addActionListener(new ResetZoomListener(_model, this));
 		zoomMenu.add(zoomResetButton);
 		
 		_menuBar.add(zoomMenu);
@@ -320,7 +317,6 @@ public class UI implements Observer{
 	public void updateFractalDetails() {
 		_currentEscapeDistance.setText("Current Escape Distance: " + _model.getEscapeDistance());
 		_currentMaxEscapeTime.setText("Current Maximum Escape Time: " + _model.getEscapeTime());
-		_currentZoomCoords.setText("Showing "+ _model.getDisplayRegionPercentage() + "% of the Fractal");
 		_fractalPanel.setIndexColorModel(_model.getColorModel());
 		_model.zoomFractal();
 		_fractalPanel.updateImage(_model.getEscapeTimeArray());

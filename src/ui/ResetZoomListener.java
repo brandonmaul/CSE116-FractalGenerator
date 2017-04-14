@@ -5,12 +5,12 @@ import java.awt.event.ActionListener;
 
 import model.Model;
 
-public class resetZoomListener implements ActionListener {
+public class ResetZoomListener implements ActionListener {
 	
 	private Model _model;
 	private UI _ui;
 	
-	public resetZoomListener(Model m, UI ui){
+	public ResetZoomListener(Model m, UI ui){
 		_model = m;
 		_ui = ui;
 	}

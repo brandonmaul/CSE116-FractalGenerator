@@ -168,8 +168,8 @@ public abstract class FractalAlgorithms {
 	 */
 	public void calcPixelCoordinates(Pixel p, double[] constants, int arrayLength){
 		double xC_0 = constants[0];
-		double xC_511 = constants[1];
-		double yC_0 = constants[2];
+		double yC_0 = constants[1];
+		double xC_511 = constants[2];
 		double yC_511 = constants[3];
 		
 		double deltaX = ((xC_511 - xC_0) / arrayLength); 

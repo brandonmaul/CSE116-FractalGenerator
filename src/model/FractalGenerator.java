@@ -65,7 +65,7 @@ public class FractalGenerator extends FractalAlgorithms {
 	 *         locally-stored escape time and X/Y Coordinates
 	 */
 	public Pixel[][] genMandelbrot(int maxDist, int maxPasses) {
-		double[] constants = new double[]{-2.15, .6, -1.3, 1.3};
+		double[] constants = new double[]{-2.15, -1.3, .6, 1.3};
 		
 		for(Pixel[] pixRow : _fractal){
 			for(Pixel p : pixRow){
@@ -85,7 +85,7 @@ public class FractalGenerator extends FractalAlgorithms {
 	 *         locally-stored escape time and X/Y Coordinates
 	 */
 	public Pixel[][] genJulia(int maxDist, int maxPasses) {
-		double[] constants = new double[]{-1.7, 1.7, -1.0, 1.0};
+		double[] constants = new double[]{-1.7, -1.0, 1.7, 1.0};
 		
 		for(Pixel[] pixRow : _fractal){
 			for(Pixel p : pixRow){
@@ -104,7 +104,7 @@ public class FractalGenerator extends FractalAlgorithms {
 	 *         locally-stored escape time and X/Y Coordinates
 	 */
 	public Pixel[][] genBurningShip(int maxDist, int maxPasses) {
-		double[] constants = new double[]{-1.8, -1.7, -.08, .025};
+		double[] constants = new double[]{-1.8, -.08, -1.7, .025};
 		
 		for(Pixel[] pixRow : _fractal){
 			for(Pixel p : pixRow){
@@ -123,7 +123,7 @@ public class FractalGenerator extends FractalAlgorithms {
 	 *         locally-stored escape time and X/Y Coordinates
 	 */
 	public Pixel[][] genMultibrot(int maxDist, int maxPasses) {
-		double[] constants = new double[]{-1, 1, -1.3, 1.3};
+		double[] constants = new double[]{-1, -1.3, 1, 1.3};
 		
 		for(Pixel[] pixRow : _fractal){
 			for(Pixel p : pixRow){
