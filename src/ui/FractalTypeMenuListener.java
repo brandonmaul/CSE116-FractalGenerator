@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class FractalTypeMenuListener implements ActionListener {
+	
 	Model _model;
 	UI _ui;
 	int _myFractalID;

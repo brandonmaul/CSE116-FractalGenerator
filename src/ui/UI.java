@@ -2,7 +2,8 @@ package ui;
 
 import model.*;
 import observer_pattern.*;
-import java.awt.CardLayout;
+
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -24,9 +25,7 @@ public class UI implements Observer{
 	
 	Model _model;
 	JFrame _window;
-	JPanel _generatePanel;
 	FractalPanel _fractalPanel;
-	JButton _generateButton;
 	JMenuItem _currentEscapeDistance;
 	JMenuItem _currentMaxEscapeTime;
 	JMenuItem _currentZoomCoords;
@@ -52,20 +51,14 @@ public class UI implements Observer{
 	public void initUI(){
 
 		_window = new JFrame("Fractal Generator");
+		_window.setSize(new Dimension(_model.getGridSize(), _model.getGridSize()));
 		_window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
 		_menuBar = new JMenuBar();
 		
 		_fractalPanel = new FractalPanel();
-		_fractalPanel.setSize(511, 511);
-		_fractalPanel.setVisible(false);
+		_fractalPanel.setSize(new Dimension(_model.getGridSize(), _model.getGridSize()));
+		_window.add(_fractalPanel);
 		
-		_generatePanel = new JPanel();
-		_generatePanel.setLayout(new CardLayout(150,200));
-		_generateButton = new JButton("Generate Fractal");
-		_generateButton.addActionListener(new GenerateButtonListener(this));
-		_generatePanel.add(_generateButton);
-
 		initFileMenu();
 		initFractalTypeMenu();
 		initEscapeDistanceMenu();
@@ -74,14 +67,18 @@ public class UI implements Observer{
 		initColorSchemeMenu();
 		
 		_window.setJMenuBar(_menuBar);
-		_window.add(_generatePanel);
-		_window.setResizable(false);
+		
+		updateFractal();
+		
 		ZoomBoxListener listener = new ZoomBoxListener(_model, this, _fractalPanel);
 		_fractalPanel.addMouseListener(listener);
 		_fractalPanel.addMouseMotionListener(listener);
 		
-		_window.setSize(512, 563); // this was tough to figure out... Turns out the size of the menu bar is 51 pixels.
+		_window.setResizable(false);
 		_window.setVisible(true);
+		_window.pack();
+		System.out.println("Fractal Panel Size: " + _fractalPanel.getSize());
+		System.out.println("Window Size: " + _window.getSize());
 	
 	}
 
@@ -278,29 +275,14 @@ public class UI implements Observer{
 	}
 	
 	/**
-	 * Displays the FractalPanel in the window, and removes the GeneratePanel with the generate button.
-	 */
-	public void displayFractal(){
-		_generatePanel.setVisible(false);
-		_window.remove(_generatePanel);
-		_window.add(_fractalPanel);
-		_fractalPanel.setVisible(true);
-	}
-	
-	/**
 	 * Removes the FractalPanel object from display JFrame. Then goes ahead and resets the options to their default values.
 	 */
 	public void clearFractal(){
-		_window.remove(_fractalPanel);
-		_fractalPanel.setVisible(false);
-		
 		_menuBar.getMenu(1).getItem(0).doClick();
 		_menuBar.getMenu(5).getItem(0).doClick();
 		_model.setEscapeDistance(2);
 		_model.setMaxEscapeTime(255);
-		_model.setDisplayRegion(0, 0, 511, 511);
-		_window.add(_generatePanel);
-		_generatePanel.setVisible(true);
+		_model.setDisplayRegion(0, 0, _model.getGridSize() - 1, _model.getGridSize() - 1);
 		
 		updateFractal();
 	}
@@ -314,11 +296,12 @@ public class UI implements Observer{
 	}
 	
 	public void updateFractalDetails() {
+		_model.zoomFractal();
 		_currentEscapeDistance.setText("Current Escape Distance: " + _model.getEscapeDistance());
 		_currentMaxEscapeTime.setText("Current Maximum Escape Time: " + _model.getEscapeTime());
 		_fractalPanel.setIndexColorModel(_model.getColorModel());
-		_model.zoomFractal();
-		_fractalPanel.updateImage(_model.getEscapeTimeArray());		
+		_fractalPanel.updateImage(_model.getEscapeTimeArray());
+		
 	}
 	
 }

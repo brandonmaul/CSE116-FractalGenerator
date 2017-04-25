@@ -14,8 +14,8 @@ import observer_pattern.*;
  */
 public class Model implements Observable {
 	
+	private int _gridSize;
 	private ArrayList<Observer> _observers;
-
 	private Pixel[][] _fractal;
 	private FractalGenerator _fractalGenerator;
 	private FractalZoomTool _fractalZoomTool;
@@ -27,10 +27,9 @@ public class Model implements Observable {
 	private IndexColorModel _colorModel; 
 	
 	public Model(){
-
 		_observers = new ArrayList<Observer>();
-		
-		_fractal = new Pixel[512][512];
+		_gridSize = 2048;
+		_fractal = new Pixel[_gridSize][_gridSize];
 		for (int xIndex = 0; xIndex < _fractal.length; xIndex++) {// Row
 			for (int yIndex = 0; yIndex < _fractal[0].length; yIndex++) {// Col
 				_fractal[xIndex][yIndex] =  new Pixel(xIndex, yIndex);
@@ -42,7 +41,7 @@ public class Model implements Observable {
 		_escapeDistance = 2;
 		_maxPasses = 255;
 		_regionStart = new int[]{0, 0}; 
-		_regionEnd = new int[]{511, 511};
+		_regionEnd = new int[]{_gridSize - 1, _gridSize - 1};
 	}
 	
 	/**
@@ -53,7 +52,6 @@ public class Model implements Observable {
 	
 	public Pixel[][] generateFractal(){
 		
-		setDisplayRegion(0,0,511,511);
 		if (_fractalType == 1){
 			_fractal = _fractalGenerator.genMandelbrot(_escapeDistance, _maxPasses);
 		}else if (_fractalType == 2){
@@ -78,7 +76,8 @@ public class Model implements Observable {
 			_fractalZoomTool.zoomMultibrot(_regionStart, _regionEnd, _escapeDistance, _maxPasses);
 		}
 		
-		setDisplayRegion(0, 0, 511, 511);
+		setDisplayRegion(0, 0, _gridSize - 1, _gridSize - 1);
+		
 		return _fractal;
 	}
 	
@@ -150,6 +149,10 @@ public class Model implements Observable {
 		}
 		
 		return escapeTimes;
+	}
+	
+	public int getGridSize(){
+		return _gridSize;
 	}
 	
 	//Observer Methods...

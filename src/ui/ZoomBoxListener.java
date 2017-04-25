@@ -2,13 +2,10 @@ package ui;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
-import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Stroke;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
-import java.util.concurrent.TimeUnit;
 
 import edu.buffalo.fractal.FractalPanel;
 import model.Model;
@@ -24,7 +21,7 @@ public class ZoomBoxListener implements MouseListener, MouseMotionListener{
 		_ui = ui;
 		_model = model;
 		_fp = fp;
-		_dispRegion = new int[]{0,0,511,511};
+		_dispRegion = new int[]{0, 0, _model.getGridSize() - 1, _model.getGridSize() - 1};
 	}
 
 
@@ -86,7 +83,6 @@ public class ZoomBoxListener implements MouseListener, MouseMotionListener{
 		g.setColor(new Color(255,255,255,100));
 		g.setStroke(new BasicStroke(5));
 		g.drawRect(_dispRegion[0],_dispRegion[1], width, height);
-		System.out.println("Painted on " + e.getX() + ", " + e.getY());
 		
 		return;
 		
@@ -97,8 +93,6 @@ public class ZoomBoxListener implements MouseListener, MouseMotionListener{
 
 	@Override
 	public void mouseMoved(MouseEvent e) {
-		System.out.println("MouseMoved");
-		
 		
 	}
 
