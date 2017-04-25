@@ -3,9 +3,7 @@ A fractal generator when calculates the escape times of 4 different fractals on 
 
 To use this program run the main method found in model.Driver.java.
 
-The program displays a menu bar with a selection of fractal types, as well as options that change the fractal. 
-
-Click on the 'Generate Fractal' button to view the panel that displays the fractal.
+The program displays a menu bar with a selection of fractal types, as well as options that change the fractal.
 
 Each change you make to the fractal will update in real-time.
 
