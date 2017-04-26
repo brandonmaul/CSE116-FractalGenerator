@@ -14,7 +14,7 @@ public class IndexTranslationToCoordTest {
 	@Test
 	public void xMBtest() {
 		
-		_model.setFractalType(1); // Set fractal to Mandelbrot
+		_model.setFractalType("Mandelbrot"); // Set fractal to Mandelbrot
 		Pixel[][] mandelbrot = _model.generateFractal(); // Generate Fractal
 		
 		// Index to xCord
@@ -37,6 +37,7 @@ public class IndexTranslationToCoordTest {
 	@Test
 	public void yMBtest() {
 		
+		_model.setFractalType("Mandelbrot"); // Set fractal to Mandelbrot
 		Pixel[][] mandelbrot = _model.generateFractal(); // Generate Fractal
 		
 		// yCord range is -1.3 to 1.3
@@ -60,7 +61,7 @@ public class IndexTranslationToCoordTest {
 
 	@Test
 	public void xJtest() {
-		_model.setFractalType(2); // Set fractal to Julia
+		_model.setFractalType("Julia"); // Set fractal to Julia
 		Pixel[][] julia = _model.generateFractal(); // Generate Fractal
 
 		// Get coordinates of the Pixel at (0,0)
@@ -82,7 +83,7 @@ public class IndexTranslationToCoordTest {
 	@Test
 	public void yJtest() {
 		
-		_model.setFractalType(2); // Set fractal to Julia
+		_model.setFractalType("Julia"); // Set fractal to Julia
 		Pixel[][] julia = _model.generateFractal(); // Generate Fractal
 		
 		// Index to xCord
@@ -106,7 +107,7 @@ public class IndexTranslationToCoordTest {
 
 	@Test
 	public void xBurntest() {
-		_model.setFractalType(3); // Set fractal to Burning Ship
+		_model.setFractalType("Burning Ship"); // Set fractal to Burning Ship
 		Pixel[][] burningship = _model.generateFractal(); // Generate Fractal
 
 		// Get coordinates of the Pixel at (0,0)
@@ -124,7 +125,7 @@ public class IndexTranslationToCoordTest {
 
 	@Test
 	public void yBurntest() {
-	_model.setFractalType(3); // Set fractal to Burning Ship
+	_model.setFractalType("Burning Ship"); // Set fractal to Burning Ship
 	Pixel[][] burningship = _model.generateFractal(); // Generate Fractal
 
 	// Get coordinates of the Pixel at (0,0)
@@ -142,7 +143,7 @@ public class IndexTranslationToCoordTest {
 
 	@Test
 	public void xMultitest() {
-		_model.setFractalType(4); // Set fractal to Multibrot
+		_model.setFractalType("Multibrot"); // Set fractal to Multibrot
 		Pixel[][] multibrot = _model.generateFractal(); // Generate Fractal
 
 		// Get coordinates of the Pixel at (0,0)
@@ -160,7 +161,7 @@ public class IndexTranslationToCoordTest {
 
 	@Test
 	public void yMultiest() {
-		_model.setFractalType(4); // Set fractal to Multibrot
+		_model.setFractalType("Multibrot"); // Set fractal to Multibrot
 		Pixel[][] multibrot = _model.generateFractal(); // Generate Fractal
 
 		// Get coordinates of the Pixel at (0,0)

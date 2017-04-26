@@ -19,8 +19,8 @@ public class Model implements Observable {
 	private Pixel[][] _fractal;
 	private FractalGenerator _fractalGenerator;
 	private FractalZoomTool _fractalZoomTool;
-	private int _escapeDistance; //1 = Mandelbrot; 2 = Julia; 3 = Burning Ship; 4 = Multibrot;
-	private int _fractalType;
+	private String _fractalType;
+	private int _escapeDistance;
 	private int _maxPasses;
 	private int _regionStart[];
 	private int _regionEnd[];
@@ -28,7 +28,7 @@ public class Model implements Observable {
 	
 	public Model(){
 		_observers = new ArrayList<Observer>();
-		_gridSize = 2048;
+		_gridSize = 512;
 		_fractal = new Pixel[_gridSize][_gridSize];
 		for (int xIndex = 0; xIndex < _fractal.length; xIndex++) {// Row
 			for (int yIndex = 0; yIndex < _fractal[0].length; yIndex++) {// Col
@@ -37,7 +37,7 @@ public class Model implements Observable {
 		}
 		_fractalGenerator = new FractalGenerator(_fractal);
 		_fractalZoomTool = new FractalZoomTool(_fractal);
-		_fractalType = 1;
+		_fractalType = "Mandelbrot";
 		_escapeDistance = 2;
 		_maxPasses = 255;
 		_regionStart = new int[]{0, 0}; 
@@ -51,29 +51,43 @@ public class Model implements Observable {
 	 */
 	
 	public Pixel[][] generateFractal(){
-		
-		if (_fractalType == 1){
-			_fractal = _fractalGenerator.genMandelbrot(_escapeDistance, _maxPasses);
-		}else if (_fractalType == 2){
-			_fractal = _fractalGenerator.genJulia(_escapeDistance, _maxPasses);
-		}else if (_fractalType == 3){
-			_fractal = _fractalGenerator.genBurningShip(_escapeDistance, _maxPasses);
-		}else if (_fractalType == 4){
-			_fractal = _fractalGenerator.genMultibrot(_escapeDistance, _maxPasses);
+		switch (_fractalType){
+			case "Mandelbrot":
+					_fractal = _fractalGenerator.genMandelbrot(_escapeDistance, _maxPasses);
+					break;
+					
+			case "Julia": 
+					_fractal = _fractalGenerator.genJulia(_escapeDistance, _maxPasses);
+					break;
+					
+			case "Burning Ship": 
+					_fractal = _fractalGenerator.genBurningShip(_escapeDistance, _maxPasses);
+					break;
+					
+			case "Multibrot": 
+					_fractal = _fractalGenerator.genMultibrot(_escapeDistance, _maxPasses); 
+					break;
 		}
 		return _fractal;
 	}
 	
 	public Pixel[][] zoomFractal(){
-		
-		if (_fractalType == 1){
-			_fractalZoomTool.zoomMandelbrot(_regionStart, _regionEnd, _escapeDistance, _maxPasses);
-		}else if (_fractalType == 2){
-			_fractalZoomTool.zoomJulia(_regionStart, _regionEnd, _escapeDistance, _maxPasses);
-		}else if (_fractalType == 3){
-			_fractalZoomTool.zoomBurningShip(_regionStart, _regionEnd, _escapeDistance, _maxPasses);
-		}else if (_fractalType == 4){
-			_fractalZoomTool.zoomMultibrot(_regionStart, _regionEnd, _escapeDistance, _maxPasses);
+		switch (_fractalType){
+			case "Mandelbrot": 
+					_fractalZoomTool.zoomMandelbrot(_regionStart, _regionEnd, _escapeDistance, _maxPasses);
+					break;
+					
+			case "Julia":
+					_fractalZoomTool.zoomJulia(_regionStart, _regionEnd, _escapeDistance, _maxPasses);
+					break;
+					
+			case "Burning Ship": 
+					_fractalZoomTool.zoomBurningShip(_regionStart, _regionEnd, _escapeDistance, _maxPasses);
+					break;
+					
+			case "Multibrot": 
+					_fractalZoomTool.zoomMultibrot(_regionStart, _regionEnd, _escapeDistance, _maxPasses); 
+					break;
 		}
 		
 		setDisplayRegion(0, 0, _gridSize - 1, _gridSize - 1);
@@ -85,10 +99,10 @@ public class Model implements Observable {
 	 * Getter and Setter methods for each of the private instance variables.
 	 */
 	
-	public void setFractalType(int i) {
-		_fractalType = i;
+	public void setFractalType(String s) {
+		_fractalType = s;
 	}
-	public int getFractalType() {
+	public String getFractalType() {
 		return _fractalType;
 	}
 	

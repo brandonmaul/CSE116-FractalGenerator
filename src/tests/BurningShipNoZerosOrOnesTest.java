@@ -36,7 +36,7 @@ public class BurningShipNoZerosOrOnesTest {
 	@Test
 	public void BurnEscTimeTest() {
 		Model m = new Model();
-		m.setFractalType(3); //Set the fractal to the burning ship
+		m.setFractalType("Burning Ship"); //Set the fractal to the burning ship
 		Pixel[][] fractal = m.generateFractal();
 
 		assertTrue(boolContainsNoZerosOrOnes(fractal));

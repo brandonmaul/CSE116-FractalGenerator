@@ -16,7 +16,7 @@ public class ReturnedFractalHasProperSizeTest {
 
 	@Test
 	public void MBSizeTest() {
-		_model.setFractalType(1); // Set fractal to Mandelbrot
+		_model.setFractalType("Mandelbrot"); // Set fractal to Mandelbrot
 		_model.generateFractal();
 		int[][] a = _model.getEscapeTimeArray();
 		// length of a column
@@ -27,7 +27,7 @@ public class ReturnedFractalHasProperSizeTest {
 
 	@Test
 	public void JSizeTest() {
-		_model.setFractalType(3); // Set fractal to Julia
+		_model.setFractalType("Julia"); // Set fractal to Julia
 		_model.generateFractal();
 		int[][] a = _model.getEscapeTimeArray();
 		// length of a column
@@ -38,7 +38,7 @@ public class ReturnedFractalHasProperSizeTest {
 
 	@Test
 	public void BurnSizeTest() {
-		_model.setFractalType(3); // Set fractal to BurningShip
+		_model.setFractalType("Burning Ship"); // Set fractal to BurningShip
 		_model.generateFractal();
 		int[][] a = _model.getEscapeTimeArray();
 		// length of a column
@@ -49,7 +49,7 @@ public class ReturnedFractalHasProperSizeTest {
 
 	@Test
 	public void MultiSizeTest() {
-		_model.setFractalType(4); // Set fractal to Multibrot
+		_model.setFractalType("Multibrot"); // Set fractal to Multibrot
 		_model.generateFractal();
 		int[][] a = _model.getEscapeTimeArray();
 		// length of a column

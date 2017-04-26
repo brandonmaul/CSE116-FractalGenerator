@@ -122,10 +122,10 @@ public class UI implements Observer{
 		group.add(fractal4);
 		
 		
-		fractal1.addActionListener(new FractalTypeMenuListener(_model, this, 1));
-		fractal2.addActionListener(new FractalTypeMenuListener(_model, this, 2));
-		fractal3.addActionListener(new FractalTypeMenuListener(_model, this, 3));
-		fractal4.addActionListener(new FractalTypeMenuListener(_model, this, 4));
+		fractal1.addActionListener(new FractalTypeMenuListener(_model, this));
+		fractal2.addActionListener(new FractalTypeMenuListener(_model, this));
+		fractal3.addActionListener(new FractalTypeMenuListener(_model, this));
+		fractal4.addActionListener(new FractalTypeMenuListener(_model, this));
 		
 		fractalTypeMenu.add(fractal1);
 		fractalTypeMenu.add(fractal2);
