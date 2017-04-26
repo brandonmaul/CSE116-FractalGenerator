@@ -77,8 +77,6 @@ public class UI implements Observer{
 		_window.setResizable(false);
 		_window.setVisible(true);
 		_window.pack();
-		System.out.println("Fractal Panel Size: " + _fractalPanel.getSize());
-		System.out.println("Window Size: " + _window.getSize());
 	
 	}
 
