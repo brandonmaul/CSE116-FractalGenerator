@@ -28,7 +28,7 @@ public class Model implements Observable {
 	
 	public Model(){
 		_observers = new ArrayList<Observer>();
-		_gridSize = 512;
+		_gridSize = 2048;
 		_fractal = new Pixel[_gridSize][_gridSize];
 		for (int xIndex = 0; xIndex < _fractal.length; xIndex++) {// Row
 			for (int yIndex = 0; yIndex < _fractal[0].length; yIndex++) {// Col

@@ -78,10 +78,10 @@ public class ZoomBoxListener implements MouseListener, MouseMotionListener{
 		int width = e.getX() - _dispRegion[0];
 		int height = e.getY() - _dispRegion[1];
 		
-		_fp.repaint(_dispRegion[0],_dispRegion[1], width, height);
 		Graphics2D g = (Graphics2D) _fp.getGraphics();
-		g.setColor(new Color(255,255,255,100));
-		g.setStroke(new BasicStroke(5));
+		_fp.paint(g);
+		g.setColor(new Color(255,255,255,255));
+		g.setStroke(new BasicStroke(3));
 		g.drawRect(_dispRegion[0],_dispRegion[1], width, height);
 		
 		return;
