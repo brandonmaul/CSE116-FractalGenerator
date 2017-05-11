@@ -15,7 +15,7 @@ import observer_pattern.*;
 public class Model implements Observable {
 	
 	private int _gridSize;
-	private int _threadCount;
+	private int _workerCount;
 	private ArrayList<Observer> _observers;
 	private Pixel[][] _fractal;
 	private FractalGenerator _fractalGenerator;
@@ -27,16 +27,22 @@ public class Model implements Observable {
 	private int _regionEnd[];
 	private IndexColorModel _colorModel; 
 	
+	private MultiThreadingTool[] _workerArray;
+	
 	public Model(){
 		_observers = new ArrayList<Observer>();
-		_gridSize = 720;
-		_threadCount = 1;
+		
+		_gridSize = 2048;
+		_workerCount = 1;
+		
 		_fractal = new Pixel[_gridSize][_gridSize];
+		
 		for (int xIndex = 0; xIndex < _fractal.length; xIndex++) {// Row
 			for (int yIndex = 0; yIndex < _fractal[0].length; yIndex++) {// Col
 				_fractal[xIndex][yIndex] =  new Pixel(xIndex, yIndex);
 			}
 		}
+		
 		_fractalGenerator = new FractalGenerator(_fractal);
 		_fractalZoomTool = new FractalZoomTool(_fractal);
 		_fractalType = "Mandelbrot";
@@ -54,6 +60,7 @@ public class Model implements Observable {
 	
 	public int[][] generateFractal(){
 		_fractal = _fractalGenerator.generateFractal(_fractalType, _escapeDistance, _escapeDistance);
+		zoomFractal();
 		return getEscapeTimeArray();
 	}
 	
@@ -159,12 +166,26 @@ public class Model implements Observable {
 		return _gridSize;
 	}
 	
-	public void setWorkerCount(int i){
-		_threadCount = i;
+	public void setWorkerCount(int input){
+		_workerCount = input;
 	}
 	
-	public int getThreadCount(){
-		return _threadCount;
+	public int getWorkerCount(){
+		return _workerCount;
+	}
+	
+	public MultiThreadingTool[] getWorkers(){
+		return _workerArray;
+	}
+	
+	public MultiThreadingTool[] generateWorkerArray(){
+		_workerArray = new MultiThreadingTool[_workerCount];
+		
+		for(int i=0; i < _workerCount; i++){
+			_workerArray[i] = new MultiThreadingTool(this);
+		}
+		
+		return _workerArray;
 	}
 	
 	//Observer Methods...

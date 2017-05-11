@@ -36,6 +36,7 @@ public class UI implements Observer{
 	
 	MouseEvent _zoomBox;
 	
+	SwingWorker<WorkerResult, Void>[] _workerArray;
 	ComputePool _computePool;
 	
 	/**
@@ -45,8 +46,8 @@ public class UI implements Observer{
 	 */
 	public UI(Model m){
 		_model = m;
+		_workerArray = _model.getWorkers();
 		_computePool = new ComputePool();
-		
 		_model.addObserver(this);
 		initUI();
 		
@@ -63,6 +64,8 @@ public class UI implements Observer{
 		_menuBar = new JMenuBar();
 		
 		_fractalPanel = new FractalPanel();
+		_computePool.changePanel(_fractalPanel); //fractalPanel and computePool have relationship now. <3
+		
 		_fractalPanel.setSize(new Dimension(_model.getGridSize(), _model.getGridSize()));
 		_window.add(_fractalPanel);
 		
@@ -126,6 +129,7 @@ public class UI implements Observer{
 		windowMenu.addSeparator();
 		JButton windowSizeSetter = new JButton("Set Window Size");
 		windowSizeSetter.addActionListener(new SetWindowSizeListener(this));
+		windowSizeSetter.setEnabled(false); //TURNED THIS OFF BECAUSE I DONT WANT TO IMPLEMENT IT YET
 		windowMenu.add(windowSizeSetter);
 		
 		_menuBar.add(windowMenu);
@@ -382,21 +386,15 @@ public class UI implements Observer{
 	 * Updates the display and Escape Distance displayed in the UI. Called whenever a change to the Model is made.
 	 */
 	public void updateFractal() {
-		_model.generateFractal();
-		updateFractalDetails();
-	}
-	
-	public void updateFractalDetails() {
-		_model.zoomFractal();
 		_currentWindowSize.setText("Current Window Size: " + _model.getGridSize() + " x " + _model.getGridSize());
-		_currentThreadCount.setText("Current Number of Workers: " + _model.getThreadCount());
+		_currentThreadCount.setText("Current Number of Workers: " + _model.getWorkerCount());
 		_currentEscapeDistance.setText("Current Escape Distance: " + _model.getEscapeDistance());
 		_currentMaxEscapeTime.setText("Current Maximum Escape Time: " + _model.getEscapeTime());
 		_fractalPanel.setIndexColorModel(_model.getColorModel());
-		_fractalPanel.updateImage(_model.getEscapeTimeArray());
-//		_computePool.changePanel(_fractalPanel);
-//		_computePool.ge
-//		_computePool.generateFractal(_model.getGridSize() / _model.getThreadCount(), );
-		
+		_computePool.generateFractal(_model.getGridSize(), _model.generateWorkerArray());
+	}
+	
+	public void updateFractalDetails() { 
+		updateFractal();
 	}
 }
