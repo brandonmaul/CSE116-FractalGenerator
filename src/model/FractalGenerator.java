@@ -1,10 +1,6 @@
 package model;
 
-import javax.swing.SwingWorker;
-
-import edu.buffalo.fractal.WorkerResult;
-
-public class FractalGenerator extends SwingWorker<WorkerResult, Void> {
+public class FractalGenerator {
 
 	private Pixel[][] _fractal;
 
@@ -158,14 +154,5 @@ public class FractalGenerator extends SwingWorker<WorkerResult, Void> {
 		
 		}
 		return _fractal;
-	}
-
-	
-	// SWINGWORKER METHODS
-	
-	@Override
-	protected WorkerResult doInBackground() throws Exception {
-		// TODO Auto-generated method stub
-		return null;
 	}
 }

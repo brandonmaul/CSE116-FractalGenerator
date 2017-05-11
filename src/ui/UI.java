@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 
 import javax.swing.*;
+
 import edu.buffalo.fractal.*;
 
 /**
@@ -26,12 +27,16 @@ public class UI implements Observer{
 	Model _model;
 	JFrame _window;
 	FractalPanel _fractalPanel;
+	JMenuItem _currentWindowSize;
+	JMenuItem _currentThreadCount;
 	JMenuItem _currentEscapeDistance;
 	JMenuItem _currentMaxEscapeTime;
 	JMenuItem _currentZoomCoords;
 	JMenuBar _menuBar;
 	
 	MouseEvent _zoomBox;
+	
+	ComputePool _computePool;
 	
 	/**
 	 * 
@@ -40,6 +45,8 @@ public class UI implements Observer{
 	 */
 	public UI(Model m){
 		_model = m;
+		_computePool = new ComputePool();
+		
 		_model.addObserver(this);
 		initUI();
 		
@@ -61,6 +68,7 @@ public class UI implements Observer{
 		
 		initFileMenu();
 		initWindowMenu();
+		initWorkerMenu();
 		initFractalTypeMenu();
 		initEscapeDistanceMenu();
 		initMaxEscapeTimeMenu();
@@ -111,14 +119,33 @@ public class UI implements Observer{
 		JMenu windowMenu = new JMenu("Window");
 		
 		windowMenu.addSeparator();
-		JMenuItem _currentWindowSize = new JMenuItem();
+		_currentWindowSize = new JMenuItem();
 		_currentWindowSize.setEnabled(false);
 		windowMenu.add(_currentWindowSize);
 		
 		windowMenu.addSeparator();
 		JButton windowSizeSetter = new JButton("Set Window Size");
-		windowSizeSetter.addActionListener(new SetWindowSizeListener(_model, this));
+		windowSizeSetter.addActionListener(new SetWindowSizeListener(this));
 		windowMenu.add(windowSizeSetter);
+		
+		_menuBar.add(windowMenu);
+	}
+	
+	/**
+	 * Sub-initialization method for the 'Window' menu in the menu bar. 
+	 */
+	public void initWorkerMenu(){
+		JMenu windowMenu = new JMenu("Workers");
+		
+		windowMenu.addSeparator();
+		_currentThreadCount = new JMenuItem();
+		_currentThreadCount.setEnabled(false);
+		windowMenu.add(_currentThreadCount);
+		
+		windowMenu.addSeparator();
+		JButton threadCountSetter = new JButton("Set Worker Count");
+		threadCountSetter.addActionListener(new SetWorkerCountListener(_model, this));
+		windowMenu.add(threadCountSetter);
 		
 		_menuBar.add(windowMenu);
 	}
@@ -274,7 +301,7 @@ public class UI implements Observer{
 			try {
 				inputNum = Integer.parseInt(input);
 				if(inputNum > 0){
-					//_model.setWindowSize(inputNum);
+					_model.setGridSize(inputNum);
 					updateFractalDetails();
 				}else if(inputNum < 0){
 					JOptionPane.showMessageDialog(_window, "Please Enter a POSITIVE Integer... ");
@@ -313,11 +340,37 @@ public class UI implements Observer{
 	}
 	
 	/**
+	 * Method that displays the prompt for entering the amount of threads to calculate the fractal with
+	 * then checks to see if it was a valid input.
+	 * 
+	 * If input is valid, calls _model.setThreadCount() to update the model.
+	 */
+	public void workerCountPrompt() {
+		int inputNum = 0;
+		String input = JOptionPane.showInputDialog(_window,"Enter a number between 1 and 128: ");
+		if(input != null){
+			try {
+				inputNum = Integer.parseInt(input);
+				if(inputNum >= 1 && inputNum <= 128){
+					_model.setWorkerCount(inputNum);
+					updateFractalDetails();
+				}else{
+					JOptionPane.showMessageDialog(_window, "Input must be between 1 and 128.");
+					workerCountPrompt();
+				}
+			} catch (NumberFormatException e) {
+				JOptionPane.showMessageDialog(_window, "That was not a valid input.");
+				workerCountPrompt();
+			}
+		}
+	}
+	
+	/**
 	 * Removes the FractalPanel object from display JFrame. Then goes ahead and resets the options to their default values.
 	 */
 	public void clearFractal(){
-		_menuBar.getMenu(1).getItem(0).doClick();
-		_menuBar.getMenu(5).getItem(0).doClick();
+		_menuBar.getMenu(3).getItem(0).doClick();
+		_menuBar.getMenu(7).getItem(0).doClick();
 		_model.setEscapeDistance(2);
 		_model.setMaxEscapeTime(255);
 		_model.setDisplayRegion(0, 0, _model.getGridSize() - 1, _model.getGridSize() - 1);
@@ -335,10 +388,15 @@ public class UI implements Observer{
 	
 	public void updateFractalDetails() {
 		_model.zoomFractal();
+		_currentWindowSize.setText("Current Window Size: " + _model.getGridSize() + " x " + _model.getGridSize());
+		_currentThreadCount.setText("Current Number of Workers: " + _model.getThreadCount());
 		_currentEscapeDistance.setText("Current Escape Distance: " + _model.getEscapeDistance());
 		_currentMaxEscapeTime.setText("Current Maximum Escape Time: " + _model.getEscapeTime());
 		_fractalPanel.setIndexColorModel(_model.getColorModel());
 		_fractalPanel.updateImage(_model.getEscapeTimeArray());
+//		_computePool.changePanel(_fractalPanel);
+//		_computePool.ge
+//		_computePool.generateFractal(_model.getGridSize() / _model.getThreadCount(), );
 		
 	}
 }

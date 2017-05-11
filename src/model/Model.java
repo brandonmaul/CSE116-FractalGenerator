@@ -15,6 +15,7 @@ import observer_pattern.*;
 public class Model implements Observable {
 	
 	private int _gridSize;
+	private int _threadCount;
 	private ArrayList<Observer> _observers;
 	private Pixel[][] _fractal;
 	private FractalGenerator _fractalGenerator;
@@ -28,7 +29,8 @@ public class Model implements Observable {
 	
 	public Model(){
 		_observers = new ArrayList<Observer>();
-		_gridSize = 2048;
+		_gridSize = 720;
+		_threadCount = 1;
 		_fractal = new Pixel[_gridSize][_gridSize];
 		for (int xIndex = 0; xIndex < _fractal.length; xIndex++) {// Row
 			for (int yIndex = 0; yIndex < _fractal[0].length; yIndex++) {// Col
@@ -50,8 +52,9 @@ public class Model implements Observable {
 	 * @return Numerical 2d array of integers that represent the escape time of each point on the fractal.
 	 */
 	
-	public Pixel[][] generateFractal(){
-		return _fractal = _fractalGenerator.generateFractal(_fractalType, _escapeDistance, _escapeDistance);
+	public int[][] generateFractal(){
+		_fractal = _fractalGenerator.generateFractal(_fractalType, _escapeDistance, _escapeDistance);
+		return getEscapeTimeArray();
 	}
 	
 	public Pixel[][] zoomFractal(){
@@ -148,8 +151,20 @@ public class Model implements Observable {
 		return escapeTimes;
 	}
 	
+	public void setGridSize(int i){
+		_gridSize = i;
+	}
+	
 	public int getGridSize(){
 		return _gridSize;
+	}
+	
+	public void setWorkerCount(int i){
+		_threadCount = i;
+	}
+	
+	public int getThreadCount(){
+		return _threadCount;
 	}
 	
 	//Observer Methods...
