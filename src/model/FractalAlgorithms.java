@@ -28,7 +28,7 @@ public abstract class FractalAlgorithms {
 	 * @param maxPasses
 	 * 			  - The maximum escape time allowed for each pixel on the fractal.
 	 */
-	public void calcMandelbrotEscapeTime(Pixel p, int maxDist, int maxPasses) {
+	protected static void calcMandelbrotEscapeTime(Pixel p, int maxDist, int maxPasses) {
 		
 		double[] coords = p.getCoords();
 		double xCoord = coords[0];
@@ -62,7 +62,7 @@ public abstract class FractalAlgorithms {
 	 * @param maxPasses
 	 * 			  - The maximum escape time allowed for each pixel on the fractal.
 	 */
-	public void calcJuliaEscapeTime(Pixel p, int maxDist, int maxPasses) {
+	protected static void calcJuliaEscapeTime(Pixel p, int maxDist, int maxPasses) {
 		
 		double[] coords = p.getCoords();
 		double xCoord = coords[0];
@@ -96,7 +96,7 @@ public abstract class FractalAlgorithms {
 	 * @param maxPasses
 	 * 			  - The maximum escape time allowed for each pixel on the fractal.
 	 */
-	public void calcBurningShipEscapeTime(Pixel p, int maxDist, int maxPasses) {
+	protected static void calcBurningShipEscapeTime(Pixel p, int maxDist, int maxPasses) {
 		
 		double[] coords = p.getCoords();
 		double xCoord = coords[0];
@@ -130,7 +130,7 @@ public abstract class FractalAlgorithms {
 	 * @param maxPasses
 	 * 			  - The maximum escape time allowed for each pixel on the fractal.
 	 */
-	public void calcMultibrotEscapeTime(Pixel p, int maxDist, int maxPasses) {
+	protected static void calcMultibrotEscapeTime(Pixel p, int maxDist, int maxPasses) {
 		
 		double[] coords = p.getCoords();
 		double xCoord = coords[0];
@@ -166,7 +166,7 @@ public abstract class FractalAlgorithms {
 	 * @param arrayLength
 	 * 			  - The length of the whole array, so that the pixels index can have some context.
 	 */
-	public void calcPixelCoordinates(Pixel p, double[] constants, int arrayLength){
+	protected static void calcPixelCoordinates(Pixel p, double[] constants, int arrayLength){
 		double xC_0 = constants[0];
 		double yC_0 = constants[1];
 		double xC_511 = constants[2];
@@ -193,7 +193,7 @@ public abstract class FractalAlgorithms {
 	 *            - Y coordinate of a point
 	 * @return The distance from 0,0 to the point input.
 	 */
-	public double distanceCalculator(double xCoord, double yCoord) {
+	protected static double distanceCalculator(double xCoord, double yCoord) {
 		double dist = Math.sqrt(((xCoord) * (xCoord)) + ((yCoord) * (yCoord)));
 		return dist;
 	}

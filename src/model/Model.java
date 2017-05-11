@@ -51,24 +51,7 @@ public class Model implements Observable {
 	 */
 	
 	public Pixel[][] generateFractal(){
-		switch (_fractalType){
-			case "Mandelbrot":
-					_fractal = _fractalGenerator.genMandelbrot(_escapeDistance, _maxPasses);
-					break;
-					
-			case "Julia": 
-					_fractal = _fractalGenerator.genJulia(_escapeDistance, _maxPasses);
-					break;
-					
-			case "Burning Ship": 
-					_fractal = _fractalGenerator.genBurningShip(_escapeDistance, _maxPasses);
-					break;
-					
-			case "Multibrot": 
-					_fractal = _fractalGenerator.genMultibrot(_escapeDistance, _maxPasses); 
-					break;
-		}
-		return _fractal;
+		return _fractal = _fractalGenerator.generateFractal(_fractalType, _escapeDistance, _escapeDistance);
 	}
 	
 	public Pixel[][] zoomFractal(){

@@ -1,6 +1,10 @@
 package model;
 
-public class FractalGenerator extends FractalAlgorithms {
+import javax.swing.SwingWorker;
+
+import edu.buffalo.fractal.WorkerResult;
+
+public class FractalGenerator extends SwingWorker<WorkerResult, Void> {
 
 	private Pixel[][] _fractal;
 
@@ -57,6 +61,27 @@ public class FractalGenerator extends FractalAlgorithms {
 	 *         before a fractal generation method, you're gonna have a bad time.
 	 * 
 	 */
+	public Pixel[][] generateFractal(String fractalType, int escapeDistance, int maxPasses){ 
+		Pixel[][] retVal = null;
+		switch (fractalType){
+			case "Mandelbrot":
+					retVal = genMandelbrot(escapeDistance, maxPasses);
+					break;
+					
+			case "Julia": 
+					retVal = genJulia(escapeDistance, maxPasses);
+					break;
+					
+			case "Burning Ship": 
+					retVal = genBurningShip(escapeDistance, maxPasses);
+					break;
+					
+			case "Multibrot": 
+					retVal = genMultibrot(escapeDistance, maxPasses); 
+					break;
+		}
+		return retVal;
+	}
 
 	/**
 	 * Mandelbrot Fractal Generator -
@@ -69,8 +94,8 @@ public class FractalGenerator extends FractalAlgorithms {
 		
 		for(Pixel[] pixRow : _fractal){
 			for(Pixel p : pixRow){
-				calcPixelCoordinates(p, constants, _fractal.length);
-				calcMandelbrotEscapeTime(p, maxDist, maxPasses);
+				model.FractalAlgorithms.calcPixelCoordinates(p, constants, _fractal.length);
+				model.FractalAlgorithms.calcMandelbrotEscapeTime(p, maxDist, maxPasses);
 			}
 		
 		}
@@ -89,8 +114,8 @@ public class FractalGenerator extends FractalAlgorithms {
 		
 		for(Pixel[] pixRow : _fractal){
 			for(Pixel p : pixRow){
-				calcPixelCoordinates(p, constants, _fractal.length);
-				calcJuliaEscapeTime(p, maxDist, maxPasses);
+				model.FractalAlgorithms.calcPixelCoordinates(p, constants, _fractal.length);
+				model.FractalAlgorithms.calcJuliaEscapeTime(p, maxDist, maxPasses);
 			}
 		
 		}
@@ -108,8 +133,8 @@ public class FractalGenerator extends FractalAlgorithms {
 		
 		for(Pixel[] pixRow : _fractal){
 			for(Pixel p : pixRow){
-				calcPixelCoordinates(p, constants, _fractal.length);
-				calcBurningShipEscapeTime(p, maxDist, maxPasses);
+				model.FractalAlgorithms.calcPixelCoordinates(p, constants, _fractal.length);
+				model.FractalAlgorithms.calcBurningShipEscapeTime(p, maxDist, maxPasses);
 			}
 		
 		}
@@ -127,11 +152,20 @@ public class FractalGenerator extends FractalAlgorithms {
 		
 		for(Pixel[] pixRow : _fractal){
 			for(Pixel p : pixRow){
-				calcPixelCoordinates(p, constants, _fractal.length);
-				calcMultibrotEscapeTime(p, maxDist, maxPasses);
+				model.FractalAlgorithms.calcPixelCoordinates(p, constants, _fractal.length);
+				model.FractalAlgorithms.calcMultibrotEscapeTime(p, maxDist, maxPasses);
 			}
 		
 		}
 		return _fractal;
+	}
+
+	
+	// SWINGWORKER METHODS
+	
+	@Override
+	protected WorkerResult doInBackground() throws Exception {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

@@ -9,7 +9,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 
 import javax.swing.*;
-import edu.buffalo.fractal.FractalPanel;
+import edu.buffalo.fractal.*;
 
 /**
  * 
@@ -60,6 +60,7 @@ public class UI implements Observer{
 		_window.add(_fractalPanel);
 		
 		initFileMenu();
+		initWindowMenu();
 		initFractalTypeMenu();
 		initEscapeDistanceMenu();
 		initMaxEscapeTimeMenu();
@@ -101,6 +102,25 @@ public class UI implements Observer{
 		fileMenu.add(exit);
 		
 		_menuBar.add(fileMenu);
+	}
+	
+	/**
+	 * Sub-initialization method for the 'Window' menu in the menu bar. 
+	 */
+	public void initWindowMenu(){
+		JMenu windowMenu = new JMenu("Window");
+		
+		windowMenu.addSeparator();
+		JMenuItem _currentWindowSize = new JMenuItem();
+		_currentWindowSize.setEnabled(false);
+		windowMenu.add(_currentWindowSize);
+		
+		windowMenu.addSeparator();
+		JButton windowSizeSetter = new JButton("Set Window Size");
+		windowSizeSetter.addActionListener(new SetWindowSizeListener(_model, this));
+		windowMenu.add(windowSizeSetter);
+		
+		_menuBar.add(windowMenu);
 	}
 	
 	/**
@@ -247,6 +267,26 @@ public class UI implements Observer{
 		}
 	}
 	
+	public void setWindowSizePrompt() {
+		int inputNum = 0;
+		String input = JOptionPane.showInputDialog(_window,"Enter a Positive Integer: ");
+		if(input != null){
+			try {
+				inputNum = Integer.parseInt(input);
+				if(inputNum > 0){
+					//_model.setWindowSize(inputNum);
+					updateFractalDetails();
+				}else if(inputNum < 0){
+					JOptionPane.showMessageDialog(_window, "Please Enter a POSITIVE Integer... ");
+					setWindowSizePrompt();
+				}
+			} catch (NumberFormatException e) {
+				JOptionPane.showMessageDialog(_window, "That was not a valid input.");
+				setWindowSizePrompt();
+			}
+		}
+	}
+	
 	/**
 	 * Method that displays the prompt for entering the max escape time, then checks to see if it was valid.
 	 * 
@@ -301,5 +341,4 @@ public class UI implements Observer{
 		_fractalPanel.updateImage(_model.getEscapeTimeArray());
 		
 	}
-	
 }
