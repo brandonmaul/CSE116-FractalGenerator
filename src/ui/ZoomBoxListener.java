@@ -27,6 +27,7 @@ public class ZoomBoxListener implements MouseListener, MouseMotionListener{
 
 	@Override
 	public void mousePressed(MouseEvent e) {
+		System.out.println(e.getX() + ", " + e.getY());
 		_dispRegion[0] = e.getX();
 		_dispRegion[1] = e.getY();
 		
@@ -34,6 +35,7 @@ public class ZoomBoxListener implements MouseListener, MouseMotionListener{
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
+		System.out.println(e.getX() + ", " + e.getY());
 		try{
 			_dispRegion[2] = e.getX();
 			_dispRegion[3] = e.getY();
@@ -43,7 +45,7 @@ public class ZoomBoxListener implements MouseListener, MouseMotionListener{
 				return;
 			}else{
 				_model.setDisplayRegion(_dispRegion[0], _dispRegion[1], _dispRegion[2], _dispRegion[3]);
-				_ui.updateFractalDetails();
+				_ui.updateFractal();
 			}
 		}catch(ArrayIndexOutOfBoundsException except){
 			_fp.repaint();

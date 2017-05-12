@@ -26,7 +26,7 @@ public class ColorSchemeMenuListener implements ActionListener {
 		_model.setColorModel(_myColorModel);
 		JRadioButtonMenuItem thisButton = (JRadioButtonMenuItem) e.getSource();
 		thisButton.setSelected(true);
-		_ui.updateFractalDetails();
+		_ui.updateFractal();
 	}
 
 }

@@ -80,11 +80,11 @@ public class UI implements Observer{
 		
 		_window.setJMenuBar(_menuBar);
 		
-		updateFractal();
-		
 		ZoomBoxListener listener = new ZoomBoxListener(_model, this, _fractalPanel);
 		_fractalPanel.addMouseListener(listener);
 		_fractalPanel.addMouseMotionListener(listener);
+		
+		updateFractal();
 		
 		_window.setResizable(false);
 		_window.setVisible(true);
@@ -162,7 +162,7 @@ public class UI implements Observer{
 		JMenu fractalTypeMenu = new JMenu("Fractal Type");
 		
 		ButtonGroup group = new ButtonGroup();
-		JRadioButtonMenuItem fractal1 = new JRadioButtonMenuItem("MandelBrot");
+		JRadioButtonMenuItem fractal1 = new JRadioButtonMenuItem("Mandelbrot");
 		JRadioButtonMenuItem fractal2 = new JRadioButtonMenuItem("Julia");
 		JRadioButtonMenuItem fractal3 = new JRadioButtonMenuItem("Burning Ship");
 		JRadioButtonMenuItem fractal4 = new JRadioButtonMenuItem("Multibrot");
@@ -286,7 +286,7 @@ public class UI implements Observer{
 				inputNum = Integer.parseInt(input);
 				if(inputNum > 0){
 					_model.setEscapeDistance(inputNum);
-					updateFractalDetails();
+					updateFractal();
 				}else if(inputNum < 0){
 					JOptionPane.showMessageDialog(_window, "Please Enter a POSITIVE Integer... ");
 					escapeDistancePrompt();
@@ -306,7 +306,7 @@ public class UI implements Observer{
 				inputNum = Integer.parseInt(input);
 				if(inputNum > 0){
 					_model.setGridSize(inputNum);
-					updateFractalDetails();
+					updateFractal();
 				}else if(inputNum < 0){
 					JOptionPane.showMessageDialog(_window, "Please Enter a POSITIVE Integer... ");
 					setWindowSizePrompt();
@@ -331,7 +331,7 @@ public class UI implements Observer{
 				inputNum = Integer.parseInt(input);
 				if(inputNum >= 1 && inputNum <= 255){
 					_model.setMaxEscapeTime(inputNum);
-					updateFractalDetails();
+					updateFractal();
 				}else if(inputNum < 1 || inputNum > 255){
 					JOptionPane.showMessageDialog(_window, "Input must be between 1 and 255.");
 					maxEscapeTimePrompt();
@@ -357,7 +357,7 @@ public class UI implements Observer{
 				inputNum = Integer.parseInt(input);
 				if(inputNum >= 1 && inputNum <= 128){
 					_model.setWorkerCount(inputNum);
-					updateFractalDetails();
+					updateFractal();
 				}else{
 					JOptionPane.showMessageDialog(_window, "Input must be between 1 and 128.");
 					workerCountPrompt();
@@ -392,9 +392,5 @@ public class UI implements Observer{
 		_currentMaxEscapeTime.setText("Current Maximum Escape Time: " + _model.getEscapeTime());
 		_fractalPanel.setIndexColorModel(_model.getColorModel());
 		_computePool.generateFractal(_model.getGridSize(), _model.generateWorkerArray());
-	}
-	
-	public void updateFractalDetails() { 
-		updateFractal();
 	}
 }

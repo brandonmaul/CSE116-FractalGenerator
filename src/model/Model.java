@@ -19,7 +19,6 @@ public class Model implements Observable {
 	private ArrayList<Observer> _observers;
 	private Pixel[][] _fractal;
 	private FractalGenerator _fractalGenerator;
-	private FractalZoomTool _fractalZoomTool;
 	private String _fractalType;
 	private int _escapeDistance;
 	private int _maxPasses;
@@ -32,10 +31,11 @@ public class Model implements Observable {
 	public Model(){
 		_observers = new ArrayList<Observer>();
 		
-		_gridSize = 2048;
+		_gridSize = 720;
 		_workerCount = 1;
 		
 		_fractal = new Pixel[_gridSize][_gridSize];
+		_fractalGenerator = new FractalGenerator(_fractal);
 		
 		for (int xIndex = 0; xIndex < _fractal.length; xIndex++) {// Row
 			for (int yIndex = 0; yIndex < _fractal[0].length; yIndex++) {// Col
@@ -43,8 +43,6 @@ public class Model implements Observable {
 			}
 		}
 		
-		_fractalGenerator = new FractalGenerator(_fractal);
-		_fractalZoomTool = new FractalZoomTool(_fractal);
 		_fractalType = "Mandelbrot";
 		_escapeDistance = 2;
 		_maxPasses = 255;
@@ -59,33 +57,11 @@ public class Model implements Observable {
 	 */
 	
 	public int[][] generateFractal(){
-		_fractal = _fractalGenerator.generateFractal(_fractalType, _escapeDistance, _escapeDistance);
-		zoomFractal();
+		_fractal = _fractalGenerator.generateFractal(_fractalType, _escapeDistance, _maxPasses, _regionStart, _regionEnd);
+
+		//setDisplayRegion(0, 0, _gridSize - 1, _gridSize - 1);
+		
 		return getEscapeTimeArray();
-	}
-	
-	public Pixel[][] zoomFractal(){
-		switch (_fractalType){
-			case "Mandelbrot": 
-					_fractalZoomTool.zoomMandelbrot(_regionStart, _regionEnd, _escapeDistance, _maxPasses);
-					break;
-					
-			case "Julia":
-					_fractalZoomTool.zoomJulia(_regionStart, _regionEnd, _escapeDistance, _maxPasses);
-					break;
-					
-			case "Burning Ship": 
-					_fractalZoomTool.zoomBurningShip(_regionStart, _regionEnd, _escapeDistance, _maxPasses);
-					break;
-					
-			case "Multibrot": 
-					_fractalZoomTool.zoomMultibrot(_regionStart, _regionEnd, _escapeDistance, _maxPasses); 
-					break;
-		}
-		
-		setDisplayRegion(0, 0, _gridSize - 1, _gridSize - 1);
-		
-		return _fractal;
 	}
 	
 	/**
