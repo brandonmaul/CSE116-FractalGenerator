@@ -45,6 +45,7 @@ public class ZoomBoxListener implements MouseListener, MouseMotionListener{
 				return;
 			}else{
 				_model.setDisplayRegion(_dispRegion[0], _dispRegion[1], _dispRegion[2], _dispRegion[3]);
+				_model.zoomFractal();
 				_ui.updateFractal();
 			}
 		}catch(ArrayIndexOutOfBoundsException except){

@@ -57,10 +57,14 @@ public class Model implements Observable {
 	 */
 	
 	public int[][] generateFractal(){
-		_fractal = _fractalGenerator.generateFractal(_fractalType, _escapeDistance, _maxPasses, _regionStart, _regionEnd);
-
-		//setDisplayRegion(0, 0, _gridSize - 1, _gridSize - 1);
-		
+		_fractal = _fractalGenerator.generateFractal(_fractalType, _escapeDistance, _maxPasses);
+		setDisplayRegion(0, 0, _gridSize - 1, _gridSize - 1);
+		return getEscapeTimeArray();
+	}
+	
+	public int[][] zoomFractal(){
+		_fractal = _fractalGenerator.zoomFractal( _escapeDistance, _maxPasses, _regionStart, _regionEnd);
+		setDisplayRegion(0, 0, _gridSize - 1, _gridSize - 1);
 		return getEscapeTimeArray();
 	}
 	

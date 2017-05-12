@@ -60,28 +60,29 @@ public class FractalGenerator {
 	 *         before a fractal generation method, you're gonna have a bad time.
 	 * 
 	 */
-	public Pixel[][] generateFractal(String fractalType, int escapeDistance, int maxPasses, int[] regionStart, int[] regionEnd){ 
+	public Pixel[][] generateFractal(String fractalType, int escapeDistance, int maxPasses){ 
 		switch (fractalType){
 			case "Mandelbrot":
 					_fractal = genMandelbrot(escapeDistance, maxPasses);
-					_fractalZoomTool.zoomMandelbrot(_fractal, regionStart, regionEnd, escapeDistance, maxPasses);
 					break;
 					
 			case "Julia": 
 					_fractal = genJulia(escapeDistance, maxPasses);
-					_fractalZoomTool.zoomJulia(_fractal, regionStart, regionEnd, escapeDistance, maxPasses);
 					break;
 					
 			case "Burning Ship": 
 					_fractal = genBurningShip(escapeDistance, maxPasses);
-					_fractalZoomTool.zoomBurningShip(_fractal, regionStart, regionEnd, escapeDistance, maxPasses);
 					break;
 					
 			case "Multibrot": 
 					_fractal = genMultibrot(escapeDistance, maxPasses);
-					_fractalZoomTool.zoomMultibrot(_fractal, regionStart, regionEnd, escapeDistance, maxPasses);
 					break;
 		}
+		return _fractal;
+	}
+	
+	public Pixel[][] zoomFractal(int escapeDistance, int maxPasses, int[] regionStart, int[] regionEnd){ 
+		_fractal = _fractalZoomTool.zoomFractal(_fractal, escapeDistance, maxPasses, regionStart, regionEnd);
 		return _fractal;
 	}
 
