@@ -1,0 +1,5 @@
+To change the number of workers/threads the program uses, there's a menu bar item called "Workers" in which you can enter in a number between 1 and 128. 
+
+If you try to enter something invalid it will prompt you to do it again.
+
+After changing the value all future calculations of fractals will be used with that number of workers.

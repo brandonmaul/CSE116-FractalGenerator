@@ -18,28 +18,28 @@ public class EscTimeExceedsMaxPassesTest {
 	@Test
 	public void MBEscTest() {
 		_testPixel.setCoords(0.3207031250000001, -0.07109374999999386);
-		_fractal.calcMandelbrotEscapeTime(_testPixel, 2, 255);
+		model.FractalAlgorithms.calcMandelbrotEscapeTime(_testPixel, 2, 255);
 		assertEquals(255, _testPixel.getEscapeTime(), 0.01);
 	}
 
 	@Test
 	public void JEscTest() {
 		_testPixel.setCoords(1.0492187499999897, -0.234375);
-		_fractal.calcJuliaEscapeTime(_testPixel, 2, 255);
+		model.FractalAlgorithms.calcJuliaEscapeTime(_testPixel, 2, 255);
 		assertEquals(255, _testPixel.getEscapeTime(), 0.01);
 	}
 
 	@Test
 	public void BurnEscTest() {
 		_testPixel.setCoords(-1.7443359374999874, -0.017451171875000338);
-		_fractal.calcBurningShipEscapeTime(_testPixel, 2, 255);
+		model.FractalAlgorithms.calcBurningShipEscapeTime(_testPixel, 2, 255);
 		assertEquals(255, _testPixel.getEscapeTime(), 0.01);
 	}
 
 	@Test
 	public void MultiEscTest() {
 		_testPixel.setCoords(0.5859375, 0.24375000000000108);
-		_fractal.calcMultibrotEscapeTime(_testPixel, 2, 255);
+		model.FractalAlgorithms.calcMultibrotEscapeTime(_testPixel, 2, 255);
 		assertEquals(255, _testPixel.getEscapeTime(), 0.01);
 	}
 

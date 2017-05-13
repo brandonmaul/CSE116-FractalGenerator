@@ -27,25 +27,25 @@ public class ZoomBoxListener implements MouseListener, MouseMotionListener{
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		System.out.println(e.getX() + ", " + e.getY());
-		_dispRegion[0] = e.getX();
-		_dispRegion[1] = e.getY();
+		//System.out.println(e.getX() + ", " + e.getY()); //debug tool :)
+		_dispRegion[0] = e.getX() * 2;
+		_dispRegion[1] = e.getY() * 2;
 		
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		System.out.println(e.getX() + ", " + e.getY());
+		//System.out.println(e.getX() + ", " + e.getY()); //debug tool :) 
 		try{
-			_dispRegion[2] = e.getX();
-			_dispRegion[3] = e.getY();
+			_dispRegion[2] = e.getX() * 2;
+			_dispRegion[3] = e.getY() * 2;
 			
 			if(_dispRegion[0] >= _dispRegion[2] || _dispRegion[1] >= _dispRegion[3]){
 				_fp.repaint();
 				return;
 			}else{
 				_model.setDisplayRegion(_dispRegion[0], _dispRegion[1], _dispRegion[2], _dispRegion[3]);
-				_model.zoomFractal();
+				_model.generateFractal();
 				_ui.updateFractal();
 			}
 		}catch(ArrayIndexOutOfBoundsException except){
@@ -78,14 +78,14 @@ public class ZoomBoxListener implements MouseListener, MouseMotionListener{
 	@Override
 	public void mouseDragged(MouseEvent e) {
 		
-		int width = e.getX() - _dispRegion[0];
-		int height = e.getY() - _dispRegion[1];
+		int width = e.getX() - _dispRegion[0] / 2;
+		int height = e.getY() - _dispRegion[1] / 2;
 		
 		Graphics2D g = (Graphics2D) _fp.getGraphics();
 		_fp.paint(g);
 		g.setColor(new Color(255,255,255,255));
 		g.setStroke(new BasicStroke(3));
-		g.drawRect(_dispRegion[0],_dispRegion[1], width, height);
+		g.drawRect(_dispRegion[0]/ 2,_dispRegion[1] / 2, width, height);
 		
 		return;
 		

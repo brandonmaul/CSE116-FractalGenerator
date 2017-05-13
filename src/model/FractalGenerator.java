@@ -81,8 +81,26 @@ public class FractalGenerator {
 		return _fractal;
 	}
 	
-	public Pixel[][] zoomFractal(int escapeDistance, int maxPasses, int[] regionStart, int[] regionEnd){ 
-		_fractal = _fractalZoomTool.zoomFractal(_fractal, escapeDistance, maxPasses, regionStart, regionEnd);
+	public Pixel[][] zoomFractal(String fractalType, int escapeDistance, int maxPasses, int[] regionStart, int[] regionEnd){ 
+		
+		switch (fractalType){
+			case "Mandelbrot":
+					_fractal = _fractalZoomTool.zoomMandelbrot(_fractal, escapeDistance, maxPasses, regionStart, regionEnd);
+					break;
+					
+			case "Julia": 
+					_fractal = _fractalZoomTool.zoomJulia(_fractal, escapeDistance, maxPasses, regionStart, regionEnd);
+					break;
+					
+			case "Burning Ship": 
+					_fractal = _fractalZoomTool.zoomBurningShip(_fractal, escapeDistance, maxPasses, regionStart, regionEnd);
+					break;
+					
+			case "Multibrot": 
+					_fractal = _fractalZoomTool.zoomMultibrot(_fractal, escapeDistance, maxPasses, regionStart, regionEnd);
+					break;
+		}
+
 		return _fractal;
 	}
 

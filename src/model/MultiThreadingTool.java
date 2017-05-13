@@ -14,7 +14,7 @@ public class MultiThreadingTool extends SwingWorker<WorkerResult, Void>{
 	
 	@Override
 	protected WorkerResult doInBackground() throws Exception {
-		return new WorkerResult(getProgress(), _model.generateFractal());
+		return new WorkerResult(this.getProgress(), _model.generateFractal());
 	}
 
 }

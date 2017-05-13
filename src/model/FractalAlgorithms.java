@@ -28,7 +28,7 @@ public abstract class FractalAlgorithms {
 	 * @param maxPasses
 	 * 			  - The maximum escape time allowed for each pixel on the fractal.
 	 */
-	protected static void calcMandelbrotEscapeTime(Pixel p, int maxDist, int maxPasses) {
+	public static void calcMandelbrotEscapeTime(Pixel p, int maxDist, int maxPasses) {
 		
 		double[] coords = p.getCoords();
 		double xCoord = coords[0];
@@ -62,7 +62,7 @@ public abstract class FractalAlgorithms {
 	 * @param maxPasses
 	 * 			  - The maximum escape time allowed for each pixel on the fractal.
 	 */
-	protected static void calcJuliaEscapeTime(Pixel p, int maxDist, int maxPasses) {
+	public static void calcJuliaEscapeTime(Pixel p, int maxDist, int maxPasses) {
 		
 		double[] coords = p.getCoords();
 		double xCoord = coords[0];
@@ -96,7 +96,7 @@ public abstract class FractalAlgorithms {
 	 * @param maxPasses
 	 * 			  - The maximum escape time allowed for each pixel on the fractal.
 	 */
-	protected static void calcBurningShipEscapeTime(Pixel p, int maxDist, int maxPasses) {
+	public static void calcBurningShipEscapeTime(Pixel p, int maxDist, int maxPasses) {
 		
 		double[] coords = p.getCoords();
 		double xCoord = coords[0];
@@ -130,7 +130,7 @@ public abstract class FractalAlgorithms {
 	 * @param maxPasses
 	 * 			  - The maximum escape time allowed for each pixel on the fractal.
 	 */
-	protected static void calcMultibrotEscapeTime(Pixel p, int maxDist, int maxPasses) {
+	public static void calcMultibrotEscapeTime(Pixel p, int maxDist, int maxPasses) {
 		
 		double[] coords = p.getCoords();
 		double xCoord = coords[0];

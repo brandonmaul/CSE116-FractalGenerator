@@ -20,6 +20,7 @@ public class Model implements Observable {
 	private Pixel[][] _fractal;
 	private FractalGenerator _fractalGenerator;
 	private String _fractalType;
+	private boolean _fractalChanged;
 	private int _escapeDistance;
 	private int _maxPasses;
 	private int _regionStart[];
@@ -31,7 +32,7 @@ public class Model implements Observable {
 	public Model(){
 		_observers = new ArrayList<Observer>();
 		
-		_gridSize = 720;
+		_gridSize = 2048;
 		_workerCount = 1;
 		
 		_fractal = new Pixel[_gridSize][_gridSize];
@@ -44,6 +45,7 @@ public class Model implements Observable {
 		}
 		
 		_fractalType = "Mandelbrot";
+		setFractalChanged(true);
 		_escapeDistance = 2;
 		_maxPasses = 255;
 		_regionStart = new int[]{0, 0}; 
@@ -57,15 +59,17 @@ public class Model implements Observable {
 	 */
 	
 	public int[][] generateFractal(){
-		_fractal = _fractalGenerator.generateFractal(_fractalType, _escapeDistance, _maxPasses);
-		setDisplayRegion(0, 0, _gridSize - 1, _gridSize - 1);
-		return getEscapeTimeArray();
-	}
-	
-	public int[][] zoomFractal(){
-		_fractal = _fractalGenerator.zoomFractal( _escapeDistance, _maxPasses, _regionStart, _regionEnd);
-		setDisplayRegion(0, 0, _gridSize - 1, _gridSize - 1);
-		return getEscapeTimeArray();
+		if(isFractalChanged()){
+			_fractal = _fractalGenerator.generateFractal(_fractalType, _escapeDistance, _maxPasses);
+			setDisplayRegion(0, 0, _gridSize - 1, _gridSize - 1);
+			setFractalChanged(false);
+			return getEscapeTimeArray();
+		}else{
+			_fractalGenerator.zoomFractal(_fractalType, _escapeDistance, _maxPasses, _regionStart, _regionEnd);
+			setDisplayRegion(0, 0, _gridSize - 1, _gridSize - 1);
+			return getEscapeTimeArray();
+		}
+		
 	}
 	
 	/**
@@ -74,6 +78,7 @@ public class Model implements Observable {
 	
 	public void setFractalType(String s) {
 		_fractalType = s;
+		setFractalChanged(true);
 	}
 	public String getFractalType() {
 		return _fractalType;
@@ -104,9 +109,12 @@ public class Model implements Observable {
 		_maxPasses = inputNum;
 		
 	}
-
 	public int getEscapeTime() {
 		return _maxPasses;
+	}
+	
+	public Pixel[][] getRawFractal(){
+		return _fractal;
 	}
 	
 	public void setDisplayRegion(int xRegionStart, int yRegionStart, int xRegionEnd, int yRegionEnd){
@@ -148,10 +156,19 @@ public class Model implements Observable {
 	
 	public void setWorkerCount(int input){
 		_workerCount = input;
+		generateWorkerArray();
 	}
 	
 	public int getWorkerCount(){
 		return _workerCount;
+	}
+	
+	public boolean isFractalChanged() {
+		return _fractalChanged;
+	}
+
+	public void setFractalChanged(boolean fractalChanged) {
+		_fractalChanged = fractalChanged;
 	}
 	
 	public MultiThreadingTool[] getWorkers(){

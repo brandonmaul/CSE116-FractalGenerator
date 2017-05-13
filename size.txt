@@ -1,0 +1,11 @@
+The number of Pixels the fractal generates is based on single number in the model.Model class called _gridSize. This integer is specified when the Model class is constructed.
+
+This number creates a 1:1 grid of the pixels, with each row and column being the size of _gridSize.
+
+To check this at any point in time while the program is running, click on the "Size" menu in the menu bar. 
+(The "set fractal size" was an extra feature we were working on that would allow resizing while running, but we never got to finish...)
+
+Feel free to change the _gridSize value at line 35 in model.Model to see how it affects the rest of the program. 
+
+However please note that window size is always 1/2 the size of the fractal, to save up some space on the really large fractals and maintain a constant ratio for the zoom box,
+so changing _gridSize will change the size of the window.

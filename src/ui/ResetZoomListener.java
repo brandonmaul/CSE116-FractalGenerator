@@ -17,7 +17,7 @@ public class ResetZoomListener implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		_model.setDisplayRegion(0, 0, _model.getGridSize() - 1, _model.getGridSize() - 1);
+		_model.setFractalChanged(true);
 		_ui.updateFractal();
 
 	}

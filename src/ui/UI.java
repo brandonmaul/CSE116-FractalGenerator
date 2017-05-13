@@ -59,15 +59,19 @@ public class UI implements Observer{
 	public void initUI(){
 
 		_window = new JFrame("Fractal Generator");
-		_window.setSize(new Dimension(_model.getGridSize(), _model.getGridSize()));
+		_window.setSize(new Dimension(_model.getGridSize() / 2, _model.getGridSize() / 2));
 		_window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		_menuBar = new JMenuBar();
 		
 		_fractalPanel = new FractalPanel();
+		_fractalPanel.setSize(new Dimension(_model.getGridSize(), _model.getGridSize()));
+		
+		ZoomBoxListener listener = new ZoomBoxListener(_model, this, _fractalPanel);
+		_fractalPanel.addMouseListener(listener);
+		_fractalPanel.addMouseMotionListener(listener);
+		
 		_computePool.changePanel(_fractalPanel); //fractalPanel and computePool have relationship now. <3
 		
-		_fractalPanel.setSize(new Dimension(_model.getGridSize(), _model.getGridSize()));
-		_window.add(_fractalPanel);
 		
 		initFileMenu();
 		initWindowMenu();
@@ -78,17 +82,14 @@ public class UI implements Observer{
 		initZoomMenu();
 		initColorSchemeMenu();
 		
-		_window.setJMenuBar(_menuBar);
-		
-		ZoomBoxListener listener = new ZoomBoxListener(_model, this, _fractalPanel);
-		_fractalPanel.addMouseListener(listener);
-		_fractalPanel.addMouseMotionListener(listener);
-		
 		updateFractal();
 		
+		
+		_window.setJMenuBar(_menuBar);
+		_window.add(_fractalPanel);
 		_window.setResizable(false);
 		_window.setVisible(true);
-		_window.pack();
+		
 	
 	}
 
@@ -119,7 +120,7 @@ public class UI implements Observer{
 	 * Sub-initialization method for the 'Window' menu in the menu bar. 
 	 */
 	public void initWindowMenu(){
-		JMenu windowMenu = new JMenu("Window");
+		JMenu windowMenu = new JMenu("Size");
 		
 		windowMenu.addSeparator();
 		_currentWindowSize = new JMenuItem();
@@ -127,7 +128,7 @@ public class UI implements Observer{
 		windowMenu.add(_currentWindowSize);
 		
 		windowMenu.addSeparator();
-		JButton windowSizeSetter = new JButton("Set Window Size");
+		JButton windowSizeSetter = new JButton("Set Fractal Size");
 		windowSizeSetter.addActionListener(new SetWindowSizeListener(this));
 		windowSizeSetter.setEnabled(false); //TURNED THIS OFF BECAUSE I DONT WANT TO IMPLEMENT IT YET
 		windowMenu.add(windowSizeSetter);
@@ -383,14 +384,16 @@ public class UI implements Observer{
 	}
 	
 	/**
-	 * Updates the display and Escape Distance displayed in the UI. Called whenever a change to the Model is made.
+	 * Updates the display in the UI. Called whenever a change to the Model is made.
 	 */
 	public void updateFractal() {
-		_currentWindowSize.setText("Current Window Size: " + _model.getGridSize() + " x " + _model.getGridSize());
+		_computePool.clearPool();
+		_currentWindowSize.setText("Current Fractal Size: " + _model.getGridSize() + " x " + _model.getGridSize());
 		_currentThreadCount.setText("Current Number of Workers: " + _model.getWorkerCount());
 		_currentEscapeDistance.setText("Current Escape Distance: " + _model.getEscapeDistance());
 		_currentMaxEscapeTime.setText("Current Maximum Escape Time: " + _model.getEscapeTime());
 		_fractalPanel.setIndexColorModel(_model.getColorModel());
 		_computePool.generateFractal(_model.getGridSize(), _model.generateWorkerArray());
+		
 	}
 }

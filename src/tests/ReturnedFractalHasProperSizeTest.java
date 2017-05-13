@@ -17,44 +17,48 @@ public class ReturnedFractalHasProperSizeTest {
 	@Test
 	public void MBSizeTest() {
 		_model.setFractalType("Mandelbrot"); // Set fractal to Mandelbrot
+		_model.setWorkerCount(4);
 		_model.generateFractal();
 		int[][] a = _model.getEscapeTimeArray();
 		// length of a column
-		assertEquals(512, a[0].length);
+		assertEquals(_model.getGridSize(), a[0].length);
 		// length of a row
-		assertEquals(512, a.length);
+		assertEquals(_model.getGridSize(), a.length);
 	}
 
 	@Test
 	public void JSizeTest() {
 		_model.setFractalType("Julia"); // Set fractal to Julia
+		_model.setWorkerCount(4);
 		_model.generateFractal();
 		int[][] a = _model.getEscapeTimeArray();
 		// length of a column
-		assertEquals(512, a[0].length);
+		assertEquals(_model.getGridSize(), a[0].length);
 		// length of a row
-		assertEquals(512, a.length);
+		assertEquals(_model.getGridSize(), a.length);
 	}
 
 	@Test
 	public void BurnSizeTest() {
 		_model.setFractalType("Burning Ship"); // Set fractal to BurningShip
+		_model.setWorkerCount(4);
 		_model.generateFractal();
 		int[][] a = _model.getEscapeTimeArray();
 		// length of a column
-		assertEquals(512, a[0].length);
+		assertEquals(_model.getGridSize(), a[0].length);
 		// length of a row
-		assertEquals(512, a.length);
+		assertEquals(_model.getGridSize(), a.length);
 	}
 
 	@Test
 	public void MultiSizeTest() {
 		_model.setFractalType("Multibrot"); // Set fractal to Multibrot
+		_model.setWorkerCount(4);
 		_model.generateFractal();
 		int[][] a = _model.getEscapeTimeArray();
 		// length of a column
-		assertEquals(512, a[0].length);
+		assertEquals(_model.getGridSize(), a[0].length);
 		// length of a row
-		assertEquals(512, a.length);
+		assertEquals(_model.getGridSize(), a.length);
 	}
 }
